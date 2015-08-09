@@ -19,7 +19,7 @@ import org.mcisb.ui.util.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ListManagerPanel extends JPanel implements ActionListener, PropertyChangeListener, Disposable
@@ -28,46 +28,46 @@ public class ListManagerPanel extends JPanel implements ActionListener, Property
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private static final String NEXT_INDEX = "NEXT_INDEX"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private static final String PREVIOUS_INDEX = "PREVIOUS_INDEX"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final JButton previous = new JButton( new ResourceFactory().getImageIcon( "toolbarButtonGraphics/navigation/Back16.gif" ) ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final JButton next = new JButton( new ResourceFactory().getImageIcon( "toolbarButtonGraphics/navigation/Forward16.gif" ) ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final JLabel label = new JLabel();
-	
+
 	/**
 	 * 
 	 */
 	private final Collection<ListManager> listManagers = new ArrayList<>();
-	
+
 	/**
-	 *
+	 * 
 	 * @param listManager
 	 */
 	public ListManagerPanel( final ListManager listManager )
 	{
 		this( new ListManager[] { listManager } );
 	}
-	
+
 	/**
 	 * Assumes all ListManagers manage lists of the SAME length.
 	 * 
@@ -76,24 +76,24 @@ public class ListManagerPanel extends JPanel implements ActionListener, Property
 	public ListManagerPanel( final ListManager[] listManagers )
 	{
 		this.listManagers.addAll( Arrays.asList( listManagers ) );
-		
+
 		for( ListManager listManager : this.listManagers )
 		{
 			listManager.addPropertyChangeListener( this );
 		}
-		
+
 		previous.setActionCommand( PREVIOUS_INDEX );
 		previous.addActionListener( this );
 		next.setActionCommand( NEXT_INDEX );
 		next.addActionListener( this );
-		
+
 		add( previous );
 		add( label );
 		add( next );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param e
 	 */
 	@Override
@@ -105,34 +105,37 @@ public class ListManagerPanel extends JPanel implements ActionListener, Property
 			label.setText( ( ( (Integer)e.getNewValue() ).intValue() + 1 ) + SEPARATOR + CollectionUtils.getFirst( listManagers ).getListSize() );
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( final ActionEvent e )
 	{
 		final String actionCommand = e.getActionCommand();
-		
+
 		if( actionCommand.equals( PREVIOUS_INDEX ) )
-	    {
+		{
 			for( ListManager listManager : this.listManagers )
 			{
 				listManager.previous();
 			}
-	    }
-	    else if( actionCommand.equals( NEXT_INDEX ) )
-	    {
-	    	for( ListManager listManager : this.listManagers )
+		}
+		else if( actionCommand.equals( NEXT_INDEX ) )
+		{
+			for( ListManager listManager : this.listManagers )
 			{
 				listManager.next();
 			}
-	    }
+		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -142,7 +145,7 @@ public class ListManagerPanel extends JPanel implements ActionListener, Property
 		{
 			listManager.removePropertyChangeListener( this );
 		}
-		
+
 		previous.removeActionListener( this );
 		next.removeActionListener( this );
 	}

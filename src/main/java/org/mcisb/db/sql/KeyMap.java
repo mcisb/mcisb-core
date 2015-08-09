@@ -19,17 +19,17 @@ import java.util.*;
  * @author Neil Swainston
  */
 class KeyMap
-{	
+{
 	/**
 	 * 
 	 */
 	private static final String SEPARATOR = ","; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Map<Object,Collection<Key>> map = new HashMap<>();
-	
+
 	/**
 	 * 
 	 * @param os
@@ -37,12 +37,12 @@ class KeyMap
 	 */
 	void write( final OutputStream os ) throws IOException
 	{
-		try( final BufferedWriter writer = new BufferedWriter( new OutputStreamWriter( os ) ) )
+		try ( final BufferedWriter writer = new BufferedWriter( new OutputStreamWriter( os ) ) )
 		{
 			for( Iterator<Collection<Key>> keysIterator = map.values().iterator(); keysIterator.hasNext(); )
 			{
 				final Collection<Key> keys = keysIterator.next();
-				
+
 				for( Iterator<Key> keyIterator = keys.iterator(); keyIterator.hasNext(); )
 				{
 					final Key key = keyIterator.next();
@@ -50,11 +50,11 @@ class KeyMap
 					writer.newLine();
 				}
 			}
-			
+
 			writer.flush();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param tableName1
@@ -67,10 +67,10 @@ class KeyMap
 		addKey( tableName1, fieldName1, tableName2, fieldName2 );
 		addKey( tableName2, fieldName2, tableName1, fieldName1 );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param tableName
 	 * @return Collection
 	 */
@@ -78,7 +78,7 @@ class KeyMap
 	{
 		return map.get( tableName );
 	}
-	
+
 	/**
 	 * 
 	 * @param tableName
@@ -88,21 +88,20 @@ class KeyMap
 	boolean isKey( final String tableName, final String fieldName )
 	{
 		final Collection<Key> keys = getKeys( tableName );
-		
+
 		for( Iterator<Key> keyIterator = keys.iterator(); keyIterator.hasNext(); )
 		{
 			final Key key = keyIterator.next();
-			
-			if( ( key.getSourceTableName().equals( tableName ) && key.getSourceFieldName().equals( fieldName ) )
-				|| ( key.getTargetTableName().equals( tableName ) && key.getTargetFieldName().equals( fieldName ) ) )
+
+			if( ( key.getSourceTableName().equals( tableName ) && key.getSourceFieldName().equals( fieldName ) ) || ( key.getTargetTableName().equals( tableName ) && key.getTargetFieldName().equals( fieldName ) ) )
 			{
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param sourceTableName
@@ -113,13 +112,13 @@ class KeyMap
 	private void addKey( final Object sourceTableName, final Object sourceFieldName, final Object targetTableName, final Object targetFieldName )
 	{
 		Collection<Key> keys = map.get( sourceTableName );
-		
+
 		if( keys == null )
 		{
 			keys = new LinkedHashSet<>();
 			map.put( sourceTableName, keys );
 		}
-		
+
 		keys.add( new Key( sourceTableName, sourceFieldName, targetTableName, targetFieldName ) );
 	}
 }

@@ -25,51 +25,51 @@ public class FtpClient
 	 * 
 	 */
 	private final FTPClient client = new FTPClient();
-	
+
 	/**
 	 * 
 	 * @param hostname
 	 * @param username
 	 * @param password
-	 * @throws IOException 
-	 * @throws SocketException 
+	 * @throws IOException
+	 * @throws SocketException
 	 */
 	public FtpClient( final String hostname, final String username, final String password ) throws SocketException, IOException
 	{
 		client.connect( hostname );
 		check();
-		
+
 		if( username != null && password != null )
 		{
 			client.login( username, password );
 			check();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param fileType
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void setFileType( final int fileType ) throws IOException
 	{
 		client.setFileType( fileType );
 	}
-	
+
 	/**
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void close() throws IOException
 	{
 		if( client.isConnected() )
 		{
 			client.logout();
-	        client.disconnect();
+			client.disconnect();
 		}
-		
+
 		check();
 	}
-	
+
 	/**
 	 * 
 	 * @param directory
@@ -81,12 +81,12 @@ public class FtpClient
 	 */
 	public boolean get( final String directory, final String filename, final File local ) throws SocketException, IOException
 	{
-		try( final OutputStream os = new FileOutputStream( local ) )
+		try ( final OutputStream os = new FileOutputStream( local ) )
 		{
 			return get( directory, filename, os );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param directory
@@ -99,26 +99,26 @@ public class FtpClient
 	public boolean get( final String directory, final String filename, final OutputStream os ) throws SocketException, IOException
 	{
 		boolean success = false;
-	    
+
 		try
-	    {
+		{
 			client.changeWorkingDirectory( directory );
 			check();
-			
+
 			success = client.retrieveFile( filename, os );
 			check();
 
 			return success;
-	    }
+		}
 		finally
 		{
 			if( client != null && client.isConnected() )
 			{
 				client.disconnect();
-	        }
-	    }
+			}
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @param directory
@@ -130,18 +130,18 @@ public class FtpClient
 		final List<String> filenames = new ArrayList<>();
 		client.changeWorkingDirectory( directory );
 		check();
-		
+
 		for( FTPFile file : client.listFiles() )
 		{
 			filenames.add( file.getName() );
 		}
-		
+
 		return filenames;
 	}
-	
+
 	/**
 	 * 
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private void check() throws IOException
 	{

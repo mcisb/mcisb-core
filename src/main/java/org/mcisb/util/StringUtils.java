@@ -24,12 +24,12 @@ public abstract class StringUtils
 	 * 
 	 */
 	private final static String E0 = "E0"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final static NumberFormat engineeringFormat = new DecimalFormat( "##0.#E0" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 * @return String
@@ -40,7 +40,7 @@ public abstract class StringUtils
 		final String UNDERSCORE = "_"; //$NON-NLS-1$
 		return UNDERSCORE + UUID.randomUUID().toString().replaceAll( DASH, UNDERSCORE );
 	}
-	
+
 	/**
 	 * 
 	 * @param d
@@ -49,12 +49,12 @@ public abstract class StringUtils
 	public static String getEngineeringNotation( final double d )
 	{
 		final String engineeringNotation = engineeringFormat.format( d );
-		
+
 		if( engineeringNotation.endsWith( E0 ) )
 		{
 			return engineeringNotation.substring( 0, engineeringNotation.length() - E0.length() );
 		}
-		
+
 		return engineeringNotation;
 	}
 }

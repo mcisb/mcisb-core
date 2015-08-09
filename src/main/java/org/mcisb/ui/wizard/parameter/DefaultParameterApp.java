@@ -28,14 +28,14 @@ public class DefaultParameterApp extends App
 	 * 
 	 */
 	private final ResourceBundle resourceBundle = ResourceBundle.getBundle( "org.mcisb.ui.wizard.parameter.messages" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Wizard wizard;
-	
+
 	/**
-	 *
+	 * 
 	 * @param dialog
 	 * @param title
 	 * @param bean
@@ -48,9 +48,10 @@ public class DefaultParameterApp extends App
 		wizard = new DefaultParameterWizard( bean, component, propertyNameToKey );
 		init( title, resourceBundle.getString( "DefaultParameterApp.error" ), new ResourceFactory().getImageIcon( resourceBundle.getString( "DefaultParameterApp.icon" ) ).getImage() ); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.app.App#getWizard(org.mcisb.util.GenericBean)
 	 */
 	@Override

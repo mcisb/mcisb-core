@@ -21,27 +21,27 @@ public abstract class PropertyNames
 	 * 
 	 */
 	public static final String IMPORT_FILEPATHS = "IMPORT_FILEPATHS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String EXPORT_FILEPATHS = "EXPORT_FILEPATHS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String SAMPLES = "SAMPLES"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String LABELS = "LABELS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String CHOOSER_OBJECTS = "CHOOSER_OBJECTS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */

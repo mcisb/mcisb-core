@@ -20,7 +20,7 @@ import org.mcisb.util.*;
 import org.mcisb.util.net.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ReportErrorAction extends AbstractAction
@@ -34,17 +34,17 @@ public class ReportErrorAction extends AbstractAction
 	 * 
 	 */
 	private final static ResourceBundle resourceBundle = ResourceBundle.getBundle( "org.mcisb.ui.util.action.messages" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final static String TAB = "\t"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
-	private final static String osDetails = System.getProperty( "line.separator" ) + System.getProperty( "os.name" ) + TAB + System.getProperty( "os.arch" ) + TAB + System.getProperty( "os.version" );  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$ //$NON-NLS-4$
-	
+	private final static String osDetails = System.getProperty( "line.separator" ) + System.getProperty( "os.name" ) + TAB + System.getProperty( "os.arch" ) + TAB + System.getProperty( "os.version" ); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$ //$NON-NLS-4$
+
 	/**
 	 * 
 	 */
@@ -62,10 +62,10 @@ public class ReportErrorAction extends AbstractAction
 		putValue( SHORT_DESCRIPTION, getValue( NAME ) );
 		setEnabled( false );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param error
 	 */
 	public void setError( final String error )
@@ -74,9 +74,11 @@ public class ReportErrorAction extends AbstractAction
 		setEnabled( error != null && error.length() > 0 );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( @SuppressWarnings("unused") final ActionEvent e )
@@ -84,7 +86,7 @@ public class ReportErrorAction extends AbstractAction
 		final String EMAIL_ADDRESS = resourceBundle.getString( "ReportErrorAction.eMailAddress" ); //$NON-NLS-1$
 		final String ERROR_MESSAGE = resourceBundle.getString( "ReportErrorAction.errorMessage" ); //$NON-NLS-1$
 		URL url;
-		
+
 		try
 		{
 			url = new URL( "mailto:" + EMAIL_ADDRESS + "?subject=" + ERROR_MESSAGE + "&body=" + error + osDetails ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

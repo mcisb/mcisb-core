@@ -36,37 +36,39 @@ public class SelectableTree extends JTree implements Chooser
 	{
 		super( model );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTree#getToolTipText(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public final String getToolTipText( final MouseEvent evt )
 	{
 		final TreePath path = getPathForLocation( evt.getX(), evt.getY() );
-		
+
 		if( path != null )
 		{
 			final Object node = path.getLastPathComponent();
-			
+
 			if( node instanceof DefaultMutableTreeNode )
 			{
 				final DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode)node;
 				final Object userObject = treeNode.getUserObject();
-				
+
 				if( userObject instanceof UniqueObject )
 				{
 					return ( (UniqueObject)userObject ).getDescription();
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JComponent#createToolTip()
 	 */
 	@Override
@@ -80,6 +82,7 @@ public class SelectableTree extends JTree implements Chooser
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Chooser#setSelection(java.lang.Object)
 	 */
 	@Override
@@ -99,21 +102,22 @@ public class SelectableTree extends JTree implements Chooser
 			}
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Chooser#getSelection()
 	 */
 	@Override
 	public Object getSelection()
 	{
 		DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode)getLastSelectedPathComponent();
-		
+
 		if( treeNode != null )
 		{
 			return treeNode.getUserObject();
 		}
-		
+
 		return null;
 	}
 

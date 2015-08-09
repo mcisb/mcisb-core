@@ -21,7 +21,7 @@ public class UniqueObject extends NamedObject
 	 * 
 	 */
 	protected String id;
-	
+
 	/**
 	 * 
 	 */
@@ -29,7 +29,7 @@ public class UniqueObject extends NamedObject
 	{
 		// Default constructor.
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -38,9 +38,9 @@ public class UniqueObject extends NamedObject
 	{
 		this.id = id;
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param id
 	 * @param name
 	 */
@@ -49,7 +49,7 @@ public class UniqueObject extends NamedObject
 		this.id = id;
 		this.name = name;
 	}
-	
+
 	/**
 	 * 
 	 * @return String
@@ -58,9 +58,10 @@ public class UniqueObject extends NamedObject
 	{
 		return id;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -70,12 +71,13 @@ public class UniqueObject extends NamedObject
 		{
 			return id.equals( ( (UniqueObject)object ).id );
 		}
-		
+
 		return false;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

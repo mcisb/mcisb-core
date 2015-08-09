@@ -22,13 +22,13 @@ public interface Chooser
 	 * @param object
 	 */
 	public void setSelection( Object object );
-	
+
 	/**
 	 * 
 	 * @return Object
 	 */
 	public Object getSelection();
-	
+
 	/**
 	 * 
 	 */

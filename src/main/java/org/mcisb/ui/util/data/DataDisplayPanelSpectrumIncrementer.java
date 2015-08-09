@@ -21,17 +21,17 @@ public class DataDisplayPanelSpectrumIncrementer implements Runnable
 	 * 
 	 */
 	private final DataDisplayPanel dataDisplayPanel;
-	
+
 	/**
 	 * 
 	 */
 	private final long pause;
-	
+
 	/**
 	 * 
 	 */
 	private boolean go = true;
-	
+
 	/**
 	 * 
 	 * @param dataDisplayPanel
@@ -42,7 +42,7 @@ public class DataDisplayPanelSpectrumIncrementer implements Runnable
 		this.dataDisplayPanel = dataDisplayPanel;
 		this.pause = pause;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -50,9 +50,10 @@ public class DataDisplayPanelSpectrumIncrementer implements Runnable
 	{
 		go = false;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override

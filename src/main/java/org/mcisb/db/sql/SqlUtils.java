@@ -14,7 +14,7 @@ package org.mcisb.db.sql;
 import java.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class SqlUtils
@@ -23,7 +23,7 @@ public class SqlUtils
 	 * 
 	 */
 	public static final String FIELD_SEPARATOR = "."; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 * @param value
@@ -32,7 +32,7 @@ public class SqlUtils
 	public static String getValueString( final Object value )
 	{
 		final StringBuffer buffer = new StringBuffer();
-		
+
 		if( value instanceof Number || value instanceof Boolean || value == null )
 		{
 			buffer.append( value );
@@ -45,12 +45,13 @@ public class SqlUtils
 			buffer.append( value.toString().replaceAll( QUOTE, ESCAPED_QUOTE ) );
 			buffer.append( "'" ); //$NON-NLS-1$
 		}
-		
+
 		return buffer.toString();
 	}
-	
+
 	/**
-	 * Takes a Collection of values and returns them in the form name1,name2,nameN.
+	 * Takes a Collection of values and returns them in the form
+	 * name1,name2,nameN.
 	 * 
 	 * This can then be used in the FROM SQL command.
 	 * 
@@ -62,7 +63,7 @@ public class SqlUtils
 		final String SEPARATOR = ","; //$NON-NLS-1$
 		return concatenate( values, SEPARATOR );
 	}
-	
+
 	/**
 	 * 
 	 * @param objects
@@ -72,22 +73,22 @@ public class SqlUtils
 	static String concatenate( final Collection<String> objects, final String separator )
 	{
 		final StringBuffer buffer = new StringBuffer();
-		
+
 		if( objects != null )
 		{
 			for( Iterator<String> iterator = objects.iterator(); iterator.hasNext(); )
 			{
 				buffer.append( iterator.next() );
-				buffer.append( separator ); 
+				buffer.append( separator );
 			}
 		}
-		
+
 		// Strip out final separator:
 		return concatenate( objects, null, separator );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param objects
 	 * @param prefix
 	 * @param separator
@@ -96,7 +97,7 @@ public class SqlUtils
 	private static String concatenate( final Collection<String> objects, final String prefix, final String separator )
 	{
 		final StringBuffer buffer = new StringBuffer();
-		
+
 		if( objects != null )
 		{
 			for( Iterator<String> iterator = objects.iterator(); iterator.hasNext(); )
@@ -106,10 +107,10 @@ public class SqlUtils
 					buffer.append( prefix );
 				}
 				buffer.append( iterator.next() );
-				buffer.append( separator ); 
+				buffer.append( separator );
 			}
 		}
-		
+
 		// Strip out final separator:
 		return buffer.substring( 0, ( buffer.length() == 0 ) ? 0 : buffer.lastIndexOf( separator ) );
 	}

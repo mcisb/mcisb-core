@@ -23,12 +23,12 @@ public class TransferableObject implements Transferable
 	 * 
 	 */
 	private final Object object;
-	
+
 	/**
 	 * 
 	 */
 	private final DataFlavor dataFlavor;
-	
+
 	/**
 	 * 
 	 * @param object
@@ -38,10 +38,13 @@ public class TransferableObject implements Transferable
 		this.object = object;
 		dataFlavor = new DataFlavor( object.getClass(), object.getClass().getSimpleName() );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor)
+	 * 
+	 * @see
+	 * java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer
+	 * .DataFlavor)
 	 */
 	@Override
 	public Object getTransferData( final DataFlavor flavor ) throws UnsupportedFlavorException
@@ -50,12 +53,13 @@ public class TransferableObject implements Transferable
 		{
 			return object;
 		}
-		
+
 		throw new UnsupportedFlavorException( flavor );
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.datatransfer.Transferable#getTransferDataFlavors()
 	 */
 	@Override
@@ -66,7 +70,9 @@ public class TransferableObject implements Transferable
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
+	 * 
+	 * @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.
+	 * datatransfer.DataFlavor)
 	 */
 	@Override
 	public boolean isDataFlavorSupported( DataFlavor flavor )

@@ -21,17 +21,17 @@ class ExcelCell
 	 * 
 	 */
 	private final Object value;
-	
+
 	/**
 	 * 
 	 */
 	private final int row;
-	
+
 	/**
 	 * 
 	 */
 	private final int column;
-	
+
 	/**
 	 * 
 	 * @param value

@@ -27,12 +27,12 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final Map<Object,TreeNode> objectToNode = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
@@ -65,7 +65,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 	 * 
 	 * @param value
 	 */
-	public SearchableTree( final Hashtable<?, ?> value )
+	public SearchableTree( final Hashtable<?,?> value )
 	{
 		super( value );
 		init();
@@ -101,7 +101,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 		super( root, asksAllowsChildren );
 		init();
 	}
-	
+
 	/**
 	 * 
 	 * @param o
@@ -114,7 +114,10 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.TreeModelListener#treeNodesChanged(javax.swing.event.TreeModelEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.TreeModelListener#treeNodesChanged(javax.swing.event
+	 * .TreeModelEvent)
 	 */
 	@Override
 	public void treeNodesChanged( @SuppressWarnings("unused") final TreeModelEvent e )
@@ -124,13 +127,16 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.TreeModelListener#treeNodesInserted(javax.swing.event.TreeModelEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.TreeModelListener#treeNodesInserted(javax.swing.event
+	 * .TreeModelEvent)
 	 */
 	@Override
 	public void treeNodesInserted( final TreeModelEvent e )
 	{
 		final Object component = e.getTreePath().getLastPathComponent();
-		
+
 		if( component instanceof MutableTreeNode )
 		{
 			final Object userObject = ( (DefaultMutableTreeNode)component ).getUserObject();
@@ -140,17 +146,20 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.TreeModelListener#treeNodesRemoved(javax.swing.event.TreeModelEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.TreeModelListener#treeNodesRemoved(javax.swing.event
+	 * .TreeModelEvent)
 	 */
 	@Override
 	public void treeNodesRemoved( final TreeModelEvent e )
 	{
 		final Object component = e.getTreePath().getLastPathComponent();
-		
+
 		if( component instanceof MutableTreeNode )
 		{
 			final Object[] children = e.getChildren();
-			
+
 			for( int i = 0; i < children.length; i++ )
 			{
 				if( children[ i ] instanceof DefaultMutableTreeNode )
@@ -164,7 +173,10 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.TreeModelListener#treeStructureChanged(javax.swing.event.TreeModelEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.TreeModelListener#treeStructureChanged(javax.swing.
+	 * event.TreeModelEvent)
 	 */
 	@Override
 	public void treeStructureChanged( @SuppressWarnings("unused") final TreeModelEvent e )
@@ -174,6 +186,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -181,7 +194,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 	{
 		getModel().removeTreeModelListener( this );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -191,7 +204,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 		update( model.getRoot() );
 		model.addTreeModelListener( this );
 	}
-	
+
 	/**
 	 * 
 	 * @param o
@@ -202,7 +215,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 		{
 			final DefaultMutableTreeNode node = (DefaultMutableTreeNode)o;
 			objectToNode.put( node.getUserObject(), node );
-			
+
 			for( int i = 0; i < node.getChildCount(); i++ )
 			{
 				update( node.getChildAt( i ) );

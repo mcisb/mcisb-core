@@ -15,7 +15,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class PlateTable extends JTable
@@ -24,7 +24,7 @@ public class PlateTable extends JTable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 *
 	 */
@@ -34,8 +34,9 @@ public class PlateTable extends JTable
 		getTableHeader().setResizingAllowed( false );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTable#isCellEditable(int, int)
 	 */
 	@Override
@@ -45,12 +46,13 @@ public class PlateTable extends JTable
 		{
 			return false;
 		}
-		
+
 		return getValueAt( row, column ) != null;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTable#isCellSelected(int, int)
 	 */
 	@Override
@@ -60,12 +62,13 @@ public class PlateTable extends JTable
 		{
 			return false;
 		}
-		
+
 		return super.isCellSelected( row, column );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTable#getCellRenderer(int, int)
 	 */
 	@Override
@@ -75,7 +78,7 @@ public class PlateTable extends JTable
 		{
 			return getTableHeader().getDefaultRenderer();
 		}
-		
+
 		return super.getCellRenderer( row, column );
 	}
 }

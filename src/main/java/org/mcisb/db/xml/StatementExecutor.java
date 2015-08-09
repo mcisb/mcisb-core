@@ -26,19 +26,19 @@ public class StatementExecutor implements Disposable
 	 * 
 	 */
 	private final static String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Collection collection;
-	
+
 	/**
 	 * 
 	 */
 	private final XPathQueryService service;
-	
+
 	/**
-	 *
+	 * 
 	 * @param dbDriver
 	 * @param dbServerName
 	 * @param dbCollectionName
@@ -57,8 +57,9 @@ public class StatementExecutor implements Disposable
 		service = (XPathQueryService)collection.getService( "XQueryService", "1.0" ); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -66,9 +67,9 @@ public class StatementExecutor implements Disposable
 	{
 		collection.close();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param query
 	 * @return String
 	 * @throws Exception
@@ -81,7 +82,7 @@ public class StatementExecutor implements Disposable
 		if( resultSet != null )
 		{
 			final ResourceIterator iterator = resultSet.getIterator();
-			
+
 			while( iterator.hasMoreResources() )
 			{
 				final Resource currentResult = iterator.nextResource();
@@ -90,7 +91,7 @@ public class StatementExecutor implements Disposable
 				buffer.append( LINE_SEPARATOR );
 			}
 		}
-		
+
 		return buffer.toString();
 	}
 }

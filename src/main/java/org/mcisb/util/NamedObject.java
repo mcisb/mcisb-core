@@ -23,22 +23,22 @@ public class NamedObject extends GenericBean
 	 * 
 	 */
 	public static final String NAME = "NAME"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	protected String name;
-	
+
 	/**
 	 * 
 	 */
 	private final Collection<Object> ontologyTerms = new LinkedHashSet<>();
-	
+
 	/**
 	 * 
 	 */
 	private String description;
-	
+
 	/**
 	 * 
 	 */
@@ -46,9 +46,9 @@ public class NamedObject extends GenericBean
 	{
 		// No implementation
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param name
 	 */
 	public NamedObject( final String name )
@@ -76,7 +76,7 @@ public class NamedObject extends GenericBean
 		this.name = name;
 		support.firePropertyChange( NAME, oldName, this.name );
 	}
-	
+
 	/**
 	 * 
 	 * @return String
@@ -94,7 +94,7 @@ public class NamedObject extends GenericBean
 	{
 		this.description = description;
 	}
-	
+
 	/**
 	 * 
 	 * @param ontologyTerm
@@ -104,7 +104,7 @@ public class NamedObject extends GenericBean
 	{
 		return ontologyTerms.add( ontologyTerm );
 	}
-	
+
 	/**
 	 * 
 	 * @param ontologyTerm
@@ -114,7 +114,7 @@ public class NamedObject extends GenericBean
 	{
 		return ontologyTerms.remove( ontologyTerm );
 	}
-	
+
 	/**
 	 * 
 	 * @return Collection
@@ -124,8 +124,9 @@ public class NamedObject extends GenericBean
 		return ontologyTerms;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

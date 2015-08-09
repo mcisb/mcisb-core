@@ -24,7 +24,7 @@ public class DefaultListCellEditor extends DefaultCellEditor implements ListCell
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @param textField
 	 */
@@ -32,15 +32,18 @@ public class DefaultListCellEditor extends DefaultCellEditor implements ListCell
 	{
 		super( textField );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.list.ListCellEditor#getListCellEditorComponent(java.lang.Object)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.list.ListCellEditor#getListCellEditorComponent(java
+	 * .lang.Object)
 	 */
 	@Override
 	public Component getListCellEditorComponent( Object value )
 	{
-		delegate.setValue( value ); 
-        return editorComponent; 
+		delegate.setValue( value );
+		return editorComponent;
 	}
 }

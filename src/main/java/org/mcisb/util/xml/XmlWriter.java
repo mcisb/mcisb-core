@@ -20,7 +20,7 @@ import org.apache.commons.lang3.*;
 /**
  * 
  * @author Neil Swainston
- *
+ * 
  */
 public class XmlWriter
 {
@@ -28,31 +28,31 @@ public class XmlWriter
 	 *
 	 */
 	private final static String WHITE_SPACE = "[\\s]*"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final static String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-	
+
 	/**
 	 * 
 	 */
 	private final XMLEventWriter writer;
-	
+
 	/**
-	 *
+	 * 
 	 * @param writer
 	 */
 	public XmlWriter( final XMLEventWriter writer )
 	{
 		this.writer = writer;
 	}
-	
+
 	/**
 	 * 
 	 * @throws XMLStreamException
@@ -62,7 +62,7 @@ public class XmlWriter
 		writer.add( eventFactory.createStartDocument() );
 		flush();
 	}
-	
+
 	/**
 	 * 
 	 * @param prefix
@@ -74,7 +74,7 @@ public class XmlWriter
 		writer.add( eventFactory.createNamespace( prefix, namespaceUri ) );
 		flush();
 	}
-	
+
 	/**
 	 * 
 	 * @throws XMLStreamException
@@ -84,7 +84,7 @@ public class XmlWriter
 		writer.add( eventFactory.createEndDocument() );
 		flush();
 	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -94,7 +94,7 @@ public class XmlWriter
 	{
 		writeStartElement( name, new HashMap<String,String>() );
 	}
-	
+
 	/**
 	 * 
 	 * @param characters
@@ -104,7 +104,7 @@ public class XmlWriter
 	{
 		writeCharacters( eventFactory.createCharacters( StringEscapeUtils.escapeXml10( characters ) ) );
 	}
-	
+
 	/**
 	 * 
 	 * @param characters
@@ -115,9 +115,9 @@ public class XmlWriter
 		writer.add( characters );
 		flush();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param name
 	 * @param value
 	 * @throws XMLStreamException
@@ -127,7 +127,7 @@ public class XmlWriter
 		writer.add( eventFactory.createAttribute( name, value ) );
 		flush();
 	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -137,7 +137,7 @@ public class XmlWriter
 	{
 		writeEndElement( XMLConstants.DEFAULT_NS_PREFIX, XMLConstants.NULL_NS_URI, name );
 	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -148,7 +148,7 @@ public class XmlWriter
 	{
 		writeStartElement( XMLConstants.DEFAULT_NS_PREFIX, XMLConstants.NULL_NS_URI, name, attributesMap );
 	}
-	
+
 	/**
 	 * 
 	 * @param prefix
@@ -173,10 +173,10 @@ public class XmlWriter
 	{
 		writeStartElement( eventFactory.createStartElement( prefix, namespaceUri, localName, getAttributes( attributesMap ), null ) );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param event
 	 * @throws XMLStreamException
 	 */
@@ -185,25 +185,25 @@ public class XmlWriter
 		writer.add( event );
 		flush();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param attributesMap
 	 * @return Iterator
 	 */
 	protected Iterator<Attribute> getAttributes( final Map<String,String> attributesMap )
 	{
 		final Collection<Attribute> attributes = new ArrayList<>();
-		
+
 		for( Iterator<Map.Entry<String,String>> iterator = attributesMap.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<String,String> attribute = iterator.next();
 			attributes.add( eventFactory.createAttribute( attribute.getKey(), attribute.getValue() ) );
 		}
-		
+
 		return attributes.iterator();
 	}
-	
+
 	/**
 	 * 
 	 * @param prefix
@@ -215,9 +215,9 @@ public class XmlWriter
 	{
 		writeEndElement( eventFactory.createEndElement( prefix, namespaceUri, localName ) );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param endElement
 	 * @throws XMLStreamException
 	 */
@@ -226,7 +226,7 @@ public class XmlWriter
 		writer.add( endElement );
 		flush();
 	}
-	
+
 	/**
 	 * 
 	 * @throws XMLStreamException
@@ -235,9 +235,9 @@ public class XmlWriter
 	{
 		writeCharacters( LINE_SEPARATOR );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param events
 	 * @throws XMLStreamException
 	 */
@@ -248,10 +248,10 @@ public class XmlWriter
 			write( iterator.next() );
 		}
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param event
 	 * @throws XMLStreamException
 	 */
@@ -266,7 +266,7 @@ public class XmlWriter
 			writeEndDocument();
 		}
 		else if( event.isStartElement() )
-		{	
+		{
 			writeStartElement( event.asStartElement() );
 		}
 		else if( event.isEndElement() )
@@ -280,11 +280,11 @@ public class XmlWriter
 				// Ignore...
 				return;
 			}
-			
+
 			writeCharacters( event.asCharacters() );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @throws XMLStreamException
@@ -293,7 +293,7 @@ public class XmlWriter
 	{
 		writer.flush();
 	}
-	
+
 	/**
 	 * 
 	 * @throws XMLStreamException

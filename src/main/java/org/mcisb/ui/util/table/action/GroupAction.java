@@ -20,7 +20,7 @@ import org.mcisb.ui.wizard.parameter.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class GroupAction extends TableSelectionAction
@@ -29,19 +29,19 @@ public class GroupAction extends TableSelectionAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle( "org.mcisb.ui.util.table.action.messages" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final GroupManager manager;
-	
+
 	/**
-	 *
+	 * 
 	 * @param table
 	 * @param manager
 	 */
@@ -53,7 +53,10 @@ public class GroupAction extends TableSelectionAction
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.table.action.TableSelectionAction#performAction(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.table.action.TableSelectionAction#performAction(java
+	 * .awt.event.ActionEvent)
 	 */
 	@Override
 	public void performAction( @SuppressWarnings("unused") final ActionEvent e )
@@ -63,27 +66,27 @@ public class GroupAction extends TableSelectionAction
 		final Map<Object,Object> propertyNameToKey = new HashMap<>();
 		final Map<Object,Object> options = new LinkedHashMap<>();
 		final String prompt = resourceBundle.getString( "GroupAction.namePrompt" ); //$NON-NLS-1$
-		propertyNameToKey.put( GROUP_NAME, prompt ); 
+		propertyNameToKey.put( GROUP_NAME, prompt );
 		options.put( prompt, null );
 		final DefaultParameterPanel component = new DefaultParameterPanel( resourceBundle.getString( "GroupAction.dialogTitle" ), options ); //$NON-NLS-1$
-		
+
 		try
 		{
 			final Container topLevelAncestor = table.getTopLevelAncestor();
-    		final JDialog dialog = new JDialog( ( topLevelAncestor instanceof Frame ) ? (Frame)topLevelAncestor : null, true );
-        	new DefaultParameterApp( dialog, resourceBundle.getString( "GroupAction.dialogTitle" ), bean, component, propertyNameToKey ).show(); //$NON-NLS-1$
-        	
-        	final Object group = bean.getString( GROUP_NAME );
-        	
-        	if( group != null )
-        	{
-            	if( manager.getGroup( group ) != null )
-            	{
-            		JOptionPane.showMessageDialog( dialog, resourceBundle.getString( "GroupAction.duplicateErrorMessage" ), resourceBundle.getString( "GroupAction.error" ), JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
-            	}
-            	
-        		manager.addGroup( group, getSelection() );
-        	}
+			final JDialog dialog = new JDialog( ( topLevelAncestor instanceof Frame ) ? (Frame)topLevelAncestor : null, true );
+			new DefaultParameterApp( dialog, resourceBundle.getString( "GroupAction.dialogTitle" ), bean, component, propertyNameToKey ).show(); //$NON-NLS-1$
+
+			final Object group = bean.getString( GROUP_NAME );
+
+			if( group != null )
+			{
+				if( manager.getGroup( group ) != null )
+				{
+					JOptionPane.showMessageDialog( dialog, resourceBundle.getString( "GroupAction.duplicateErrorMessage" ), resourceBundle.getString( "GroupAction.error" ), JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+
+				manager.addGroup( group, getSelection() );
+			}
 		}
 		catch( Exception ex )
 		{

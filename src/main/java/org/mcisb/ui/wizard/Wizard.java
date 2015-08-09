@@ -35,7 +35,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	 * 
 	 */
 	public static final String STATUS = "STATUS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
@@ -45,32 +45,32 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	 * 
 	 */
 	protected static final int CONFIRMATION_PANEL = Integer.MIN_VALUE;
-	
+
 	/**
 	 * 
 	 */
 	protected final java.util.List<WizardComponent> wizardComponents = new ArrayList<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final GenericBean bean;
-	
+
 	/**
 	 * 
 	 */
 	protected final GenericBeanTask task;
-	
+
 	/**
 	 * 
 	 */
 	protected final ProgressPanel confirmationPanel;
-	
+
 	/**
 	 * 
 	 */
 	protected int currentWizardComponent = 0;
-	
+
 	/**
 	 * 
 	 */
@@ -80,32 +80,32 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	 * 
 	 */
 	final Action finishAction = new FinishAction();
-	
+
 	/**
 	 * 
 	 */
 	final Action cancelAction = new CancelAction();
-	
+
 	/**
 	 * 
 	 */
 	final Action nextAction = new NextAction();
-	
+
 	/**
 	 * 
 	 */
 	final boolean showReturnValue;
-	
+
 	/**
 	 * 
 	 */
 	private final Action backAction = new BackAction();
-	
+
 	/**
 	 * 
 	 */
 	private Component resultsComponent;
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -115,7 +115,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	{
 		this( bean, task, null, false );
 	}
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -124,9 +124,9 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	 */
 	public Wizard( final GenericBean bean, final GenericBeanTask task, final Dimension textAreaPreferredSize )
 	{
-		this( bean, task, textAreaPreferredSize, false);
+		this( bean, task, textAreaPreferredSize, false );
 	}
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -137,7 +137,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	{
 		this( bean, task, null, showReturnValue );
 	}
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -149,9 +149,9 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	{
 		this( bean, task, showReturnValue, new TextProgressPanel( resourceBundle.getString( "Wizard.progressTitle" ), textAreaPreferredSize, false ) ); //$NON-NLS-1$
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param bean
 	 * @param task
 	 * @param showReturnValue
@@ -164,7 +164,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		this.confirmationPanel = confirmationPanel;
 		this.showReturnValue = showReturnValue;
 	}
-	
+
 	/**
 	 * 
 	 * @return Object
@@ -173,10 +173,12 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	{
 		return returnValue;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent evt )
@@ -186,7 +188,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			updateActions();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param wizardComponent
@@ -195,15 +197,15 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	{
 		wizardComponents.add( wizardComponent );
 	}
-	
+
 	/**
 	 * 
 	 *
 	 */
 	protected void init()
-	{	
+	{
 		final JPanel buttonPanel = new JPanel();
-		
+
 		if( task != null )
 		{
 			buttonPanel.add( new JButton( backAction ) );
@@ -214,20 +216,20 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		{
 			finishAction.setEnabled( true );
 		}
-		
+
 		buttonPanel.add( new JButton( finishAction ) );
 		buttonPanel.add( new JButton( cancelAction ) );
-		
+
 		setLayout( new BorderLayout() );
-		
+
 		WizardComponent current = wizardComponents.get( currentWizardComponent );
 		updateUI( null, current.getComponent() );
 		add( buttonPanel, BorderLayout.SOUTH );
-		
+
 		// Determine preferredSize:
 		int width = confirmationPanel.getPreferredSize().width;
 		int height = confirmationPanel.getPreferredSize().height;
-		
+
 		for( Iterator<WizardComponent> iterator = wizardComponents.iterator(); iterator.hasNext(); )
 		{
 			WizardComponent wizardComponent = iterator.next();
@@ -239,36 +241,36 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		Dimension preferredSize = buttonPanel.getPreferredSize();
 		setPreferredSize( new Dimension( Math.max( width, preferredSize.width ), height + preferredSize.height ) );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return WizardComponent
 	 */
 	protected WizardComponent getBackReplacement()
 	{
 		return wizardComponents.get( --currentWizardComponent );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return WizardComponent
 	 */
 	protected WizardComponent getForwardReplacement()
 	{
 		return wizardComponents.get( ++currentWizardComponent );
 	}
-	
+
 	/**
 	 * 
 	 * @return Component
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@SuppressWarnings({ "static-method", "unused" })
 	protected Component getResultsComponent() throws Exception
 	{
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * @param status
@@ -277,13 +279,13 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	protected void close( int status ) throws Exception
 	{
 		firePropertyChange( STATUS, Integer.valueOf( Task.READY ), Integer.valueOf( status ) );
-		
+
 		// Clean up:
 		for( Iterator<WizardComponent> iterator = wizardComponents.iterator(); iterator.hasNext(); )
 		{
 			WizardComponent wizardComponent = iterator.next();
 			Object component = wizardComponent.getComponent();
-			
+
 			try
 			{
 				( (Disposable)component ).dispose();
@@ -293,20 +295,20 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 				showException( e );
 			}
 		}
-		
+
 		if( confirmationPanel != null )
 		{
 			confirmationPanel.dispose();
 		}
-		
+
 		if( resultsComponent != null && resultsComponent instanceof Disposable )
 		{
 			( (Disposable)resultsComponent ).dispose();
 		}
-		
+
 		dispose();
 	}
-	
+
 	/**
 	 */
 	protected void dispose()
@@ -321,7 +323,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		WizardComponent current = wizardComponents.get( currentWizardComponent );
 		updateUI( current.getComponent(), getBackReplacement().getComponent() );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -339,7 +341,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			{
 				final WizardComponent current = wizardComponents.get( currentWizardComponent );
 				current.update();
-					
+
 				if( currentWizardComponent == wizardComponents.size() - 1 )
 				{
 					runTask();
@@ -357,7 +359,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			showException( e );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param e
@@ -368,16 +370,16 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		ComponentUtils.setLocationCentral( dialog );
 		dialog.setVisible( true );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param title
 	 */
 	void updateActions( final String title )
 	{
 		confirmationPanel.setTitle( title );
-		
+
 		if( showReturnValue )
 		{
 			nextAction.setEnabled( true );
@@ -388,7 +390,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			cancelAction.setEnabled( false );
 		}
 	}
-	
+
 	/**
 	 * 
 	 *
@@ -396,7 +398,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 	private void runTask()
 	{
 		WizardComponent current = wizardComponents.get( currentWizardComponent );
-		
+
 		try
 		{
 			if( task == null )
@@ -406,21 +408,22 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			else
 			{
 				task.addPropertyChangeListener( confirmationPanel );
-				
+
 				currentWizardComponent = CONFIRMATION_PANEL;
 				updateUI( current.getComponent(), confirmationPanel );
-				
+
 				Runnable runnable = new Runnable()
 				{
-					/* 
+					/*
 					 * (non-Javadoc)
+					 * 
 					 * @see java.lang.Runnable#run()
 					 */
 					@Override
 					public void run()
 					{
 						String title;
-						
+
 						try
 						{
 							returnValue = task.runTask( bean );
@@ -443,13 +446,14 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 								showException( e );
 							}
 						}
-						
+
 						final String confirmedTitle = title;
-						
+
 						SwingUtilities.invokeLater( new Runnable()
 						{
-							/* 
+							/*
 							 * (non-Javadoc)
+							 * 
 							 * @see java.lang.Runnable#run()
 							 */
 							@Override
@@ -460,7 +464,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 						} );
 					}
 				};
-				
+
 				new Thread( runnable ).start();
 			}
 		}
@@ -469,9 +473,9 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			showException( e );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param current
 	 * @param replacement
 	 */
@@ -482,15 +486,15 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			current.removePropertyChangeListener( this );
 			remove( current );
 		}
-		
+
 		replacement.addPropertyChangeListener( this );
 		add( replacement, BorderLayout.CENTER );
-		
+
 		updateActions();
 		validate();
 		repaint();
 	}
-	
+
 	/**
 	 * 
 	 *
@@ -500,7 +504,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		backAction.setEnabled( currentWizardComponent > 0 );
 		nextAction.setEnabled( currentWizardComponent != CONFIRMATION_PANEL && currentWizardComponent != wizardComponents.size() && wizardComponents.get( currentWizardComponent ).getComponent().isValidated() );
 	}
-	
+
 	/**
 	 * 
 	 * @author Neil Swainston
@@ -511,7 +515,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 * 
 		 */
@@ -519,10 +523,13 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		{
 			putValue( NAME, resourceBundle.getString( "Wizard.back" ) ); //$NON-NLS-1$
 		}
-		
+
 		/*
 		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 * 
+		 * @see
+		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+		 * )
 		 */
 		@Override
 		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
@@ -537,7 +544,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @author Neil Swainston
@@ -548,7 +555,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 * 
 		 */
@@ -556,10 +563,13 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		{
 			putValue( NAME, resourceBundle.getString( "Wizard.next" ) ); //$NON-NLS-1$
 		}
-		
+
 		/*
 		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 * 
+		 * @see
+		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+		 * )
 		 */
 		@Override
 		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
@@ -567,7 +577,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			forward();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @author Neil Swainston
@@ -578,7 +588,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 * 
 		 */
@@ -586,10 +596,13 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		{
 			putValue( NAME, resourceBundle.getString( "Wizard.finish" ) ); //$NON-NLS-1$
 		}
-		
+
 		/*
 		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 * 
+		 * @see
+		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+		 * )
 		 */
 		@Override
 		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
@@ -611,7 +624,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @author Neil Swainston
@@ -622,7 +635,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 * 
 		 */
@@ -630,10 +643,13 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		{
 			putValue( NAME, resourceBundle.getString( "Wizard.cancel" ) ); //$NON-NLS-1$
 		}
-		
+
 		/*
 		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 * 
+		 * @see
+		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+		 * )
 		 */
 		@Override
 		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
@@ -644,7 +660,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 				{
 					task.cancel();
 				}
-				
+
 				close( Task.CANCELLED );
 			}
 			catch( Exception ex )

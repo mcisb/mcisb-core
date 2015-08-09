@@ -25,15 +25,17 @@ public class DefaultDocumentListener extends PropertyChangeSupported implements 
 	 * 
 	 */
 	public static final String TEXT = "TEXT"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private String text = null;
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void changedUpdate( DocumentEvent e )
@@ -50,7 +52,9 @@ public class DefaultDocumentListener extends PropertyChangeSupported implements 
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void insertUpdate( DocumentEvent e )
@@ -67,7 +71,9 @@ public class DefaultDocumentListener extends PropertyChangeSupported implements 
 
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void removeUpdate( DocumentEvent e )
@@ -81,11 +87,11 @@ public class DefaultDocumentListener extends PropertyChangeSupported implements 
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param e
-	 * @throws BadLocationException 
+	 * @throws BadLocationException
 	 */
 	private void update( final DocumentEvent e ) throws BadLocationException
 	{

@@ -26,9 +26,9 @@ public class FileChooserWizardComponent extends WizardComponent
 	 * 
 	 */
 	private final String propertyName;
-	
+
 	/**
-	 *
+	 * 
 	 * @param bean
 	 * @param component
 	 * @param propertyName
@@ -38,9 +38,10 @@ public class FileChooserWizardComponent extends WizardComponent
 		super( bean, component );
 		this.propertyName = propertyName;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.WizardComponent#update()
 	 */
 	@Override
@@ -49,13 +50,13 @@ public class FileChooserWizardComponent extends WizardComponent
 		FileChooserPanel fileChooserPanel = (FileChooserPanel)parameterPanel;
 		Collection<File> files = fileChooserPanel.getFiles();
 		Collection<String> filepaths = new ArrayList<>();
-			
+
 		for( Iterator<File> iterator = files.iterator(); iterator.hasNext(); )
 		{
 			File file = iterator.next();
-			filepaths.add( file.getAbsolutePath() ); 
+			filepaths.add( file.getAbsolutePath() );
 		}
-		
+
 		bean.setProperty( propertyName, filepaths );
 	}
 }

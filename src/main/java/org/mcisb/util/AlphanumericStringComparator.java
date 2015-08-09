@@ -32,6 +32,7 @@ public class AlphanumericStringComparator implements Serializable, Comparator<St
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -39,13 +40,13 @@ public class AlphanumericStringComparator implements Serializable, Comparator<St
 	{
 		final List<Comparable<?>> chunks1 = getChunks( o1 );
 		final List<Comparable<?>> chunks2 = getChunks( o2 );
-		
+
 		for( int i = 0; i < Math.min( chunks1.size(), chunks2.size() ); i++ )
 		{
 			if( chunks1.get( i ) instanceof Double && chunks2.get( i ) instanceof Double )
 			{
 				final int compare = ( (Double)chunks1.get( i ) ).compareTo( (Double)chunks2.get( i ) );
-				
+
 				if( compare != 0 )
 				{
 					return compare;
@@ -54,7 +55,7 @@ public class AlphanumericStringComparator implements Serializable, Comparator<St
 			else
 			{
 				final int compare = chunks1.get( i ).toString().compareTo( chunks2.get( i ).toString() );
-				
+
 				if( compare != 0 )
 				{
 					return compare;
@@ -64,7 +65,7 @@ public class AlphanumericStringComparator implements Serializable, Comparator<St
 
 		return chunks1.size() - chunks2.size();
 	}
-	
+
 	/**
 	 * 
 	 * @param s
@@ -74,25 +75,25 @@ public class AlphanumericStringComparator implements Serializable, Comparator<St
 	{
 		final List<Comparable<?>> chunks = new ArrayList<>();
 		String chunk = EMPTY_STRING;
-		
+
 		for( int i = 0; i < s.length(); i++ )
 		{
 			char c = s.charAt( i );
-			
+
 			if( !inChunk( c, chunk ) )
 			{
 				chunks.add( NumberUtils.isDecimal( chunk ) ? Double.valueOf( chunk ) : chunk );
 				chunk = EMPTY_STRING;
 			}
-			
+
 			chunk = chunk + c;
 		}
-		
+
 		chunks.add( NumberUtils.isDecimal( chunk ) ? Double.valueOf( chunk ) : chunk );
-		
+
 		return chunks;
 	}
-	
+
 	/**
 	 * 
 	 * @param ch

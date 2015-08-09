@@ -23,42 +23,42 @@ public interface Task
 	 * 
 	 */
 	public static final int READY = Integer.MIN_VALUE;
-	
+
 	/**
 	 * 
 	 */
 	public static final int INDETERMINATE = -555;
-	
+
 	/**
 	 * 
 	 */
 	public static final int STARTED = 0;
-	
+
 	/**
 	 * 
 	 */
 	public static final int CANCELLED = 111;
-	
+
 	/**
 	 * 
 	 */
 	public static final int ERROR = 666;
-	
+
 	/**
 	 * 
 	 */
 	public static final int FINISHED = Integer.MAX_VALUE;
-	
+
 	/**
 	 * 
 	 */
 	public static final String MESSAGE = "MESSAGE"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String PROGRESS = "PROGRESS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 * @param l

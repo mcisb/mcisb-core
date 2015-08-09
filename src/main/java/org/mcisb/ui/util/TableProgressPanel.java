@@ -19,7 +19,7 @@ import org.mcisb.util.task.*;
 
 /**
  * @author Neil Swainston
- *
+ * 
  */
 public class TableProgressPanel extends ProgressPanel
 {
@@ -27,12 +27,12 @@ public class TableProgressPanel extends ProgressPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	public static final String SEPARATOR = "\t"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
@@ -40,8 +40,8 @@ public class TableProgressPanel extends ProgressPanel
 
 	/**
 	 * @param title
-	 * @param columnIdentifiers 
-	 * @param displayPreferredSize 
+	 * @param columnIdentifiers
+	 * @param displayPreferredSize
 	 */
 	public TableProgressPanel( final String title, final String[] columnIdentifiers, final Dimension displayPreferredSize )
 	{
@@ -50,9 +50,10 @@ public class TableProgressPanel extends ProgressPanel
 		model.setColumnIdentifiers( columnIdentifiers );
 		display.setViewportView( new JTable( model ) );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ProgressPanel#setException(java.lang.Exception)
 	 */
 	@Override
@@ -62,14 +63,15 @@ public class TableProgressPanel extends ProgressPanel
 		setProgress( Task.ERROR );
 		reportErrorAction.setError( error );
 		toolbar.add( reportErrorAction );
-		
+
 		final JDialog errorDialog = new ExceptionComponentFactory().getExceptionDialog( getParent(), error, e );
 		ComponentUtils.setLocationCentral( errorDialog );
 		errorDialog.setVisible( true );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ProgressPanel#setMessage(java.lang.String)
 	 */
 	@Override
@@ -80,13 +82,14 @@ public class TableProgressPanel extends ProgressPanel
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ProgressPanel#clearMessage()
 	 */
 	@Override
 	protected void clearMessage()
 	{
 		final int ZERO = 0;
-		
+
 		while( model.getRowCount() > ZERO )
 		{
 			model.removeRow( ZERO );

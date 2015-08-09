@@ -29,32 +29,32 @@ public abstract class App implements PropertyChangeListener
 	 * 
 	 */
 	protected final GenericBean bean;
-	
+
 	/**
 	 * 
 	 */
 	protected final Window window;
-	
+
 	/**
 	 * 
 	 */
 	protected final JDialog dialog;
-	
+
 	/**
 	 * 
 	 */
 	protected final JFrame frame;
-	
+
 	/**
 	 * 
 	 */
 	private String error;
-	
+
 	/**
 	 * 
 	 */
 	private int status;
-	
+
 	/**
 	 * 
 	 * @param dialog
@@ -67,7 +67,7 @@ public abstract class App implements PropertyChangeListener
 		this.frame = null;
 		this.bean = bean;
 	}
-	
+
 	/**
 	 * 
 	 * @param frame
@@ -80,7 +80,7 @@ public abstract class App implements PropertyChangeListener
 		this.dialog = null;
 		this.bean = bean;
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -90,10 +90,10 @@ public abstract class App implements PropertyChangeListener
 	public void init( final String title, final String errorTitle, final Image icon )
 	{
 		this.error = errorTitle;
-		
+
 		Container contentPane;
 		Wizard w = null;
-		
+
 		try
 		{
 			w = getWizard();
@@ -118,10 +118,10 @@ public abstract class App implements PropertyChangeListener
 			frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
 			frame.setContentPane( contentPane );
 		}
-		
+
 		window.pack();
 	}
-	
+
 	/**
 	 * 
 	 * @return int
@@ -132,15 +132,18 @@ public abstract class App implements PropertyChangeListener
 		{
 			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		}
-		
+
 		ComponentUtils.setLocationCentral( window );
 		window.setVisible( true );
 		return status;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.util.task.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see
+	 * org.mcisb.util.task.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent e )
@@ -148,19 +151,19 @@ public abstract class App implements PropertyChangeListener
 		if( e.getPropertyName().equals( Task.PROGRESS ) )
 		{
 			final int progress = ( (Integer)e.getNewValue() ).intValue();
-			
+
 			if( progress == Task.CANCELLED || progress == Task.FINISHED || progress == Task.ERROR )
 			{
 				Object source = e.getSource();
-				
+
 				if( source instanceof AbstractTask )
 				{
 					AbstractTask task = (AbstractTask)source;
-					
+
 					try
 					{
 						task.removePropertyChangeListener( this );
-						
+
 						if( task.getException() != null )
 						{
 							showException( task.getException() );
@@ -179,14 +182,14 @@ public abstract class App implements PropertyChangeListener
 			window.dispose();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return Wizard
 	 * @throws Exception
 	 */
 	protected abstract Wizard getWizard() throws Exception;
-	
+
 	/**
 	 * 
 	 * @param e
@@ -194,8 +197,8 @@ public abstract class App implements PropertyChangeListener
 	private void showException( Exception e )
 	{
 		final Container contentPane = new ExceptionComponentFactory().getExceptionPanel( error, e );
-		
-		if( dialog != null  )
+
+		if( dialog != null )
 		{
 			dialog.setContentPane( contentPane );
 		}
@@ -203,7 +206,7 @@ public abstract class App implements PropertyChangeListener
 		{
 			frame.setContentPane( contentPane );
 		}
-		
+
 		window.validate();
 	}
 }

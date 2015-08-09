@@ -38,12 +38,12 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	 * 
 	 */
 	protected final JList<?> objectList;
-	
+
 	/**
 	 * 
 	 */
 	protected int previousIndex = -1;
-	
+
 	/**
 	 * 
 	 * @param title
@@ -54,13 +54,13 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	{
 		super( title );
 		this.objectList = objectList;
-		
+
 		// Create and configure components:
 		objectList.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-		
+
 		// Listen to objectList:
 		objectList.addListSelectionListener( this );
-		
+
 		// Create and add toolbar:
 		if( hasToolbar )
 		{
@@ -73,8 +73,9 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 		}
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
 	@SuppressWarnings("unused")
@@ -83,10 +84,13 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	{
 		objectList.removeListSelectionListener( this );
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( @SuppressWarnings("unused") ListSelectionEvent e )
@@ -95,12 +99,13 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 		{
 			save( objectList.getModel().getElementAt( previousIndex ) );
 		}
-		
+
 		previousIndex = objectList.getSelectedIndex();
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#saveObject()
 	 */
 	@Override
@@ -115,7 +120,7 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	 * @throws Exception
 	 */
 	public abstract Object getObject() throws Exception;
-	
+
 	/**
 	 * 
 	 * @param name
@@ -127,7 +132,7 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 		int[] count = new int[] { 0 };
 		return getUniqueName( name, getNewName( name, count ), model, count );
 	}
-	
+
 	/**
 	 * 
 	 * @return UniqueObject
@@ -136,13 +141,13 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	{
 		return new UniqueObject( StringUtils.getUniqueId() );
 	}
-	
+
 	/**
 	 * 
 	 * @param label
 	 */
 	protected abstract void save( Object label );
-	
+
 	/**
 	 * 
 	 * @param name
@@ -156,16 +161,16 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 		for( int i = 0; i < model.getSize(); i++ )
 		{
 			String existingName = model.getElementAt( i ).toString();
-			
+
 			if( newName.equals( existingName ) )
 			{
 				return getUniqueName( name, getNewName( name, count ), model, count );
 			}
 		}
-		
+
 		return newName;
 	}
-	
+
 	/**
 	 * 
 	 * @param name

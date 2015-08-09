@@ -24,22 +24,22 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	 * 
 	 */
 	protected final PropertyChangeSupport support = new PropertyChangeSupport( this );
-	
+
 	/**
 	 * 
 	 */
 	protected Exception exception;
-	
+
 	/**
 	 * 
 	 */
 	private String message;
-	
+
 	/**
 	 * 
 	 */
 	private int progress = READY;
-	
+
 	/**
 	 * 
 	 */
@@ -55,7 +55,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 		returnValue = doTask();
 		return returnValue;
 	}
-	
+
 	/**
 	 * 
 	 * @return Object
@@ -64,7 +64,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	{
 		return returnValue;
 	}
-	
+
 	/**
 	 * 
 	 * @return Exception
@@ -74,8 +74,9 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 		return exception;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
@@ -90,28 +91,31 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 			exception = e;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
-	public void propertyChange( final PropertyChangeEvent e ) 
+	public void propertyChange( final PropertyChangeEvent e )
 	{
 		firePropertyChange( e );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Task#cancel()
 	 */
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	@Override
 	public void cancel() throws Exception
-    {
-        setProgress( CANCELLED );
-    }
-	
+	{
+		setProgress( CANCELLED );
+	}
+
 	/**
 	 * 
 	 * @param message
@@ -122,7 +126,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 		this.message = message;
 		support.firePropertyChange( MESSAGE, oldMessage, this.message );
 	}
-	
+
 	/**
 	 * 
 	 * @param progress
@@ -133,7 +137,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 		this.progress = progress;
 		support.firePropertyChange( PROGRESS, Integer.valueOf( oldProgress ), Integer.valueOf( this.progress ) );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -142,7 +146,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	{
 		support.addPropertyChangeListener( listener );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -151,7 +155,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	{
 		support.removePropertyChangeListener( listener );
 	}
-	
+
 	/**
 	 * 
 	 * @param e
@@ -160,7 +164,7 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	{
 		support.firePropertyChange( e.getPropertyName(), e.getOldValue(), e.getNewValue() );
 	}
-	
+
 	/**
 	 * 
 	 * @return Serializable

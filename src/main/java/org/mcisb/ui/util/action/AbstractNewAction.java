@@ -26,12 +26,12 @@ public abstract class AbstractNewAction extends AbstractAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final static ResourceBundle resourceBundle = ResourceBundle.getBundle( "org.mcisb.ui.util.action.messages" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */

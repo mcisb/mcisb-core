@@ -16,7 +16,7 @@ import org.junit.*;
 
 /**
  * 
- *
+ * 
  * @author Neil Swainston
  */
 public class StreamReaderTest
@@ -25,36 +25,36 @@ public class StreamReaderTest
 	 * 
 	 */
 	private final static String EXPECTED_CONTENT = "expected content"; //$NON-NLS-1$
-	
+
 	/**
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	@SuppressWarnings("static-method")
-	@Test 
+	@Test
 	public void readInputStream() throws IOException
 	{
-		try( final InputStream is = getInputStream() )
+		try ( final InputStream is = getInputStream() )
 		{
 			final String content = new String( StreamReader.read( is ) );
 			Assert.assertTrue( content.contains( EXPECTED_CONTENT ) );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("static-method")
-	@Test 
+	@Test
 	public void read() throws IOException, InterruptedException
 	{
 		read( null );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -65,31 +65,32 @@ public class StreamReaderTest
 		final File file = File.createTempFile( "temp", ".txt" ); //$NON-NLS-1$ //$NON-NLS-2$
 		read( file );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param file
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
 	private static void read( final File file ) throws IOException, InterruptedException
 	{
-		@SuppressWarnings("resource") InputStream fis = null;
+		@SuppressWarnings("resource")
+		InputStream fis = null;
 
-		try( final InputStream is = getInputStream(); @SuppressWarnings("resource")
+		try ( final InputStream is = getInputStream(); @SuppressWarnings("resource")
 		final OutputStream os = ( file == null ) ? new ByteArrayOutputStream() : new FileOutputStream( file ) )
 		{
 			final StreamReader reader = new StreamReader( is, os );
 			final Thread thread = new Thread( reader );
 			thread.start();
 			thread.join();
-			
+
 			if( file != null )
 			{
 				os.close();
 				fis = new FileInputStream( file );
 			}
-			
+
 			final String content = ( file == null ) ? os.toString() : new String( StreamReader.read( fis ) );
 			Assert.assertTrue( content.contains( EXPECTED_CONTENT ) );
 			is.close();
@@ -110,9 +111,9 @@ public class StreamReaderTest
 			}
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return InputStream
 	 */
 	private static InputStream getInputStream()

@@ -24,25 +24,25 @@ public class GridBagPanel extends JPanel
 	 * 
 	 */
 	public final static int DEFAULT_INSET = 10;
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	protected final int inset;
-	
+
 	/**
 	 * 
 	 */
 	private final GridBagConstraints constraints = new GridBagConstraints();
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param inset
 	 */
 	public GridBagPanel( final int inset )
@@ -51,7 +51,7 @@ public class GridBagPanel extends JPanel
 		this.inset = inset;
 		constraints.anchor = GridBagConstraints.NORTHWEST;
 	}
-	
+
 	/**
 	 * 
 	 *
@@ -60,10 +60,10 @@ public class GridBagPanel extends JPanel
 	{
 		this( DEFAULT_INSET );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param component
 	 * @param x
 	 * @param y
@@ -85,10 +85,10 @@ public class GridBagPanel extends JPanel
 		constraints.insets = new Insets( inset, inset, ( lastY ? inset : 0 ), ( lastX ? inset : 0 ) );
 		add( component, constraints );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param component
 	 */
 	public void fill( Component component )

@@ -27,28 +27,28 @@ public class StreamReader implements Runnable
 	 * Output stream.
 	 */
 	protected final OutputStream os;
-	
+
 	/**
 	 * Error stream.
 	 */
 	protected final OutputStream es;
-	
+
 	/**
 	 * Input stream.
 	 */
 	protected InputStream is;
-	
+
 	/**
-	 *
+	 * 
 	 * @param os
 	 */
 	public StreamReader( final OutputStream os )
 	{
 		this( null, os, System.err );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param os
 	 */
@@ -56,9 +56,9 @@ public class StreamReader implements Runnable
 	{
 		this( is, os, System.err );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param os
 	 * @param es
@@ -69,7 +69,7 @@ public class StreamReader implements Runnable
 		this.os = new BufferedOutputStream( os );
 		this.es = new BufferedOutputStream( es );
 	}
-	
+
 	/**
 	 * 
 	 * @param is
@@ -78,29 +78,30 @@ public class StreamReader implements Runnable
 	{
 		this.is = new BufferedInputStream( is );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public void read() throws IOException
 	{
 		final int BUFFER_SIZE = 1048576;
 		final ByteBuffer buffer = ByteBuffer.allocate( BUFFER_SIZE );
-        
-        try( final ReadableByteChannel source = Channels.newChannel( is ); final WritableByteChannel destination = Channels.newChannel( os ) )
-        {
-        	while( source.read( buffer ) > 0 )
-        	{
-        		buffer.flip(); 
-        		destination.write( buffer );
-        		buffer.clear();
-        	}
-        }
+
+		try ( final ReadableByteChannel source = Channels.newChannel( is ); final WritableByteChannel destination = Channels.newChannel( os ) )
+		{
+			while( source.read( buffer ) > 0 )
+			{
+				buffer.flip();
+				destination.write( buffer );
+				buffer.clear();
+			}
+		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
@@ -115,7 +116,7 @@ public class StreamReader implements Runnable
 			e.printStackTrace( new PrintStream( es ) );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param is
@@ -125,7 +126,7 @@ public class StreamReader implements Runnable
 	public static byte[] read( final InputStream is ) throws IOException
 	{
 		ByteArrayOutputStream os = null;
-		
+
 		try
 		{
 			os = new ByteArrayOutputStream();
@@ -142,24 +143,25 @@ public class StreamReader implements Runnable
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param zipUrl
-	 * @param root 
+	 * @param root
 	 * @throws IOException
 	 */
 	public static void unzip( final URL zipUrl, final File root ) throws IOException
 	{
-		try( @SuppressWarnings("resource") final InputStream is = new BufferedInputStream( zipUrl.openStream() );
-			@SuppressWarnings("resource") final ZipInputStream zis = new ZipInputStream( is ) )
+		try ( @SuppressWarnings("resource")
+		final InputStream is = new BufferedInputStream( zipUrl.openStream() ); @SuppressWarnings("resource")
+		final ZipInputStream zis = new ZipInputStream( is ) )
 		{
 			ZipEntry entry;
 
 			while( ( entry = zis.getNextEntry() ) != null )
 			{
 				final File entryFile = new File( root, entry.getName() );
-				
+
 				if( entry.getName().endsWith( "/" ) ) //$NON-NLS-1$
 				{
 					if( !entryFile.mkdir() )
@@ -169,7 +171,7 @@ public class StreamReader implements Runnable
 				}
 				else
 				{
-					try( final OutputStream os = new FileOutputStream( entryFile ) )
+					try ( final OutputStream os = new FileOutputStream( entryFile ) )
 					{
 						new StreamReader( zis, os ).read();
 					}

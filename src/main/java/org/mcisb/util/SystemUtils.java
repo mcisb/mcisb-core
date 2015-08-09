@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * @author Neil Swainston
- *
+ * 
  */
 public class SystemUtils
 {
@@ -29,18 +29,18 @@ public class SystemUtils
 		 * 
 		 */
 		WINDOWS,
-		
+
 		/**
 		 * 
 		 */
 		MAC,
-		
+
 		/**
 		 * 
 		 */
 		LINUX
 	}
-	
+
 	/**
 	 * 
 	 * @return OperatingSystem
@@ -48,22 +48,22 @@ public class SystemUtils
 	public static OperatingSystem getOperatingSystem()
 	{
 		final String os = System.getProperty( "os.name" ).toLowerCase( Locale.getDefault() ); //$NON-NLS-1$
-		
+
 		if( os.contains( OperatingSystem.WINDOWS.toString().toLowerCase( Locale.getDefault() ) ) )
 		{
 			return OperatingSystem.WINDOWS;
 		}
-		
+
 		if( os.contains( OperatingSystem.MAC.toString().toLowerCase( Locale.getDefault() ) ) )
 		{
 			return OperatingSystem.MAC;
 		}
-		
+
 		if( os.contains( OperatingSystem.LINUX.toString().toLowerCase( Locale.getDefault() ) ) )
 		{
 			return OperatingSystem.LINUX;
 		}
-		
+
 		throw new IllegalArgumentException();
 	}
 }

@@ -22,13 +22,13 @@ public interface Manager
 	 * @throws Exception
 	 */
 	public void newObject() throws Exception;
-	
+
 	/**
 	 * 
 	 * @throws Exception
 	 */
 	public void saveObject() throws Exception;
-	
+
 	/**
 	 * 
 	 * @throws Exception

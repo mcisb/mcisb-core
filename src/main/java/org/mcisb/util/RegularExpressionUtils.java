@@ -32,12 +32,12 @@ public class RegularExpressionUtils
 	 * 
 	 */
 	public static final String INCHI_REGEX = "(?=.*)InChI=[\\d]+S?/[A-Z[\\d]+]+/[\\w/-[,][+][\\(][\\)]]+(?=.*)"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String YEAST_ORF_REGEX = "(?=.*)Y[A-Z]{2}[\\d]{3}[A-Z](?=.*)"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 * @param url
@@ -49,9 +49,9 @@ public class RegularExpressionUtils
 	{
 		return getMatches( url, regex, 0 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param regex
 	 * @return Collection
@@ -61,7 +61,7 @@ public class RegularExpressionUtils
 	{
 		return getMatches( is, regex, 0 );
 	}
-	
+
 	/**
 	 * 
 	 * @param input
@@ -72,7 +72,7 @@ public class RegularExpressionUtils
 	{
 		return getMatches( input, regex, 0 );
 	}
-	
+
 	/**
 	 * 
 	 * @param url
@@ -84,9 +84,9 @@ public class RegularExpressionUtils
 	{
 		return getAllMatches( url, regex, 0 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param regex
 	 * @return Collection
@@ -96,7 +96,7 @@ public class RegularExpressionUtils
 	{
 		return getAllMatches( is, regex, 0 );
 	}
-	
+
 	/**
 	 * 
 	 * @param input
@@ -107,12 +107,12 @@ public class RegularExpressionUtils
 	{
 		return getAllMatches( input, regex, 0 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 * @throws IOException
 	 */
@@ -120,30 +120,30 @@ public class RegularExpressionUtils
 	{
 		return new LinkedHashSet<>( getAllMatches( url, regex, flags ) );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 * @throws IOException
 	 */
 	public static Collection<String> getAllMatches( final URL url, final String regex, final int flags ) throws IOException
 	{
-		try( final InputStream is = url.openStream() )
+		try ( final InputStream is = url.openStream() )
 		{
 			final Collection<String> matches = getAllMatches( is, regex, flags );
 			is.close();
 			return matches;
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 * @throws IOException
 	 */
@@ -151,12 +151,12 @@ public class RegularExpressionUtils
 	{
 		return getMatches( new String( StreamReader.read( is ) ), regex, flags );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 * @throws IOException
 	 */
@@ -164,24 +164,24 @@ public class RegularExpressionUtils
 	{
 		return getAllMatches( new String( StreamReader.read( is ) ), regex, flags );
 	}
-	
+
 	/**
 	 * 
 	 * @param input
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 */
 	public static Collection<String> getMatches( final String input, final String regex, final int flags )
 	{
 		return new LinkedHashSet<>( getAllMatches( input, regex, flags ) );
 	}
-	
+
 	/**
 	 * 
 	 * @param input
 	 * @param regex
-	 * @param flags 
+	 * @param flags
 	 * @return Collection
 	 */
 	public static Collection<String> getAllMatches( final String input, final String regex, final int flags )
@@ -189,12 +189,12 @@ public class RegularExpressionUtils
 		final Collection<String> matches = new ArrayList<>();
 		final Pattern pattern = Pattern.compile( regex, flags );
 		final Matcher matcher = pattern.matcher( input );
-		
-        while( matcher.find() )
+
+		while( matcher.find() )
 		{
-        	matches.add( input.substring( matcher.start(), matcher.end() ) );
+			matches.add( input.substring( matcher.start(), matcher.end() ) );
 		}
-		
-        return matches;
+
+		return matches;
 	}
 }

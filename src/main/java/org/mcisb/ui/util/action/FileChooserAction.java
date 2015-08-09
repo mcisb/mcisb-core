@@ -27,7 +27,7 @@ public class FileChooserAction extends AbstractAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
@@ -42,34 +42,34 @@ public class FileChooserAction extends AbstractAction
 	 * 
 	 */
 	private final Component parent;
-	
+
 	/**
 	 * 
 	 */
 	private final JFileChooser fileChooser;
-	
+
 	/**
 	 * 
 	 */
 	private final boolean multiSelectionEnabled;
-	
+
 	/**
 	 * 
 	 */
 	private final transient javax.swing.filechooser.FileFilter fileFilter;
-	
+
 	/**
 	 * 
 	 */
 	private int fileSelectionMode;
-	
+
 	/**
 	 * 
 	 */
 	private File[] files;
-	
+
 	/**
-	 *
+	 * 
 	 * @param parent
 	 * @param fileChooser
 	 * @param multiSelectionEnabled
@@ -85,7 +85,7 @@ public class FileChooserAction extends AbstractAction
 		this.fileFilter = fileFilter;
 		this.fileSelectionMode = fileSelectionMode;
 	}
-	
+
 	/**
 	 * 
 	 * @param fileSelectionMode
@@ -94,42 +94,44 @@ public class FileChooserAction extends AbstractAction
 	{
 		this.fileSelectionMode = fileSelectionMode;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
 	{
 		File[] oldFiles = files;
-		
+
 		if( fileSelectionMode != JFileChooser.DIRECTORIES_ONLY )
 		{
 			fileChooser.setFileFilter( fileFilter );
 			fileChooser.setMultiSelectionEnabled( multiSelectionEnabled );
 		}
-		
-		fileChooser.setFileSelectionMode( fileSelectionMode );
-		
-		int returnVal = fileChooser.showOpenDialog( parent );
-		
-	    if( returnVal == JFileChooser.APPROVE_OPTION )
-	    {
-	    	File blankFile = new File( "" ); //$NON-NLS-1$
-	    	
-	    	if( fileChooser.isMultiSelectionEnabled() )
-	    	{
-	    		files = fileChooser.getSelectedFiles();
-	    		fileChooser.setSelectedFiles( new File[] { blankFile } );
-	    	}
-	    	else
-	    	{
-	    		files = new File[] { fileChooser.getSelectedFile() };
-	    		fileChooser.setSelectedFile( blankFile );
-	    	}
-	    }
 
-	    firePropertyChange( FILES, oldFiles, files );
+		fileChooser.setFileSelectionMode( fileSelectionMode );
+
+		int returnVal = fileChooser.showOpenDialog( parent );
+
+		if( returnVal == JFileChooser.APPROVE_OPTION )
+		{
+			File blankFile = new File( "" ); //$NON-NLS-1$
+
+			if( fileChooser.isMultiSelectionEnabled() )
+			{
+				files = fileChooser.getSelectedFiles();
+				fileChooser.setSelectedFiles( new File[] { blankFile } );
+			}
+			else
+			{
+				files = new File[] { fileChooser.getSelectedFile() };
+				fileChooser.setSelectedFile( blankFile );
+			}
+		}
+
+		firePropertyChange( FILES, oldFiles, files );
 	}
 }

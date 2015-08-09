@@ -24,25 +24,25 @@ public class TextProgressPanel extends ProgressPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private static final String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	protected final JTextArea textArea = new JTextArea();
-	
+
 	/**
 	 * 
 	 */
 	private final boolean appendMessages;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param title
 	 * @param displayPreferredSize
 	 * @param appendMessages
@@ -51,14 +51,15 @@ public class TextProgressPanel extends ProgressPanel
 	{
 		super( title, displayPreferredSize );
 		this.appendMessages = appendMessages;
-		
+
 		textArea.setEditable( false );
-		
+
 		display.setViewportView( textArea );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ProgressPanel#setMessage(java.lang.String)
 	 */
 	@Override
@@ -67,9 +68,10 @@ public class TextProgressPanel extends ProgressPanel
 		final String existingText = textArea.getText();
 		textArea.setText( ( appendMessages ) ? existingText + ( ( existingText.length() == 0 ) ? "" : LINE_SEPARATOR ) + message : message ); //$NON-NLS-1$
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ProgressPanel#clearMessage()
 	 */
 	@Override

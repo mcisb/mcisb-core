@@ -20,12 +20,12 @@ import org.mcisb.util.*;
  * @author Neil Swainston
  */
 public class DefaultWizardComponent extends WizardComponent
-{	
+{
 	/**
 	 * 
 	 */
 	protected final Map<Object,Object> propertyNameToKey;
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -38,15 +38,16 @@ public class DefaultWizardComponent extends WizardComponent
 		this.propertyNameToKey = propertyNameToKey;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.wizard.WizardComponent#update()
 	 */
 	@Override
 	public void update()
 	{
 		DefaultParameterPanel defaultParameterPanel = (DefaultParameterPanel)parameterPanel;
-		
+
 		for( Iterator<Object> iterator = propertyNameToKey.keySet().iterator(); iterator.hasNext(); )
 		{
 			Object propertyName = iterator.next();

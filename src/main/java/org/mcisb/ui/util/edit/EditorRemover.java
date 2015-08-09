@@ -25,57 +25,59 @@ public class EditorRemover implements PropertyChangeListener
 	 * 
 	 */
 	private final Editable editable;
-	
+
 	/**
 	 *
 	 */
-	private final KeyboardFocusManager focusManager; 
+	private final KeyboardFocusManager focusManager;
 
-   /**
-    * 
-    * @param editable
-    * @param focusManager
-    */
+	/**
+	 * 
+	 * @param editable
+	 * @param focusManager
+	 */
 	public EditorRemover( final Editable editable, final KeyboardFocusManager focusManager )
-	{ 
+	{
 		this.editable = editable;
-		this.focusManager = focusManager; 
-	} 
+		this.focusManager = focusManager;
+	}
 
-   /* 
-    * (non-Javadoc)
-    * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
-    */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange( @SuppressWarnings("unused") PropertyChangeEvent ev )
-	{ 
+	{
 		if( editable.getEditorComponent() == null || !editable.terminateEditOnFocusLost() )
 		{
-			return; 
-		} 
+			return;
+		}
 
-		Component c = focusManager.getPermanentFocusOwner(); 
-       
+		Component c = focusManager.getPermanentFocusOwner();
+
 		while( c != null )
-		{ 
+		{
 			if( c == editable )
-			{ 
-				// focus remains inside the table 
-				return; 
+			{
+				// focus remains inside the table
+				return;
 			}
 			else if( ( c instanceof Window ) || ( c instanceof Applet && c.getParent() == null ) )
-			{ 
+			{
 				if( c == editable.getRoot() )
-				{ 
+				{
 					if( !editable.stopEditing() )
-					{ 
-						editable.cancelEditing(); 
-					} 
-				} 
-				break; 
+					{
+						editable.cancelEditing();
+					}
+				}
+				break;
 			}
-           
-			c = c.getParent(); 
-		} 
-	} 
+
+			c = c.getParent();
+		}
+	}
 }

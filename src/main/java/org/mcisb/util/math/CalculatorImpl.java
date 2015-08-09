@@ -18,13 +18,13 @@ public interface CalculatorImpl
 {
 	/**
 	 * 
-	 *
+	 * 
 	 * @param command
 	 * @return HashMap
 	 * @throws java.lang.Exception
 	 */
 	public abstract java.util.HashMap<String,Double> getResults( final String command ) throws java.lang.Exception;
-	
+
 	/**
 	 * 
 	 * @throws java.lang.Exception

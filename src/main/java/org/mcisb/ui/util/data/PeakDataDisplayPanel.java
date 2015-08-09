@@ -14,7 +14,7 @@ package org.mcisb.ui.util.data;
 import java.awt.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class PeakDataDisplayPanel extends DataDisplayPanel
@@ -23,12 +23,12 @@ public class PeakDataDisplayPanel extends DataDisplayPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	final static float DEFAULT_LABEL_THRESHOLD = 0.25f;
-	
+
 	/**
 	 * 
 	 */
@@ -36,10 +36,13 @@ public class PeakDataDisplayPanel extends DataDisplayPanel
 	{
 		super( DEFAULT_LABEL_THRESHOLD );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.data.DataDisplayPanel#paintData(java.awt.Graphics2D, int, int)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.data.DataDisplayPanel#paintData(java.awt.Graphics2D,
+	 * int, int)
 	 */
 	@Override
 	protected void paintData( final Graphics2D g, final int xPosition, final int yPosition )

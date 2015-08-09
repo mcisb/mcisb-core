@@ -16,7 +16,7 @@ import javax.swing.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ResizableJLayeredPane extends JLayeredPane implements ComponentListener, Disposable
@@ -33,9 +33,10 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 	{
 		addComponentListener( this );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -44,9 +45,11 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 		removeComponentListener( this );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ComponentListener#componentResized(java.awt.event.ComponentEvent)
+	 * 
+	 * @see java.awt.event.ComponentListener#componentResized(java.awt.event.
+	 * ComponentEvent)
 	 */
 	@Override
 	public void componentResized( @SuppressWarnings("unused") ComponentEvent e )
@@ -54,16 +57,19 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 		update();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ComponentListener#componentShown(java.awt.event.ComponentEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ComponentListener#componentShown(java.awt.event.ComponentEvent
+	 * )
 	 */
 	@Override
 	public void componentShown( @SuppressWarnings("unused") ComponentEvent e )
 	{
 		update();
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -74,10 +80,12 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 			getComponent( i ).setSize( getSize() );
 		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ComponentListener#componentHidden(java.awt.event.ComponentEvent)
+	 * 
+	 * @see java.awt.event.ComponentListener#componentHidden(java.awt.event.
+	 * ComponentEvent)
 	 */
 	@Override
 	public void componentHidden( @SuppressWarnings("unused") ComponentEvent e )
@@ -85,9 +93,12 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 		// No implementation.
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ComponentListener#componentMoved(java.awt.event.ComponentEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ComponentListener#componentMoved(java.awt.event.ComponentEvent
+	 * )
 	 */
 	@Override
 	public void componentMoved( @SuppressWarnings("unused") ComponentEvent e )

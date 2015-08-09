@@ -24,7 +24,7 @@ public class UniqueObjectList extends JMutableList
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 * @param dataModel
@@ -35,15 +35,15 @@ public class UniqueObjectList extends JMutableList
 		super( dataModel, editor );
 	}
 
-    /**
-     * 
-     * @param value
-     * @param index
-     */
-    @Override
+	/**
+	 * 
+	 * @param value
+	 * @param index
+	 */
+	@Override
 	protected void setValueAt( Object value, int index )
-    {
-    	UniqueObject object = (UniqueObject)( (MutableListModel)getModel() ).getElementAt( index );
-    	object.setName( (String)value );
-    }
+	{
+		UniqueObject object = (UniqueObject)( (MutableListModel)getModel() ).getElementAt( index );
+		object.setName( (String)value );
+	}
 }

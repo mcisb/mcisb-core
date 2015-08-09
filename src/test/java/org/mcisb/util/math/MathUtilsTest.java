@@ -16,7 +16,7 @@ import org.junit.*;
 
 /**
  * 
- *
+ * 
  * @author Neil Swainston
  */
 public class MathUtilsTest
@@ -25,7 +25,7 @@ public class MathUtilsTest
 	 *
 	 */
 	@SuppressWarnings("static-method")
-	@Test 
+	@Test
 	public void encodeDecode()
 	{
 		testDouble( true );
@@ -33,7 +33,7 @@ public class MathUtilsTest
 		testFloat( true );
 		testFloat( false );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -44,16 +44,16 @@ public class MathUtilsTest
 		final double[] array = getRandomDoubleArray();
 		final double[] addedArray = new double[ array.length ];
 		System.arraycopy( array, 0, addedArray, 0, array.length );
-		
+
 		final double value = Math.random();
 		MathUtils.add( addedArray, value );
-		
+
 		for( int i = 0; i < array.length; i++ )
 		{
 			Assert.assertTrue( addedArray[ i ] == array[ i ] + value );
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -64,7 +64,7 @@ public class MathUtilsTest
 		Assert.assertEquals( Double.toString( MathUtils.getSignificantFigures( 0.0012232323 ) ), "0.001223" ); //$NON-NLS-1$
 		Assert.assertEquals( Double.toString( MathUtils.getSignificantFigures( 12232.3267673 ) ), "12230.0" ); //$NON-NLS-1$
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -73,7 +73,7 @@ public class MathUtilsTest
 	public void testGetHistogram()
 	{
 		final double[] values = new double[] { 15.3, 25.4, 22.1, 20, 2.5001, 29.999999 };
-		
+
 		final double start1 = 0;
 		final double end1 = 30;
 		final double binSize1 = 10;
@@ -82,7 +82,7 @@ public class MathUtilsTest
 		Assert.assertEquals( histogram1[ 0 ], 1 );
 		Assert.assertEquals( histogram1[ 1 ], 1 );
 		Assert.assertEquals( histogram1[ 2 ], 4 );
-		
+
 		final double start2 = 2.5;
 		final double end2 = 30;
 		final double binSize2 = 1.25;
@@ -91,9 +91,9 @@ public class MathUtilsTest
 		Assert.assertEquals( histogram2[ 0 ], 1 );
 		Assert.assertEquals( histogram2[ 21 ], 1 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param bigEndian
 	 */
 	private static void testDouble( final boolean bigEndian )
@@ -102,57 +102,57 @@ public class MathUtilsTest
 		final double[] encodedRandomArray = MathUtils.decode( MathUtils.encode( randomArray, bigEndian ).getBytes(), bigEndian, true );
 		Assert.assertTrue( Arrays.equals( randomArray, encodedRandomArray ) );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param bigEndian
 	 */
 	private static void testFloat( final boolean bigEndian )
 	{
 		final float[] randomArray = getRandomFloatArray();
 		final double[] encodedRandomArray = MathUtils.decode( MathUtils.encode( randomArray, bigEndian ).getBytes(), bigEndian, false );
-		
+
 		for( int i = 0; i < randomArray.length; i++ )
 		{
 			Assert.assertTrue( randomArray[ i ] == encodedRandomArray[ i ] );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return double[]
 	 */
 	private static double[] getRandomDoubleArray()
 	{
 		final int MAX_LENGTH = 1037;
 		final Random random = new Random();
-		
+
 		final double[] randomArray = new double[ random.nextInt( MAX_LENGTH ) ];
-		
+
 		for( int i = 0; i < randomArray.length; i++ )
 		{
 			randomArray[ i ] = random.nextDouble();
 		}
-		
+
 		return randomArray;
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return float[]
 	 */
 	private static float[] getRandomFloatArray()
 	{
 		final int MAX_LENGTH = 1037;
 		final Random random = new Random();
-		
+
 		final float[] randomArray = new float[ random.nextInt( MAX_LENGTH ) ];
-		
+
 		for( int i = 0; i < randomArray.length; i++ )
 		{
 			randomArray[ i ] = random.nextFloat();
 		}
-		
+
 		return randomArray;
 	}
 }

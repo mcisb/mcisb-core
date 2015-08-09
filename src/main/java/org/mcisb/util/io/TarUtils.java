@@ -16,6 +16,7 @@ import java.net.*;
 import java.util.zip.*;
 import org.apache.commons.compress.archivers.*;
 import org.apache.commons.compress.archivers.tar.*;
+
 // import org.apache.tools.tar.*;
 
 /**
@@ -28,13 +29,13 @@ public class TarUtils
 	 * 
 	 * @param tarUrl
 	 * @param destinationDirectory
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static void untar( final URL tarUrl, final File destinationDirectory ) throws IOException
 	{
 		untar( tarUrl.openStream(), destinationDirectory );
 	}
-	
+
 	/**
 	 * 
 	 * @param tarFile
@@ -43,12 +44,12 @@ public class TarUtils
 	 */
 	public static void untar( final File tarFile, final File destinationDirectory ) throws IOException
 	{
-		try( final InputStream is = new FileInputStream( tarFile ) )
+		try ( final InputStream is = new FileInputStream( tarFile ) )
 		{
 			untar( is, destinationDirectory );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param tarInputStream
@@ -66,16 +67,16 @@ public class TarUtils
 		}
 
 		TarArchiveInputStream is = null;
-		
+
 		try
 		{
 			is = new TarArchiveInputStream( new GZIPInputStream( tarInputStream ) );
 			ArchiveEntry tarEntry = null;
-			
+
 			while( ( tarEntry = is.getNextEntry() ) != null )
 			{
 				final File destination = new File( destinationDirectory, tarEntry.getName() );
-	
+
 				if( tarEntry.isDirectory() )
 				{
 					if( !destination.mkdir() )
@@ -86,7 +87,7 @@ public class TarUtils
 				}
 				else
 				{
-					try( final OutputStream os = new FileOutputStream( destination ) )
+					try ( final OutputStream os = new FileOutputStream( destination ) )
 					{
 						new StreamReader( is, os ).read();
 					}

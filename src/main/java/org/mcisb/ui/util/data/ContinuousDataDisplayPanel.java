@@ -17,7 +17,7 @@ import org.mcisb.util.*;
 import org.mcisb.util.data.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ContinuousDataDisplayPanel extends DataDisplayPanel
@@ -26,22 +26,22 @@ public class ContinuousDataDisplayPanel extends DataDisplayPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final static float DEFAULT_LABEL_THRESHOLD = Float.MAX_VALUE;
-	
+
 	/**
 	 * 
 	 */
 	protected int lastXPosition = NumberUtils.UNDEFINED;
-	
+
 	/**
 	 * 
 	 */
 	protected int lastYPosition = NumberUtils.UNDEFINED;
-	
+
 	/**
 	 * 
 	 */
@@ -52,20 +52,26 @@ public class ContinuousDataDisplayPanel extends DataDisplayPanel
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.data.DataDisplayPanel#paintSpectrum(java.awt.Graphics2D, org.mcisb.util.data.Spectrum)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.data.DataDisplayPanel#paintSpectrum(java.awt.Graphics2D
+	 * , org.mcisb.util.data.Spectrum)
 	 */
 	@Override
 	protected void paintSpectrum( Graphics2D g, Spectrum spectrum )
 	{
 		lastXPosition = NumberUtils.UNDEFINED;
 		lastYPosition = NumberUtils.UNDEFINED;
-		
+
 		super.paintSpectrum( g, spectrum );
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.data.DataDisplayPanel#paintData(java.awt.Graphics2D, int, int)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.data.DataDisplayPanel#paintData(java.awt.Graphics2D,
+	 * int, int)
 	 */
 	@Override
 	protected void paintData( final Graphics2D g, final int xPosition, final int yPosition )
@@ -74,13 +80,14 @@ public class ContinuousDataDisplayPanel extends DataDisplayPanel
 		{
 			g.drawLine( lastXPosition, lastYPosition, xPosition, yPosition );
 		}
-		
+
 		lastXPosition = xPosition;
 		lastYPosition = yPosition;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.data.DataDisplayPanel#getColor(double, double)
 	 */
 	@Override

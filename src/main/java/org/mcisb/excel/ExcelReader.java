@@ -28,27 +28,27 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 	 * 
 	 */
 	public final static String EXCEL_CELL = "EXCEL_CELL"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final List<Vector<Object>> data = new ArrayList<>();
-	
+
 	/**
 	 * 
 	 */
 	private int rowNumber = NumberUtils.UNDEFINED;
-	
+
 	/**
 	 * 
 	 */
 	// private final InputStream is;
-	
+
 	/**
 	 * 
 	 */
 	protected final HSSFWorkbook workbook;
-	
+
 	/**
 	 * 
 	 * @param file
@@ -56,12 +56,12 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 	 */
 	public ExcelReader( final File file ) throws IOException
 	{
-		try( final InputStream is = new FileInputStream( file ) )
+		try ( final InputStream is = new FileInputStream( file ) )
 		{
 			this.workbook = new HSSFWorkbook( is );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return List<String>
@@ -69,15 +69,15 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 	public List<String> getSheetNames()
 	{
 		final List<String> sheetNames = new ArrayList<>();
-		
+
 		for( int i = 0; i < workbook.getNumberOfSheets(); i++ )
 		{
 			sheetNames.add( workbook.getSheetName( i ) );
 		}
-		
+
 		return sheetNames;
 	}
-	
+
 	/**
 	 * 
 	 * @param sheetName
@@ -86,24 +86,24 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 	public List<Object> getColumnNames( String sheetName )
 	{
 		final List<Object> list = new ArrayList<>();
-        final HSSFRow row = getColumns( workbook.getSheet( sheetName ) );
-		
+		final HSSFRow row = getColumns( workbook.getSheet( sheetName ) );
+
 		for( Iterator<?> iterator = row.cellIterator(); iterator.hasNext(); )
 		{
 			final Object o = iterator.next();
-			
+
 			if( o instanceof HSSFCell )
 			{
 				final HSSFCell cell = (HSSFCell)o;
 				list.add( getValue( cell ) );
 			}
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param sheetName
 	 * @return List
 	 */
@@ -111,17 +111,19 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 	{
 		data.clear();
 		rowNumber = NumberUtils.UNDEFINED;
-		
+
 		addPropertyChangeListener( this );
 		read( sheetName );
 		removePropertyChangeListener( this );
-        
-        return new ArrayList<List<Object>>( data );
+
+		return new ArrayList<List<Object>>( data );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent e )
@@ -129,25 +131,25 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 		if( e.getPropertyName().equals( EXCEL_CELL ) )
 		{
 			final Object newValue = e.getNewValue();
-			
+
 			if( newValue instanceof ExcelCell )
 			{
 				final ExcelCell excelCell = (ExcelCell)newValue;
-				
+
 				if( rowNumber != excelCell.getRow() )
 				{
 					data.add( new Vector<>() );
 				}
-				
+
 				rowNumber = excelCell.getRow();
-				
+
 				final Vector<Object> rowData = data.get( rowNumber );
 				rowData.setSize( Math.max( rowData.size(), excelCell.getColumn() + 1 ) );
 				rowData.add( excelCell.getColumn(), excelCell.getValue() );
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param sheetName
@@ -157,27 +159,27 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 		final HSSFSheet sheet = workbook.getSheet( sheetName );
 		ExcelCell excelCell = null;
 		HSSFRow row = null;
-        int currentRowNumber = 0;
-        
-        while( ( row = sheet.getRow( currentRowNumber ) ) != null )
-        {
-        	for( Iterator<?> iterator = row.cellIterator(); iterator.hasNext(); )
-        	{
-        		final Object o = iterator.next();
-    			
-    			if( o instanceof HSSFCell )
-    			{
-		        	final HSSFCell cell = (HSSFCell)o;
-		        	final ExcelCell newExcelCell = new ExcelCell( getValue( cell ), currentRowNumber, cell.getColumnIndex() );
-		        	support.firePropertyChange( EXCEL_CELL, excelCell, newExcelCell );
-		        	excelCell = newExcelCell;
-    			}
-        	}
-        	
-        	currentRowNumber++;
-        }
+		int currentRowNumber = 0;
+
+		while( ( row = sheet.getRow( currentRowNumber ) ) != null )
+		{
+			for( Iterator<?> iterator = row.cellIterator(); iterator.hasNext(); )
+			{
+				final Object o = iterator.next();
+
+				if( o instanceof HSSFCell )
+				{
+					final HSSFCell cell = (HSSFCell)o;
+					final ExcelCell newExcelCell = new ExcelCell( getValue( cell ), currentRowNumber, cell.getColumnIndex() );
+					support.firePropertyChange( EXCEL_CELL, excelCell, newExcelCell );
+					excelCell = newExcelCell;
+				}
+			}
+
+			currentRowNumber++;
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @param sheet
@@ -188,7 +190,7 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 		final int COLUMN_NAME_ROW = 0;
 		return sheet.getRow( COLUMN_NAME_ROW );
 	}
-	
+
 	/**
 	 * 
 	 * @param cell
@@ -200,7 +202,7 @@ public class ExcelReader extends PropertyChangeSupported implements PropertyChan
 		{
 			return null;
 		}
-		
+
 		switch( cell.getCellType() )
 		{
 			case Cell.CELL_TYPE_BOOLEAN:

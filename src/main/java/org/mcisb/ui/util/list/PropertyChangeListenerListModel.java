@@ -16,7 +16,7 @@ import javax.swing.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class PropertyChangeListenerListModel extends DefaultListModel<Object> implements PropertyChangeListener
@@ -25,10 +25,12 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( final PropertyChangeEvent evt )
@@ -37,8 +39,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		fireContentsChanged( source, indexOf( source ), indexOf( source ) );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#add(int, java.lang.Object)
 	 */
 	@Override
@@ -48,8 +51,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		super.add( index, element );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#addElement(java.lang.Object)
 	 */
 	@Override
@@ -59,8 +63,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		super.addElement( obj );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#insertElementAt(java.lang.Object, int)
 	 */
 	@Override
@@ -70,8 +75,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		super.insertElementAt( obj, index );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#remove(int)
 	 */
 	@Override
@@ -81,8 +87,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		return super.remove( index );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#removeAllElements()
 	 */
 	@Override
@@ -92,12 +99,13 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		{
 			removePropertyChangeListener( elementAt( i ) );
 		}
-		
+
 		super.removeAllElements();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#removeElement(java.lang.Object)
 	 */
 	@Override
@@ -107,8 +115,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		return super.removeElement( obj );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#removeElementAt(int)
 	 */
 	@Override
@@ -118,8 +127,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		super.removeElementAt( index );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#removeRange(int, int)
 	 */
 	@Override
@@ -129,12 +139,13 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		{
 			removePropertyChangeListener( elementAt( i ) );
 		}
-		
+
 		super.removeRange( fromIndex, toIndex );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#setElementAt(java.lang.Object, int)
 	 */
 	@Override
@@ -144,8 +155,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		super.setElementAt( obj, index );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.DefaultListModel#clear()
 	 */
 	@Override
@@ -155,12 +167,12 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 		{
 			removePropertyChangeListener( elementAt( i ) );
 		}
-		
+
 		super.clear();
 	}
 
 	/**
-	 *
+	 * 
 	 * @param element
 	 */
 	private void addPropertyChangeListener( final Object element )
@@ -170,9 +182,9 @@ public class PropertyChangeListenerListModel extends DefaultListModel<Object> im
 			( (PropertyChangeSupported)element ).addPropertyChangeListener( this );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param element
 	 */
 	private void removePropertyChangeListener( final Object element )

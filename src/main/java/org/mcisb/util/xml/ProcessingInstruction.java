@@ -5,7 +5,7 @@ package org.mcisb.util.xml;
 
 /**
  * @author Neil Swainston
- *
+ * 
  */
 public class ProcessingInstruction
 {
@@ -13,12 +13,12 @@ public class ProcessingInstruction
 	 * 
 	 */
 	private final String target;
-	
+
 	/**
 	 * 
 	 */
 	private final String data;
-	
+
 	/**
 	 * 
 	 * @param target
@@ -45,9 +45,10 @@ public class ProcessingInstruction
 	{
 		return data;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -57,12 +58,13 @@ public class ProcessingInstruction
 		{
 			return false;
 		}
-	
+
 		return ( (ProcessingInstruction)obj ).target.equals( target ) && ( (ProcessingInstruction)obj ).data.equals( data );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

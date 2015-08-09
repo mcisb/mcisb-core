@@ -21,47 +21,47 @@ public class Value
 	 * 
 	 */
 	public static final String UNITLESS = "UNITLESS"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private static final double DEFAULT_ERROR = 0.0;
-	
+
 	/**
 	 * 
 	 */
 	private final String name;
-	
+
 	/**
 	 * 
 	 */
 	private final double value;
-	
+
 	/**
 	 * 
 	 */
 	private final double start;
-	
+
 	/**
 	 * 
 	 */
 	private final double end;
-	
+
 	/**
 	 * 
 	 */
 	private final double error;
-	
+
 	/**
 	 * 
 	 */
 	private final String unit;
-	
+
 	/**
 	 * 
 	 */
 	private final boolean constant;
-	
+
 	/**
 	 * 
 	 * @param name
@@ -82,7 +82,7 @@ public class Value
 		this.unit = unit;
 		this.constant = constant;
 	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -94,9 +94,9 @@ public class Value
 	{
 		this( name, value, value, value, DEFAULT_ERROR, unit, constant );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param name
 	 * @param value
 	 * @param constant

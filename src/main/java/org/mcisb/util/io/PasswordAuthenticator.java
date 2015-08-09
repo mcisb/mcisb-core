@@ -15,7 +15,7 @@ import java.net.*;
 
 /**
  * @author neilswainston
- *
+ * 
  */
 public class PasswordAuthenticator extends Authenticator
 {
@@ -23,12 +23,12 @@ public class PasswordAuthenticator extends Authenticator
 	 * 
 	 */
 	private final String username;
-	
+
 	/**
 	 * 
 	 */
 	private final String password;
-	
+
 	/**
 	 * 
 	 * @param username
@@ -39,14 +39,15 @@ public class PasswordAuthenticator extends Authenticator
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.net.Authenticator#getPasswordAuthentication()
 	 */
-    @Override
+	@Override
 	protected PasswordAuthentication getPasswordAuthentication()
-    {
-        return new PasswordAuthentication( username, password.toCharArray() );
-    }
+	{
+		return new PasswordAuthentication( username, password.toCharArray() );
+	}
 }

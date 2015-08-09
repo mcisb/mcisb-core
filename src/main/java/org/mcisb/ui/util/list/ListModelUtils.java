@@ -21,22 +21,22 @@ import javax.swing.*;
 public class ListModelUtils
 {
 	/**
-	 *
+	 * 
 	 * @param model
 	 * @param collection
 	 */
 	public static void add( final DefaultListModel<Object> model, final Collection<Object> collection )
 	{
 		model.clear();
-		
+
 		for( Iterator<Object> iterator = collection.iterator(); iterator.hasNext(); )
 		{
 			model.addElement( iterator.next() );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param model
 	 * @param array
 	 */

@@ -26,37 +26,37 @@ public class Executor extends AbstractTask
 	 * 
 	 */
 	public static final int SUCCESS = 0;
-	
+
 	/**
 	 * 
 	 */
 	private final String[] commandArray;
-	
+
 	/**
 	 * 
 	 */
 	private final StreamReader osStreamReader;
-	
+
 	/**
 	 * 
 	 */
 	private final StreamReader esStreamReader;
-	
+
 	/**
 	 * 
 	 */
 	private final File workingDirectory;
-	
+
 	/**
 	 * 
 	 */
 	private final Map<String,String> additionalEnvs;
-	
+
 	/**
 	 * 
 	 */
 	private Process process = null;
-	
+
 	/**
 	 * 
 	 * @param commandArray
@@ -65,7 +65,7 @@ public class Executor extends AbstractTask
 	{
 		this( commandArray, System.out, System.err );
 	}
-	
+
 	/**
 	 * 
 	 * @param commandArray
@@ -80,41 +80,41 @@ public class Executor extends AbstractTask
 	/**
 	 * 
 	 * @param commandArray
-	 * @param workingDirectory 
+	 * @param workingDirectory
 	 */
 	public Executor( final String[] commandArray, final File workingDirectory )
 	{
 		this( commandArray, System.out, System.err, workingDirectory, new HashMap<String,String>() );
 	}
-	
+
 	/**
 	 * 
 	 * @param commandArray
-	 * @param workingDirectory 
+	 * @param workingDirectory
 	 */
 	public Executor( final String[] commandArray, final File workingDirectory, final Map<String,String> additionalEnvs )
 	{
 		this( commandArray, System.out, System.err, workingDirectory, additionalEnvs );
 	}
-	
+
 	/**
 	 * 
 	 * @param commandArray
 	 * @param os
 	 * @param es
-	 * @param workingDirectory 
+	 * @param workingDirectory
 	 */
 	public Executor( final String[] commandArray, final OutputStream os, final OutputStream es, final File workingDirectory, final Map<String,String> additionalEnvs )
 	{
 		this( commandArray, new StreamReader( os ), new StreamReader( es ), workingDirectory, additionalEnvs );
 	}
-	
+
 	/**
 	 * 
 	 * @param commandArray
 	 * @param osStreamReader
 	 * @param esStreamReader
-	 * @param workingDirectory 
+	 * @param workingDirectory
 	 */
 	public Executor( final String[] commandArray, final StreamReader osStreamReader, final StreamReader esStreamReader, final File workingDirectory, final Map<String,String> additionalEnvs )
 	{
@@ -124,9 +124,10 @@ public class Executor extends AbstractTask
 		this.workingDirectory = workingDirectory;
 		this.additionalEnvs = additionalEnvs;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.task.TaskImpl#doTask()
 	 */
 	@Override
@@ -134,33 +135,33 @@ public class Executor extends AbstractTask
 	{
 		final ProcessBuilder pb = new ProcessBuilder( commandArray );
 		final Map<String,String> env = pb.environment();
-		
+
 		for( Map.Entry<String,String> additionalEnv : additionalEnvs.entrySet() )
 		{
 			env.put( additionalEnv.getKey(), additionalEnv.getValue() );
 		}
-		
+
 		if( workingDirectory != null )
 		{
 			pb.directory( workingDirectory );
 		}
-		
+
 		process = pb.start();
-		
+
 		osStreamReader.setInputStream( process.getInputStream() );
 		esStreamReader.setInputStream( process.getErrorStream() );
-		
+
 		final Thread osThread = new Thread( osStreamReader );
 		final Thread esThread = new Thread( esStreamReader );
-		
+
 		osThread.start();
 		esThread.start();
 		osThread.join();
 		esThread.join();
-		
+
 		return Integer.valueOf( process.exitValue() );
 	}
-	
+
 	/**
 	 * 
 	 * @param command
@@ -171,7 +172,7 @@ public class Executor extends AbstractTask
 		if( process != null )
 		{
 			BufferedWriter writer = null;
-			
+
 			try
 			{
 				final String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
@@ -189,11 +190,11 @@ public class Executor extends AbstractTask
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @author Neil Swainston
-	 *
+	 * 
 	 */
 	class ExecutorStreamReader extends StreamReader
 	{
@@ -201,12 +202,12 @@ public class Executor extends AbstractTask
 		 * 
 		 */
 		private static final String MESSAGE_LABEL = "MESSAGE:"; //$NON-NLS-1$
-		
+
 		/**
 		 * 
 		 */
 		private static final String PROGRESS_LABEL = "PROGRESS:"; //$NON-NLS-1$
-		
+
 		/**
 		 * 
 		 * @param is
@@ -216,9 +217,10 @@ public class Executor extends AbstractTask
 		{
 			super( os );
 		}
-		
-		/* 
+
+		/*
 		 * (non-Javadoc)
+		 * 
 		 * @see org.mcisb.util.io.StreamReader#read()
 		 */
 		@Override
@@ -226,25 +228,25 @@ public class Executor extends AbstractTask
 		{
 			final String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
 			String line = null;
-	        
+
 			final BufferedWriter outputStreamWriter = new BufferedWriter( new OutputStreamWriter( os ) );
-	        final BufferedReader inputStreamReader = new BufferedReader( new InputStreamReader( is ) );
-	        
-	        while( ( line = inputStreamReader.readLine() ) != null )
-	        {
-	        	if( line.startsWith( MESSAGE_LABEL ) )
-	        	{
-	        		setMessage( line.substring( MESSAGE_LABEL.length() ).trim() );
-	        	}
-	        	else if( line.startsWith( PROGRESS_LABEL ) )
-	        	{
-	        		setProgress( (int)Float.parseFloat( line.substring( PROGRESS_LABEL.length() ).trim() ) );
-	        	}
-	        	
-	        	outputStreamWriter.write( line );
-	        	outputStreamWriter.write( LINE_SEPARATOR );
-	        	outputStreamWriter.flush();
-	        }
+			final BufferedReader inputStreamReader = new BufferedReader( new InputStreamReader( is ) );
+
+			while( ( line = inputStreamReader.readLine() ) != null )
+			{
+				if( line.startsWith( MESSAGE_LABEL ) )
+				{
+					setMessage( line.substring( MESSAGE_LABEL.length() ).trim() );
+				}
+				else if( line.startsWith( PROGRESS_LABEL ) )
+				{
+					setProgress( (int)Float.parseFloat( line.substring( PROGRESS_LABEL.length() ).trim() ) );
+				}
+
+				outputStreamWriter.write( line );
+				outputStreamWriter.write( LINE_SEPARATOR );
+				outputStreamWriter.flush();
+			}
 		}
 	}
 }

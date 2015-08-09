@@ -18,7 +18,7 @@ import org.mcisb.util.math.*;
  * @author Neil Swainston
  */
 public abstract class MatlabImpl implements CalculatorImpl
-{	
+{
 	/**
 	 * 
 	 * @return MatlabImpl
@@ -26,12 +26,12 @@ public abstract class MatlabImpl implements CalculatorImpl
 	public static MatlabImpl getInstance()
 	{
 		final String MAC = "Mac OS X"; //$NON-NLS-1$
-		
+
 		if( System.getProperty( "os.name" ).contains( MAC ) ) //$NON-NLS-1$
 		{
 			return new MatlabImplExecutor();
 		}
-		
+
 		return new MatlabImplJni();
 	}
 }

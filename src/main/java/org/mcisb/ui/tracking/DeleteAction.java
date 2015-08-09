@@ -27,25 +27,27 @@ public class DeleteAction extends AbstractDeleteAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final Manager manager;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param manager
 	 */
 	public DeleteAction( final Manager manager )
 	{
 		this.manager = manager;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )

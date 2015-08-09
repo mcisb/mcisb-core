@@ -35,7 +35,9 @@ public class SampleParameterWizardComponent extends CustomWizardComponent
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent e )
@@ -43,7 +45,7 @@ public class SampleParameterWizardComponent extends CustomWizardComponent
 		if( e.getPropertyName().equals( PropertyNames.SAMPLES ) )
 		{
 			final Object newValue = e.getNewValue();
-			
+
 			if( newValue instanceof Collection<?> )
 			{
 				SampleParameterPanel sampleParameterPanel = (SampleParameterPanel)parameterPanel;

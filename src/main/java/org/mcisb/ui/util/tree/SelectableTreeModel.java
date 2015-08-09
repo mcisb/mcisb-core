@@ -16,7 +16,7 @@ import javax.swing.tree.*;
 
 /**
  * @author Neil Swainston
- *
+ * 
  */
 public class SelectableTreeModel extends DefaultTreeModel
 {
@@ -24,25 +24,25 @@ public class SelectableTreeModel extends DefaultTreeModel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final Map<Object,TreeNode> objectToTreeNode = new HashMap<>();
-	
+
 	/**
 	 * @param root
 	 */
 	public SelectableTreeModel( final TreeNode root )
 	{
 		super( root );
-		
+
 		if( root instanceof DefaultMutableTreeNode )
 		{
 			objectToTreeNode.put( ( (DefaultMutableTreeNode)root ).getUserObject(), root );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param userObject
@@ -53,21 +53,23 @@ public class SelectableTreeModel extends DefaultTreeModel
 		return objectToTreeNode.get( userObject );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.tree.DefaultTreeModel#insertNodeInto(javax.swing.tree.MutableTreeNode, javax.swing.tree.MutableTreeNode, int)
+	 * 
+	 * @see javax.swing.tree.DefaultTreeModel#insertNodeInto(javax.swing.tree.
+	 * MutableTreeNode, javax.swing.tree.MutableTreeNode, int)
 	 */
 	@Override
 	public void insertNodeInto( final MutableTreeNode newChild, final MutableTreeNode parent, final int index )
 	{
 		super.insertNodeInto( newChild, parent, index );
-		
+
 		if( newChild instanceof DefaultMutableTreeNode )
 		{
 			objectToTreeNode.put( ( (DefaultMutableTreeNode)newChild ).getUserObject(), newChild );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param newChild
@@ -78,15 +80,18 @@ public class SelectableTreeModel extends DefaultTreeModel
 		insertNodeInto( newChild, parent, parent.getChildCount() );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.tree.DefaultTreeModel#removeNodeFromParent(javax.swing.tree.MutableTreeNode)
+	 * 
+	 * @see
+	 * javax.swing.tree.DefaultTreeModel#removeNodeFromParent(javax.swing.tree
+	 * .MutableTreeNode)
 	 */
 	@Override
 	public void removeNodeFromParent( MutableTreeNode node )
 	{
 		super.removeNodeFromParent( node );
-		
+
 		if( node instanceof DefaultMutableTreeNode )
 		{
 			objectToTreeNode.remove( ( (DefaultMutableTreeNode)node ).getUserObject() );

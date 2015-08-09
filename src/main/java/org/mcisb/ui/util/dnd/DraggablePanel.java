@@ -25,17 +25,17 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final DragSource source = new DragSource();
-	
+
 	/**
 	 * 
 	 */
 	private DraggableLabel draggableLabel;
-	
+
 	/**
 	 * 
 	 * @param supportedClasses
@@ -45,31 +45,36 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	{
 		super( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
 		setBackground( Color.WHITE );
-		
+
 		setDropTarget( new DropTarget( this, DnDConstants.ACTION_COPY_OR_MOVE, new PanelDropTargetListener( this, supportedClasses ), true, null ) );
-		
+
 		source.createDefaultDragGestureRecognizer( this, actions, this );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.DragGestureEvent)
+	 * 
+	 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.
+	 * DragGestureEvent)
 	 */
 	@Override
 	public void dragGestureRecognized( final DragGestureEvent dge )
 	{
 		final Component component = getComponentAt( dge.getDragOrigin() );
-		
-	    if( component instanceof DraggableLabel )
-	    {
-	    	draggableLabel = (DraggableLabel)component;
-		    source.startDrag( dge, DragSource.DefaultMoveNoDrop, new TransferableObject( draggableLabel.getUserObject() ), this );
-	    }
+
+		if( component instanceof DraggableLabel )
+		{
+			draggableLabel = (DraggableLabel)component;
+			source.startDrag( dge, DragSource.DefaultMoveNoDrop, new TransferableObject( draggableLabel.getUserObject() ), this );
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragDropEnd(java.awt.dnd.DragSourceDropEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragDropEnd(java.awt.dnd.DragSourceDropEvent
+	 * )
 	 */
 	@Override
 	public void dragDropEnd( final DragSourceDropEvent dsde )
@@ -84,7 +89,10 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragEnter(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragEnter(java.awt.dnd.DragSourceDragEvent
+	 * )
 	 */
 	@Override
 	public void dragEnter( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
@@ -94,7 +102,9 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragExit(java.awt.dnd.DragSourceEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragExit(java.awt.dnd.DragSourceEvent)
 	 */
 	@Override
 	public void dragExit( @SuppressWarnings("unused") final DragSourceEvent dse )
@@ -104,7 +114,10 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragOver(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragOver(java.awt.dnd.DragSourceDragEvent
+	 * )
 	 */
 	@Override
 	public void dragOver( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
@@ -114,7 +127,9 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dropActionChanged(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see java.awt.dnd.DragSourceListener#dropActionChanged(java.awt.dnd.
+	 * DragSourceDragEvent)
 	 */
 	@Override
 	public void dropActionChanged( @SuppressWarnings("unused") final DragSourceDragEvent dsde )

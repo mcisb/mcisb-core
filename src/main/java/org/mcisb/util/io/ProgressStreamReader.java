@@ -26,7 +26,7 @@ public class ProgressStreamReader extends StreamReader
 	 * 
 	 */
 	private final PropertyChangeSupport support = new PropertyChangeSupport( this );
-	
+
 	/**
 	 * 
 	 * @param is
@@ -39,6 +39,7 @@ public class ProgressStreamReader extends StreamReader
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.io.StreamReader#read()
 	 */
 	@Override
@@ -46,27 +47,27 @@ public class ProgressStreamReader extends StreamReader
 	{
 		final String PROGRESS_REGEXP = "(?<=.*)[\\d]+(?=%)"; //$NON-NLS-1$
 		final byte[] LINE_SEPARATOR = System.getProperty( "line.separator" ).getBytes(); //$NON-NLS-1$
-        final BufferedReader reader = new BufferedReader( new InputStreamReader( is ) );
-        String line = null;
-        int oldProgress = 0;
-        
+		final BufferedReader reader = new BufferedReader( new InputStreamReader( is ) );
+		String line = null;
+		int oldProgress = 0;
+
 		while( ( line = reader.readLine() ) != null )
 		{
 			final String progress = CollectionUtils.getFirst( RegularExpressionUtils.getMatches( line, PROGRESS_REGEXP ) );
-			
+
 			if( progress != null )
 			{
 				final int newProgress = Integer.parseInt( progress );
 				support.firePropertyChange( Task.PROGRESS, oldProgress, newProgress );
 				oldProgress = newProgress;
 			}
-			
+
 			os.write( line.getBytes() );
 			os.write( LINE_SEPARATOR );
 			os.flush();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param is
@@ -77,18 +78,18 @@ public class ProgressStreamReader extends StreamReader
 	public static byte[] read( final InputStream is, final PropertyChangeListener[] listeners ) throws IOException
 	{
 		ProgressStreamReader streamReader = null;
-		
+
 		try
 		{
 			@SuppressWarnings("resource")
 			final ByteArrayOutputStream os = new ByteArrayOutputStream();
 			streamReader = new ProgressStreamReader( is, os );
-			
+
 			for( int i = 0; i < listeners.length; i++ )
 			{
 				streamReader.addPropertyChangeListener( listeners[ i ] );
 			}
-			
+
 			streamReader.read();
 			final byte[] b = os.toByteArray();
 			os.close();
@@ -114,7 +115,7 @@ public class ProgressStreamReader extends StreamReader
 	{
 		support.addPropertyChangeListener( listener );
 	}
-	
+
 	/**
 	 * 
 	 * @param listener

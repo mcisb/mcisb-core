@@ -16,7 +16,7 @@ import org.junit.*;
 
 /**
  * 
- *
+ * 
  * @author Neil Swainston
  */
 public class AlphanumericStringComparatorTest
@@ -25,7 +25,7 @@ public class AlphanumericStringComparatorTest
 	 *
 	 */
 	@SuppressWarnings("static-method")
-	@Test 
+	@Test
 	public void sort()
 	{
 		final Collection<String> set = new TreeSet<>( new AlphanumericStringComparator() );

@@ -25,12 +25,12 @@ public class ResetableAction extends AbstractAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final transient Resetable resetable;
-	
+
 	/**
 	 * 
 	 * @param name
@@ -41,10 +41,12 @@ public class ResetableAction extends AbstractAction
 		super( name );
 		this.resetable = resetable;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )

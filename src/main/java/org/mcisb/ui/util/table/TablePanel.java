@@ -26,13 +26,12 @@ public class TablePanel extends ComponentPanel implements ListSelectionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final int column;
-	
-	
+
 	/**
 	 * 
 	 * @param title
@@ -43,13 +42,13 @@ public class TablePanel extends ComponentPanel implements ListSelectionListener
 	public TablePanel( final String title, final JTable table, int column, boolean valid )
 	{
 		super( title, table );
-		
+
 		this.column = column;
-		
+
 		setValid( valid );
 		table.getSelectionModel().addListSelectionListener( this );
 	}
-	
+
 	/**
 	 * 
 	 * @return Collection
@@ -57,12 +56,12 @@ public class TablePanel extends ComponentPanel implements ListSelectionListener
 	public Collection<Object> getSelection()
 	{
 		final Collection<Object> selection = new ArrayList<>();
-		
+
 		if( component instanceof JTable )
 		{
 			final JTable table = (JTable)component;
 			final ListSelectionModel listSelectionModel = table.getSelectionModel();
-			
+
 			for( int row = 0; row < table.getRowCount(); row++ )
 			{
 				if( listSelectionModel.isSelectedIndex( row ) )
@@ -71,14 +70,17 @@ public class TablePanel extends ComponentPanel implements ListSelectionListener
 				}
 			}
 		}
-		
+
 		return selection;
-    }
-	
+	}
+
 	/*
-	 *  
+	 * 
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( ListSelectionEvent e )
@@ -90,8 +92,9 @@ public class TablePanel extends ComponentPanel implements ListSelectionListener
 		}
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override

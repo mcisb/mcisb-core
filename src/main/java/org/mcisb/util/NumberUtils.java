@@ -23,7 +23,7 @@ public class NumberUtils
 	 * 
 	 */
 	public static final int UNDEFINED = Integer.MIN_VALUE;
-	
+
 	/**
 	 * 
 	 * @param s
@@ -41,7 +41,7 @@ public class NumberUtils
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param s
@@ -59,7 +59,7 @@ public class NumberUtils
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param s
@@ -68,7 +68,7 @@ public class NumberUtils
 	public static boolean containsInteger( String s )
 	{
 		final StringTokenizer tokenizer = new StringTokenizer( s );
-		
+
 		while( tokenizer.hasMoreTokens() )
 		{
 			if( isInteger( tokenizer.nextToken() ) )
@@ -76,7 +76,7 @@ public class NumberUtils
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }

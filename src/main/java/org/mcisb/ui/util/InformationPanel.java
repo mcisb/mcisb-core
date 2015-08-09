@@ -24,39 +24,39 @@ public class InformationPanel extends ParameterPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final JTextArea textArea = new JTextArea();
-	
+
 	/**
 	 * 
 	 */
 	private transient MouseListener mouseListener;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param title
 	 */
 	public InformationPanel( final String title )
 	{
 		this( title, false );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param title
 	 * @param editable
 	 */
-	public InformationPanel( final String title, final boolean editable ) 
+	public InformationPanel( final String title, final boolean editable )
 	{
 		super( title );
 		setValid( true );
 		textArea.setEditable( editable );
-		
+
 		if( editable )
 		{
 			textArea.addMouseListener( getMouseListener() );
@@ -65,7 +65,7 @@ public class InformationPanel extends ParameterPanel
 		JComponent scrollPane = new JScrollPane( textArea );
 		fill( scrollPane );
 	}
-	
+
 	/**
 	 * 
 	 * @param text
@@ -74,9 +74,9 @@ public class InformationPanel extends ParameterPanel
 	{
 		textArea.setText( text );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return String
 	 */
 	public String getText()
@@ -84,8 +84,9 @@ public class InformationPanel extends ParameterPanel
 		return textArea.getText();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
 	@Override
@@ -96,7 +97,7 @@ public class InformationPanel extends ParameterPanel
 			textArea.removeMouseListener( getMouseListener() );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return MouseListener
@@ -107,7 +108,7 @@ public class InformationPanel extends ParameterPanel
 		{
 			mouseListener = new JMenuMouseListener( new JTextComponentMenu() );
 		}
-		
+
 		return mouseListener;
 	}
 }

@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.zip.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class FileUtils
@@ -30,7 +30,7 @@ public class FileUtils
 	public final static String EXTENSION_SEPARATOR = "."; //$NON-NLS-1$
 
 	/**
-	 *
+	 * 
 	 * @param file
 	 * @return String
 	 */
@@ -40,7 +40,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param file
 	 * @return String
 	 */
@@ -52,7 +52,8 @@ public class FileUtils
 	/**
 	 * Wrapper of File.createTempFile.
 	 * 
-	 * At first glance this seems unnecessary, but there is evidence that Tomcat occasionally deletes its temp directory.
+	 * At first glance this seems unnecessary, but there is evidence that Tomcat
+	 * occasionally deletes its temp directory.
 	 * 
 	 * Therefore, the directory must be re-created.
 	 * 
@@ -74,7 +75,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param path
 	 * @return String
 	 */
@@ -88,7 +89,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param filepaths
 	 * @return List
 	 */
@@ -105,7 +106,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param filename
 	 * @return String
 	 */
@@ -117,7 +118,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param file
 	 * @param bytes
 	 * @throws IOException
@@ -126,10 +127,10 @@ public class FileUtils
 	{
 		InputStream is = null;
 
-		try( final OutputStream os = new FileOutputStream( file ) )
+		try ( final OutputStream os = new FileOutputStream( file ) )
 		{
 			is = new ByteArrayInputStream( bytes );
-			
+
 			new StreamReader( is, os ).read();
 		}
 		finally
@@ -142,7 +143,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param src
 	 * @param dest
 	 * @throws IOException
@@ -164,17 +165,14 @@ public class FileUtils
 			}
 		}
 
-		try( final FileInputStream is = new FileInputStream( src );
-			final FileOutputStream os = new FileOutputStream( dest );
-			final FileChannel srcChannel = is.getChannel();
-			final FileChannel dstChannel = os.getChannel() )
+		try ( final FileInputStream is = new FileInputStream( src ); final FileOutputStream os = new FileOutputStream( dest ); final FileChannel srcChannel = is.getChannel(); final FileChannel dstChannel = os.getChannel() )
 		{
 			dstChannel.transferFrom( srcChannel, 0, srcChannel.size() );
 		}
 	}
 
 	/**
-	 *
+	 * 
 	 * @param src
 	 * @param dest
 	 * @throws IOException
@@ -185,7 +183,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param file
 	 * @throws IOException
 	 */
@@ -193,7 +191,7 @@ public class FileUtils
 	{
 		final String ZIP_EXTENSION = ".zip"; //$NON-NLS-1$
 
-		try( final InputStream is = new FileInputStream( file ); final ZipOutputStream os = new ZipOutputStream( new FileOutputStream( file.getAbsolutePath() + ZIP_EXTENSION ) ) )
+		try ( final InputStream is = new FileInputStream( file ); final ZipOutputStream os = new ZipOutputStream( new FileOutputStream( file.getAbsolutePath() + ZIP_EXTENSION ) ) )
 		{
 			os.putNextEntry( new ZipEntry( file.getName() ) );
 			new StreamReader( is, os ).read();
@@ -201,7 +199,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param fileName
 	 * @return String
 	 */
@@ -211,7 +209,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param parentDir
 	 * @param name
 	 * @return File
@@ -230,7 +228,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @return String
 	 * @throws IOException
@@ -254,7 +252,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param is
 	 * @param os
 	 * @param regex
@@ -297,23 +295,23 @@ public class FileUtils
 	}
 
 	/**
-	 *
-	 *
+	 * 
+	 * 
 	 * @param file
 	 * @return Map
 	 * @throws IOException
 	 */
 	public static Map<String,List<String>> generateMap( final File file ) throws IOException
 	{
-		try( final InputStream is = new FileInputStream( file ) )
+		try ( final InputStream is = new FileInputStream( file ) )
 		{
 			return generateMap( is );
 		}
 	}
 
 	/**
-	 *
-	 *
+	 * 
+	 * 
 	 * @param is
 	 * @return Map
 	 * @throws IOException
@@ -337,7 +335,7 @@ public class FileUtils
 	}
 
 	/**
-	 *
+	 * 
 	 * @param topDirectory
 	 * @param outputDirectory
 	 * @param extension
@@ -361,7 +359,7 @@ public class FileUtils
 
 	/**
 	 * 
-	 *
+	 * 
 	 * @param directory
 	 * @param out
 	 * @throws IOException
@@ -370,13 +368,13 @@ public class FileUtils
 	{
 		final String LINE_SEPARATOR = System.getProperty( "line.separator" ); //$NON-NLS-1$
 
-		try( final OutputStream os = new BufferedOutputStream( new FileOutputStream( out, true ) ) )
+		try ( final OutputStream os = new BufferedOutputStream( new FileOutputStream( out, true ) ) )
 		{
 			final File[] in = directory.listFiles();
 
 			for( int i = 0; i < in.length; i++ )
 			{
-				try( final InputStream is = new FileInputStream( in[ i ] ) )
+				try ( final InputStream is = new FileInputStream( in[ i ] ) )
 				{
 					new StreamReader( is, os ).read();
 					os.write( LINE_SEPARATOR.getBytes( Charset.defaultCharset() ) );
@@ -397,23 +395,23 @@ public class FileUtils
 		{
 			return root;
 		}
-		
+
 		if( root.isDirectory() )
 		{
 			for( final File child : root.listFiles() )
 			{
 				final File result = find( child, name );
-				
+
 				if( result != null )
 				{
 					return result;
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * @param file
@@ -426,7 +424,7 @@ public class FileUtils
 		findByRegExp( file, nameRegExp, files );
 		return files;
 	}
-	
+
 	/**
 	 * 
 	 * @param directory
@@ -439,7 +437,7 @@ public class FileUtils
 		{
 			files.add( file );
 		}
-		
+
 		if( file.isDirectory() )
 		{
 			for( final File child : file.listFiles() )

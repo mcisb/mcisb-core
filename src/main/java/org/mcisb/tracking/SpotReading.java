@@ -28,22 +28,22 @@ public class SpotReading implements Serializable
 	 * 
 	 */
 	private final Object userObject;
-	
+
 	/**
 	 * 
 	 */
 	private final Object data;
-	
+
 	/**
 	 * 
 	 * @param userObject
 	 * @param data
 	 */
 	public SpotReading( final Object userObject, final Object data )
-    {
+	{
 		this.userObject = userObject;
 		this.data = data;
-    }
+	}
 
 	/**
 	 * 
@@ -53,7 +53,7 @@ public class SpotReading implements Serializable
 	{
 		return userObject;
 	}
-	
+
 	/**
 	 * 
 	 * @return Object
@@ -62,9 +62,10 @@ public class SpotReading implements Serializable
 	{
 		return data;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -28,12 +28,12 @@ public class UrlMouseListener extends MouseAdapter implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final URL url;
-	
+
 	/**
 	 * 
 	 * @param url
@@ -42,9 +42,10 @@ public class UrlMouseListener extends MouseAdapter implements Serializable
 	{
 		this.url = url;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -60,5 +61,5 @@ public class UrlMouseListener extends MouseAdapter implements Serializable
 			ComponentUtils.setLocationCentral( errorDialog );
 			errorDialog.setVisible( true );
 		}
-    }
+	}
 }

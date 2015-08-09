@@ -24,12 +24,12 @@ public class ComponentPanel extends ParameterPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	protected final Component component;
-	
+
 	/**
 	 * 
 	 * @param title
@@ -38,16 +38,17 @@ public class ComponentPanel extends ParameterPanel
 	public ComponentPanel( final String title, final Component component )
 	{
 		super( title );
-		
+
 		this.component = component;
 
-		final JScrollPane scrollPane =  new JScrollPane( component );
+		final JScrollPane scrollPane = new JScrollPane( component );
 		scrollPane.getViewport().setBackground( Color.WHITE );
 		fill( scrollPane );
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@SuppressWarnings("unused")

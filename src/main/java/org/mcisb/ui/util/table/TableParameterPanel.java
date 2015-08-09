@@ -19,7 +19,7 @@ import org.mcisb.ui.tracking.*;
 import org.mcisb.ui.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public abstract class TableParameterPanel extends ParameterPanel implements Manager, ListSelectionListener
@@ -28,24 +28,24 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	protected final JTable table;
-	
+
 	/**
 	 * 
 	 */
 	private final JToolBar toolbar = new JToolBar( SwingConstants.VERTICAL );
-	
+
 	/**
 	 * 
 	 */
 	private final Action deleteAction = new DeleteAction( this );
 
 	/**
-	 *
+	 * 
 	 * @param title
 	 * @param table
 	 */
@@ -53,12 +53,12 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 	{
 		super( title );
 		this.table = table;
-		
+
 		// Create and configure components:
 		table.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		table.getSelectionModel().addListSelectionListener( this );
 		innerPanel.add( new JScrollPane( table ), BorderLayout.CENTER );
-		
+
 		// Create and add toolbar:
 		deleteAction.setEnabled( false );
 		toolbar.add( new NewAction( this ) );
@@ -68,9 +68,12 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 		innerPanel.add( toolbar, BorderLayout.EAST );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( @SuppressWarnings("unused") ListSelectionEvent e )
@@ -79,8 +82,9 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 		deleteAction.setEnabled( selectedRow != -1 );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
 	@Override
@@ -90,8 +94,9 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 		toolbar.removeAll();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#saveObject()
 	 */
 	@Override
@@ -100,19 +105,20 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 		// Not implemented.
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#deleteObject()
 	 */
 	@Override
 	public void deleteObject()
 	{
 		final int selectedRow = table.getSelectedRow();
-		
+
 		if( selectedRow != -1 )
 		{
 			final TableModel model = table.getModel();
-			
+
 			if( model instanceof DefaultTableModel )
 			{
 				( (DefaultTableModel)model ).removeRow( selectedRow );

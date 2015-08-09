@@ -26,12 +26,12 @@ public abstract class UniqueObjectPanel extends ObjectParameterPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final String defaultName;
-	
+
 	/**
 	 * 
 	 * @param title
@@ -43,15 +43,16 @@ public abstract class UniqueObjectPanel extends ObjectParameterPanel
 		defaultName = resourceBundle.getString( defaultNameKey );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#newObject()
 	 */
 	@Override
 	public void newObject() throws Exception
 	{
 		ListModel<?> listModel = objectList.getModel();
-		
+
 		if( listModel instanceof DefaultListModel )
 		{
 			UniqueObject object = getUniqueObject();
@@ -61,27 +62,28 @@ public abstract class UniqueObjectPanel extends ObjectParameterPanel
 			setValid();
 		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#deleteObject()
 	 */
 	@Override
 	public void deleteObject() throws Exception
 	{
 		previousIndex = -1;
-		
+
 		ListModel<?> listModel = objectList.getModel();
-		
+
 		if( listModel instanceof DefaultListModel )
 		{
 			( (DefaultListModel<?>)listModel ).removeElement( objectList.getSelectedValue() );
 			setValid();
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @throws Exception
 	 */
 	protected abstract void setValid() throws Exception;

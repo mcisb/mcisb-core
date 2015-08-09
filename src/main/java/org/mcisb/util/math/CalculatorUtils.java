@@ -31,21 +31,21 @@ public class CalculatorUtils
 		final String INFINITY = "Inf"; //$NON-NLS-1$
 		final String ERROR = "Error"; //$NON-NLS-1$
 		final java.util.HashMap<String,Double> results = new java.util.HashMap<>();
-		
+
 		if( output.contains( ERROR ) )
 		{
 			throw new java.lang.Exception( output );
 		}
-		
+
 		final BufferedReader reader = new BufferedReader( new StringReader( output ) );
-		
+
 		String line = null;
 		String key = null;
-		
+
 		while( ( line = reader.readLine() ) != null )
 		{
 			line = line.replace( '=', '\0' ).trim();
-			
+
 			if( NumberUtils.isDecimal( line ) )
 			{
 				results.put( key, Double.valueOf( Double.parseDouble( line ) ) );
@@ -59,7 +59,7 @@ public class CalculatorUtils
 				key = line;
 			}
 		}
-		
+
 		return results;
 	}
 }

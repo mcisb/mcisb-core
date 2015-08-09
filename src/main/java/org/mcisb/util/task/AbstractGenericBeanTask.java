@@ -23,7 +23,7 @@ public abstract class AbstractGenericBeanTask extends AbstractTask implements Ge
 	 * 
 	 */
 	protected GenericBean bean;
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -32,9 +32,10 @@ public abstract class AbstractGenericBeanTask extends AbstractTask implements Ge
 	{
 		this.bean = bean;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.task.Task#runTask(org.mcisb.util.GenericBean)
 	 */
 	@Override

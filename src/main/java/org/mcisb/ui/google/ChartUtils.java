@@ -43,17 +43,17 @@ public class ChartUtils
 		srcBuffer.append( "</head>" ); //$NON-NLS-1$
 		srcBuffer.append( "<body onload=\"loadGraph()\">" ); //$NON-NLS-1$
 		srcBuffer.append( "<form action=\"http://chart.apis.google.com/chart\" method=\"POST\" id=\"post_form\">" ); //$NON-NLS-1$
-		
+
 		for( Map.Entry<String,String> entry : nameValuePairs.entrySet() )
 		{
 			srcBuffer.append( "<input type=\"hidden\" name=\"" + entry.getKey() + "\" value=\"" + entry.getValue() + "\"/>" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		
+
 		// srcBuffer.append( "	<input type=\"submit\" value=\"Please wait...\"/>" ); //$NON-NLS-1$
 		srcBuffer.append( "</form>" ); //$NON-NLS-1$
 		srcBuffer.append( "</body>" ); //$NON-NLS-1$
 		srcBuffer.append( "</html>" ); //$NON-NLS-1$
-		
+
 		return srcBuffer.toString();
 	}
 }

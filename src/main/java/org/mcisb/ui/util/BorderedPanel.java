@@ -30,22 +30,22 @@ public class BorderedPanel extends JPanel
 	 * 
 	 */
 	protected final JPanel innerPanel = new JPanel( new BorderLayout() );
-	
+
 	/**
 	 * 
 	 */
 	protected final GridBagPanel contentPanel = new GridBagPanel();
-	
+
 	/**
 	 * 
 	 */
 	private final GridBagConstraints constraints = new GridBagConstraints();
-	
+
 	/**
 	 * 
 	 */
 	private final TitledBorder border;
-	
+
 	/**
 	 * 
 	 * @param title
@@ -53,17 +53,17 @@ public class BorderedPanel extends JPanel
 	public BorderedPanel( final String title )
 	{
 		super( new BorderLayout() );
-		
+
 		border = BorderFactory.createTitledBorder( title );
 		innerPanel.setBorder( border );
 		innerPanel.add( contentPanel, BorderLayout.CENTER );
-		
+
 		constraints.anchor = GridBagConstraints.NORTHWEST;
-		
+
 		setBorder( BorderFactory.createEmptyBorder( GridBagPanel.DEFAULT_INSET, GridBagPanel.DEFAULT_INSET, 0, GridBagPanel.DEFAULT_INSET ) );
 		add( innerPanel, BorderLayout.CENTER );
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -86,9 +86,9 @@ public class BorderedPanel extends JPanel
 	{
 		add( component, x, y, lastX, lastY, GridBagConstraints.NONE );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param component
 	 * @param x
 	 * @param y
@@ -100,9 +100,9 @@ public class BorderedPanel extends JPanel
 	{
 		add( component, x, y, lastX, lastY, fill, 1 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param component
 	 * @param x
 	 * @param y
@@ -115,7 +115,7 @@ public class BorderedPanel extends JPanel
 	{
 		contentPanel.add( component, x, y, lastX, lastX, lastY, lastY, fill, gridwidth );
 	}
-	
+
 	/**
 	 * 
 	 * @param component
@@ -131,7 +131,7 @@ public class BorderedPanel extends JPanel
 	{
 		contentPanel.add( component, x, y, mainX, lastX, mainY, lastY, fill, 1 );
 	}
-	
+
 	/**
 	 * 
 	 * @param component

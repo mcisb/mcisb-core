@@ -23,9 +23,10 @@ public class DefaultMutableListModel extends DefaultListModel<Object> implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.list.MutableListModel#isCellEditable(int)
 	 */
 	@Override
@@ -34,9 +35,11 @@ public class DefaultMutableListModel extends DefaultListModel<Object> implements
 		return true;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.list.MutableListModel#setValueAt(java.lang.Object, int)
+	 * 
+	 * @see org.mcisb.ui.util.list.MutableListModel#setValueAt(java.lang.Object,
+	 * int)
 	 */
 	@Override
 	public void setValueAt( Object value, int index )

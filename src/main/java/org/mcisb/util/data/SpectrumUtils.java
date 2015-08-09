@@ -23,22 +23,22 @@ public class SpectrumUtils
 	 * 
 	 */
 	public static final int START = 0;
-	
+
 	/**
 	 * 
 	 */
 	public static final int END = 1;
-	
+
 	/**
 	 * 
 	 */
 	public static final int SPECTRUM_DIMENSIONS = 2;
-	
+
 	/**
 	 * 
 	 */
 	public static final int X = 0;
-	
+
 	/**
 	 * 
 	 */
@@ -55,12 +55,12 @@ public class SpectrumUtils
 		final int ZERO = 0;
 		double minValue = Double.MAX_VALUE;
 		double maxValue = Double.MIN_VALUE;
-		
+
 		for( int i = 0; i < spectra.length; i++ )
 		{
 			final double[][] spectrum = spectra[ i ];
 			final double[] xValues = spectrum[ X ];
-			
+
 			for( int j = 0; j < xValues.length; j++ )
 			{
 				final double x = xValues[ j ];
@@ -68,22 +68,22 @@ public class SpectrumUtils
 				maxValue = Math.max( maxValue, x );
 			}
 		}
-		
+
 		final int numberOfBins = (int)Math.max( ZERO, ( maxValue - minValue ) / binSize ) + 1;
 		final double[] combinedXValues = new double[ numberOfBins ];
 		final double[] combinedYValues = new double[ numberOfBins ];
-		
+
 		for( int i = 0; i < numberOfBins; i++ )
 		{
 			combinedXValues[ i ] = minValue + ( i * binSize );
 		}
-	
+
 		for( int i = 0; i < spectra.length; i++ )
 		{
 			final double[][] spectrum = spectra[ i ];
 			final double[] xValues = spectrum[ X ];
 			final double[] yValues = spectrum[ Y ];
-			
+
 			for( int j = 0; j < xValues.length; j++ )
 			{
 				final double x = xValues[ j ];
@@ -91,11 +91,11 @@ public class SpectrumUtils
 				combinedYValues[ bin ] += yValues[ j ];
 			}
 		}
-		
+
 		final double[] strippedCombinedXValues = new double[ combinedXValues.length ];
 		final double[] strippedCombinedYValues = new double[ combinedXValues.length ];
 		int index = 0;
-		
+
 		for( int i = 0; i < combinedXValues.length; i++ )
 		{
 			if( combinedYValues[ i ] > 0 )
@@ -105,13 +105,13 @@ public class SpectrumUtils
 				index++;
 			}
 		}
-		
+
 		final double[][] spectrum = new double[ SPECTRUM_DIMENSIONS ][];
 		spectrum[ X ] = Arrays.copyOf( strippedCombinedXValues, index );
 		spectrum[ Y ] = Arrays.copyOf( strippedCombinedYValues, index );
 		return spectrum;
 	}
-	
+
 	/**
 	 * @param spectrum
 	 * @param startX
@@ -123,7 +123,7 @@ public class SpectrumUtils
 		final double[] subXValues = new double[ spectrum[ X ].length ];
 		final double[] subYValues = new double[ spectrum[ Y ].length ];
 		int index = 0;
-		
+
 		final double[] xValues = spectrum[ X ];
 		final double[] yValues = spectrum[ Y ];
 
@@ -136,13 +136,13 @@ public class SpectrumUtils
 				index++;
 			}
 		}
-		
+
 		final double[][] subSpectrum = new double[ SPECTRUM_DIMENSIONS ][];
 		subSpectrum[ X ] = Arrays.copyOf( subXValues, index );
 		subSpectrum[ Y ] = Arrays.copyOf( subYValues, index );
 		return subSpectrum;
 	}
-	
+
 	/**
 	 * 
 	 * @param str
@@ -154,7 +154,7 @@ public class SpectrumUtils
 		final List<String> tokens = new ArrayList<>();
 		final char[] charArray = str.toCharArray();
 		final StringBuffer token = new StringBuffer();
-		
+
 		for( int i = 0; i < charArray.length; i++ )
 		{
 			if( charArray[ i ] == delim )
@@ -167,12 +167,12 @@ public class SpectrumUtils
 				token.append( charArray[ i ] );
 			}
 		}
-		
+
 		if( token.length() > 0 )
 		{
 			tokens.add( token.toString() );
 		}
-		
+
 		return tokens.toArray( new String[ tokens.size() ] );
 	}
 }

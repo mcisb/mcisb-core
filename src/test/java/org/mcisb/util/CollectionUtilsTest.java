@@ -16,7 +16,7 @@ import org.junit.*;
 
 /**
  * 
- *
+ * 
  * @author Neil Swainston
  */
 public class CollectionUtilsTest
@@ -25,69 +25,69 @@ public class CollectionUtilsTest
 	 * 
 	 */
 	private final Object CHAIR = "Chair"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Object CUPBOARD = "Cupboard"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Object SOFA = "Sofa"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Object TABLE = "Table"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final Object[] array = new Object[] { TABLE, CUPBOARD, CHAIR, SOFA };
-	
+
 	/**
 	 * 
 	 */
 	private final Object[] array2 = new Object[] { TABLE, CUPBOARD, TABLE, TABLE };
-	
+
 	/**
 	 * 
 	 */
 	private final Object[] array3 = new Object[] { CHAIR, CUPBOARD, TABLE, SOFA };
-	
+
 	/**
 	 * 
 	 */
 	private final Object[] array4 = new Object[] { CUPBOARD, CUPBOARD, TABLE, CUPBOARD };
-	
+
 	/**
 	 * 
 	 */
 	private final Double[] doubleArray = new Double[] { Double.valueOf( 34.34534 ), Double.valueOf( -12e-7 ) };
-	
+
 	/**
 	 *
 	 */
-	@Test 
+	@Test
 	public void getFirstObject()
 	{
-		Assert.assertEquals( CollectionUtils.getFirst( new TreeSet<>( Arrays.asList( array ) ) ), CHAIR  );
+		Assert.assertEquals( CollectionUtils.getFirst( new TreeSet<>( Arrays.asList( array ) ) ), CHAIR );
 	}
-	
+
 	/**
 	 *
 	 */
-	@Test 	
+	@Test
 	public void getFirstArray()
 	{
 		Assert.assertEquals( CollectionUtils.getFirst( array ), TABLE );
 	}
-	
+
 	/**
 	 *
 	 */
-	@Test 	
+	@Test
 	public void getIntersection()
 	{
 		final Collection<? extends Collection<?>> collections = Arrays.asList( Arrays.asList( array ), Arrays.asList( array2 ), Arrays.asList( array3 ), Arrays.asList( array4 ) );
@@ -95,7 +95,7 @@ public class CollectionUtilsTest
 		final Collection<Object> expectedIntersection = new HashSet<>( Arrays.asList( TABLE, CUPBOARD ) );
 		Assert.assertEquals( intersection, expectedIntersection );
 	}
-	
+
 	/**
 	 * 
 	 */

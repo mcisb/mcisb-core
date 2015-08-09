@@ -25,12 +25,12 @@ public abstract class WizardComponent implements PropertyChangeListener
 	 * 
 	 */
 	protected final GenericBean bean;
-	
+
 	/**
 	 * 
 	 */
 	protected final ParameterPanel parameterPanel;
-	
+
 	/**
 	 * 
 	 * @param bean
@@ -41,7 +41,7 @@ public abstract class WizardComponent implements PropertyChangeListener
 		this.bean = bean;
 		this.parameterPanel = parameterPanel;
 	}
-	
+
 	/**
 	 * 
 	 * @return ParameterPanel
@@ -50,17 +50,19 @@ public abstract class WizardComponent implements PropertyChangeListener
 	{
 		return parameterPanel;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( @SuppressWarnings("unused") PropertyChangeEvent e )
 	{
 		// Override where necessary.
 	}
-	
+
 	/**
 	 * 
 	 * @throws Exception
@@ -70,7 +72,7 @@ public abstract class WizardComponent implements PropertyChangeListener
 	{
 		// Override where necessary.
 	}
-	
+
 	/**
 	 * 
 	 * @throws Exception

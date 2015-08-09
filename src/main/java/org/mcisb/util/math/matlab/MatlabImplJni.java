@@ -24,9 +24,10 @@ class MatlabImplJni extends MatlabImpl
 	 * 
 	 */
 	private Engine engine;
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.math.CalculatorImpl#getResults(java.lang.String)
 	 */
 	@Override
@@ -35,9 +36,10 @@ class MatlabImplJni extends MatlabImpl
 		evalString( command );
 		return getResults();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.math.CalculatorImpl#close()
 	 */
 	@Override
@@ -45,7 +47,7 @@ class MatlabImplJni extends MatlabImpl
 	{
 		getEngine().close();
 	}
-	
+
 	/**
 	 * 
 	 * @return Engine
@@ -56,17 +58,17 @@ class MatlabImplJni extends MatlabImpl
 		if( engine == null )
 		{
 			engine = new Engine();
-			
+
 			// Matlab start command:
 			engine.open( "matlab -nosplash -nojvm" ); //$NON-NLS-1$
-			
+
 			// Add the current path to Matlab's path:
 			engine.evalString( "addpath '" + new File( "" ).getAbsolutePath() + "';" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		
+
 		return engine;
 	}
-	
+
 	/**
 	 * 
 	 * @param command
@@ -76,10 +78,10 @@ class MatlabImplJni extends MatlabImpl
 	{
 		getEngine().evalString( command );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @return String
 	 * @throws java.io.IOException
 	 */
@@ -88,7 +90,7 @@ class MatlabImplJni extends MatlabImpl
 		final int NUMBER_OF_CHARACTERS = 512;
 		return getEngine().getOutputString( NUMBER_OF_CHARACTERS );
 	}
-	
+
 	/**
 	 * 
 	 * @return HashMap

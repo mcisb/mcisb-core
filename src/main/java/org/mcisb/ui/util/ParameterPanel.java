@@ -28,12 +28,12 @@ public abstract class ParameterPanel extends BorderedPanel implements Disposable
 	 * 
 	 */
 	public final static String VALID = "VALID"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public final static int DEFAULT_COLUMNS = 20;
-	
+
 	/**
 	 * 
 	 */
@@ -47,7 +47,7 @@ public abstract class ParameterPanel extends BorderedPanel implements Disposable
 	{
 		super( title );
 	}
-	
+
 	/**
 	 * 
 	 * @param validated
@@ -58,7 +58,7 @@ public abstract class ParameterPanel extends BorderedPanel implements Disposable
 		this.validated = validated;
 		firePropertyChange( VALID, oldValidated, validated );
 	}
-	
+
 	/**
 	 * 
 	 * @return boolean

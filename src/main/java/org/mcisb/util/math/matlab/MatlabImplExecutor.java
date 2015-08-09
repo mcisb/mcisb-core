@@ -23,6 +23,7 @@ class MatlabImplExecutor extends MatlabImpl
 {
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.math.CalculatorImpl#getResults(java.lang.String)
 	 */
 	@Override
@@ -30,33 +31,34 @@ class MatlabImplExecutor extends MatlabImpl
 	{
 		final String QUIT = ",quit"; //$NON-NLS-1$
 		OutputStream os = null;
-		
+
 		try
 		{
 			os = new ByteArrayOutputStream();
 			final Executor executor = new Executor( new String[] { "matlab", "-nojvm", "-nosplash", "-r", command + QUIT }, os, System.err ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			
+
 			if( ( (Integer)executor.doTask() ).intValue() != Executor.SUCCESS )
 			{
 				os.close();
 				throw new IOException();
 			}
-			
+
 			final String s = os.toString();
 			os.close();
 			return CalculatorUtils.processOutput( s );
 		}
 		finally
-		{	
+		{
 			if( os != null )
 			{
 				os.close();
 			}
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.math.CalculatorImpl#close()
 	 */
 	@Override

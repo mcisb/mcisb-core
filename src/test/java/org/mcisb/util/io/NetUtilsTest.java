@@ -18,24 +18,24 @@ import org.junit.*;
 
 /**
  * 
- *
+ * 
  * @author Neil Swainston
  */
 public class NetUtilsTest
 {
 	/**
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	@SuppressWarnings("static-method")
-	@Test 
+	@Test
 	public void doPost() throws IOException
 	{
 		final URL url = new URL( "http://www.ebi.ac.uk/miriam/main/XMLExport" ); //$NON-NLS-1$
 		final Map<String,Object> nameValuePairs = new HashMap<>();
 		nameValuePairs.put( "fileName", "MiriamXML" ); //$NON-NLS-1$ //$NON-NLS-2$
-		
-		try( final InputStream is = NetUtils.doPost( url, nameValuePairs ) )
+
+		try ( final InputStream is = NetUtils.doPost( url, nameValuePairs ) )
 		{
 			final String content = new String( StreamReader.read( is ) );
 			Assert.assertTrue( content.contains( "ChEBI" ) ); //$NON-NLS-1$

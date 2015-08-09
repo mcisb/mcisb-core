@@ -27,12 +27,12 @@ public class NewAction extends AbstractNewAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final Manager manager;
-	
+
 	/**
 	 * 
 	 * @param manager
@@ -41,10 +41,12 @@ public class NewAction extends AbstractNewAction
 	{
 		this.manager = manager;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )

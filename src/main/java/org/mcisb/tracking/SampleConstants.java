@@ -23,12 +23,12 @@ public abstract class SampleConstants
 	 * 
 	 */
 	public static final int SAMPLE = 0;
-	
+
 	/**
 	 * 
 	 */
 	public static final int BLANK = 1;
-	
+
 	/**
 	 * 
 	 */

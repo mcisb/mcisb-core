@@ -28,12 +28,12 @@ public abstract class DefaultDropTargetListener extends PropertyChangeSupported 
 	 * 
 	 */
 	private final Collection<Class<?>> supportedClasses;
-	
+
 	/**
 	 * 
 	 */
 	private DataFlavor targetFlavor;
-	
+
 	/**
 	 * 
 	 * @param supportedClasses
@@ -42,79 +42,91 @@ public abstract class DefaultDropTargetListener extends PropertyChangeSupported 
 	{
 		this.supportedClasses = supportedClasses;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DropTargetListener#dragEnter(java.awt.dnd.DropTargetDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DropTargetListener#dragEnter(java.awt.dnd.DropTargetDragEvent
+	 * )
 	 */
 	@Override
 	public void dragEnter( final DropTargetDragEvent dtde )
 	{
-	    // Accept or reject the drag.
-	    acceptOrRejectDrag( dtde );
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.dnd.DropTargetListener#dragExit(java.awt.dnd.DropTargetEvent)
-	 */
-	@Override
-	public void dragExit( @SuppressWarnings("unused") final DropTargetEvent dte )
-	{
-	    // No implementation
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.dnd.DropTargetListener#dragOver(java.awt.dnd.DropTargetDragEvent)
-	 */
-	@Override
-	public void dragOver( final DropTargetDragEvent dtde )
-	{
-	    // Accept or reject the drag
+		// Accept or reject the drag.
 		acceptOrRejectDrag( dtde );
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DropTargetListener#dropActionChanged(java.awt.dnd.DropTargetDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DropTargetListener#dragExit(java.awt.dnd.DropTargetEvent)
 	 */
 	@Override
-	public void dropActionChanged( final DropTargetDragEvent dtde )
+	public void dragExit( @SuppressWarnings("unused") final DropTargetEvent dte )
 	{
-	    // Accept or reject the drag
-	    acceptOrRejectDrag( dtde );
+		// No implementation
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DropTargetListener#drop(java.awt.dnd.DropTargetDropEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DropTargetListener#dragOver(java.awt.dnd.DropTargetDragEvent
+	 * )
+	 */
+	@Override
+	public void dragOver( final DropTargetDragEvent dtde )
+	{
+		// Accept or reject the drag
+		acceptOrRejectDrag( dtde );
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.dnd.DropTargetListener#dropActionChanged(java.awt.dnd.
+	 * DropTargetDragEvent)
+	 */
+	@Override
+	public void dropActionChanged( final DropTargetDragEvent dtde )
+	{
+		// Accept or reject the drag
+		acceptOrRejectDrag( dtde );
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.dnd.DropTargetListener#drop(java.awt.dnd.DropTargetDropEvent)
 	 */
 	@Override
 	public void drop( final DropTargetDropEvent dtde )
 	{
 		// Check the drop action
-	    if( ( dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE ) != 0 )
-	    {
+		if( ( dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE ) != 0 )
+		{
 			// Accept the drop and get the transfer data
 			dtde.acceptDrop( dtde.getDropAction() );
-			
+
 			try
 			{
-			    dtde.dropComplete( dropComponent( dtde.getTransferable().getTransferData( targetFlavor ), dtde.getLocation() ) );
+				dtde.dropComplete( dropComponent( dtde.getTransferable().getTransferData( targetFlavor ), dtde.getLocation() ) );
 			}
 			catch( Exception e )
 			{
 				e.printStackTrace();
 				dtde.dropComplete( false );
 			}
-	    }
-	    else
-	    {
-	    	dtde.rejectDrop();
-	    }
+		}
+		else
+		{
+			dtde.rejectDrop();
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @param o
@@ -124,45 +136,45 @@ public abstract class DefaultDropTargetListener extends PropertyChangeSupported 
 	 * @throws UnsupportedFlavorException
 	 */
 	protected abstract boolean dropComponent( final Object o, final Point point ) throws IOException, UnsupportedFlavorException;
-	
+
 	/**
 	 * 
 	 * @param dtde
 	 */
 	private void acceptOrRejectDrag( final DropTargetDragEvent dtde )
 	{
-	    final DataFlavor[] flavors = dtde.getCurrentDataFlavors();
-		
+		final DataFlavor[] flavors = dtde.getCurrentDataFlavors();
+
 		for( int i = 0; i < flavors.length; i++ )
 		{
 			final Class<?> dataClass = flavors[ i ].getRepresentationClass();
-		
+
 			for( Iterator<Class<?>> iterator = supportedClasses.iterator(); iterator.hasNext(); )
 			{
 				if( iterator.next().isAssignableFrom( dataClass ) )
 				{
-				    targetFlavor = flavors[ i ];
-				    
-				    if( ( dtde.getSourceActions() & DnDConstants.ACTION_COPY_OR_MOVE ) == 0 )
-				    {
-				    	dtde.rejectDrag();
-				    }
-				    else if( ( dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE ) == 0 )
-				    {
-				    	// Not offering copy or move - suggest a copy
-				    	dtde.acceptDrag( DnDConstants.ACTION_COPY );
-				    }
-				    else
-				    {
-				    	// Offering an acceptable operation: accept
-				    	dtde.acceptDrag( dtde.getDropAction() );
-				    }
-				    
-				    return;
+					targetFlavor = flavors[ i ];
+
+					if( ( dtde.getSourceActions() & DnDConstants.ACTION_COPY_OR_MOVE ) == 0 )
+					{
+						dtde.rejectDrag();
+					}
+					else if( ( dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE ) == 0 )
+					{
+						// Not offering copy or move - suggest a copy
+						dtde.acceptDrag( DnDConstants.ACTION_COPY );
+					}
+					else
+					{
+						// Offering an acceptable operation: accept
+						dtde.acceptDrag( dtde.getDropAction() );
+					}
+
+					return;
 				}
 			}
 		}
-		
+
 		dtde.rejectDrag();
 	}
 }

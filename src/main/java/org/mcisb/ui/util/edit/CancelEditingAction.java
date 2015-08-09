@@ -24,14 +24,16 @@ public class CancelEditingAction extends AbstractAction
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
-    @Override
+	@Override
 	public void actionPerformed( ActionEvent e )
-    { 
-        ( (Editable)e.getSource() ).removeEditor(); 
-    }
+	{
+		( (Editable)e.getSource() ).removeEditor();
+	}
 }

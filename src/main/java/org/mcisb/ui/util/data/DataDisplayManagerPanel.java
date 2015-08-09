@@ -20,7 +20,7 @@ import org.mcisb.util.*;
 import org.mcisb.util.data.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class DataDisplayManagerPanel extends JPanel implements PropertyChangeListener, Disposable
@@ -34,38 +34,38 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 	 * 
 	 */
 	protected final JLabel label = new JLabel();
-	
+
 	/**
 	 * 
 	 */
 	protected final DataDisplayPanel[] dataDisplayPanels;
-	
+
 	/**
 	 * 
 	 */
 	private final boolean resetXRange;
-	
+
 	/**
 	 * 
 	 */
 	private final ListManager[] listManagers;
-	
+
 	/**
 	 * 
 	 */
 	private final ResizableJLayeredPane[] layeredPanes;
-	
+
 	/**
 	 * 
 	 */
 	private final ManipulatorPanel[] manipulatorPanels;
-	
+
 	/**
 	 * 
 	 * @param dataDisplayPanel
 	 * @param data
 	 * @param manipulatable
-	 * @param resetXRange 
+	 * @param resetXRange
 	 */
 	public DataDisplayManagerPanel( final DataDisplayPanel dataDisplayPanel, final java.util.List<Spectra> data, final boolean manipulatable, final boolean resetXRange )
 	{
@@ -77,7 +77,7 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 	 * @param dataDisplayPanels
 	 * @param data
 	 * @param manipulatables
-	 * @param resetXRange 
+	 * @param resetXRange
 	 */
 	public DataDisplayManagerPanel( final DataDisplayPanel[] dataDisplayPanels, final java.util.List<java.util.List<Spectra>> data, final boolean[] manipulatables, final boolean resetXRange )
 	{
@@ -87,14 +87,14 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 		listManagers = new ListManager[ dataDisplayPanels.length ];
 		layeredPanes = new ResizableJLayeredPane[ dataDisplayPanels.length ];
 		manipulatorPanels = new ManipulatorPanel[ dataDisplayPanels.length ];
-		
+
 		setBackground( Color.WHITE );
-		
+
 		label.setHorizontalAlignment( SwingConstants.CENTER );
 		add( label, BorderLayout.NORTH );
-		
+
 		final JTabbedPane tabbedPane = new JTabbedPane();
-		
+
 		for( int i = 0; i < dataDisplayPanels.length; i++ )
 		{
 			if( manipulatables[ i ] )
@@ -102,35 +102,35 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 				manipulatorPanels[ i ] = new ManipulatorPanel( dataDisplayPanels[ i ] );
 				dataDisplayPanels[ i ].addMouseListener( manipulatorPanels[ i ] );
 				dataDisplayPanels[ i ].addMouseMotionListener( manipulatorPanels[ i ] );
-				
+
 				layeredPanes[ i ] = new ResizableJLayeredPane();
 				layeredPanes[ i ].add( dataDisplayPanels[ i ], JLayeredPane.DEFAULT_LAYER );
 				layeredPanes[ i ].add( manipulatorPanels[ i ], JLayeredPane.DRAG_LAYER );
-				
+
 				tabbedPane.addTab( dataDisplayPanels[ i ].getName(), null, layeredPanes[ i ], dataDisplayPanels[ i ].getToolTipText() );
 			}
 			else
 			{
 				tabbedPane.addTab( dataDisplayPanels[ i ].getName(), null, dataDisplayPanels[ i ], dataDisplayPanels[ i ].getToolTipText() );
 			}
-			
+
 			listManagers[ i ] = new ListManager( data.get( i ) );
 			listManagers[ i ].addPropertyChangeListener( this );
 		}
-		
+
 		final JComponent component = new ListManagerPanel( listManagers );
 		component.setOpaque( false );
 		add( component, BorderLayout.SOUTH );
-		
+
 		for( int i = 0; i < listManagers.length; i++ )
 		{
 			listManagers[ i ].init();
 		}
-		
+
 		final int FIRST = 0;
 		add( ( dataDisplayPanels.length > 1 ) ? tabbedPane : tabbedPane.getComponent( FIRST ), BorderLayout.CENTER );
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -140,7 +140,7 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 		label.setText( title );
 		repaint();
 	}
-	
+
 	/**
 	 * 
 	 * @param index
@@ -153,35 +153,37 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( final PropertyChangeEvent e )
 	{
 		final String propertyName = e.getPropertyName();
-		
+
 		if( propertyName.equals( ListManager.OBJECT ) )
 		{
 			final Object data = e.getNewValue();
-			
+
 			if( data instanceof Spectra )
 			{
 				try
 				{
 					final Spectra newSpectra = (Spectra)data;
 					final Collection<String> labels = new LinkedHashSet<>();
-					
+
 					for( Iterator<Spectrum> iterator = newSpectra.iterator(); iterator.hasNext(); )
 					{
 						labels.add( iterator.next().getLabel() );
 					}
-					
+
 					final int BRACKET_LENGTH = 1;
 					final String title = Arrays.toString( labels.toArray() );
 					setTitle( title.substring( BRACKET_LENGTH, title.length() - BRACKET_LENGTH ) );
-					
+
 					dataDisplayPanels[ Arrays.asList( listManagers ).indexOf( e.getSource() ) ].setSpectra( newSpectra );
-					
+
 					if( resetXRange )
 					{
 						dataDisplayPanels[ Arrays.asList( listManagers ).indexOf( e.getSource() ) ].reset();
@@ -196,10 +198,11 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 			}
 		}
 	}
-	
+
 	/*
 	 * 
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -219,7 +222,7 @@ public class DataDisplayManagerPanel extends JPanel implements PropertyChangeLis
 			{
 				dataDisplayPanels[ i ].removeMouseListener( manipulatorPanels[ i ] );
 			}
-			
+
 			dataDisplayPanels[ i ].dispose();
 		}
 	}

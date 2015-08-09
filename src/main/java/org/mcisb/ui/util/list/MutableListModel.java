@@ -24,12 +24,12 @@ public interface MutableListModel extends ListModel<Object>
 	 * @param index
 	 * @return boolean
 	 */
-	public boolean isCellEditable( int index ); 
-    
+	public boolean isCellEditable( int index );
+
 	/**
 	 * 
 	 * @param value
 	 * @param index
 	 */
-	public void setValueAt( Object value, int index ); 
+	public void setValueAt( Object value, int index );
 }

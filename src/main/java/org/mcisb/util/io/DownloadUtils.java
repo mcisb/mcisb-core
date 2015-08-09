@@ -16,7 +16,7 @@ import java.net.*;
 import java.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class DownloadUtils
@@ -25,12 +25,12 @@ public class DownloadUtils
 	 * 
 	 */
 	private final URL remoteUrl;
-	
+
 	/**
 	 * 
 	 */
 	private final Map<String,Object> nameValuePairs;
-	
+
 	/**
 	 * 
 	 * @param remoteUrl
@@ -41,7 +41,7 @@ public class DownloadUtils
 		this.remoteUrl = remoteUrl;
 		this.nameValuePairs = nameValuePairs;
 	}
-	
+
 	/**
 	 * 
 	 * @return String

@@ -16,18 +16,18 @@ import java.net.*;
 import java.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class NetUtils
-{	
+{
 	/**
 	 * 
 	 */
 	private final static Random random = new Random();
-	
+
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @param parameters
 	 * @return InputStream
@@ -38,21 +38,21 @@ public class NetUtils
 		final String SEPARATOR = "?"; //$NON-NLS-1$
 		return url + SEPARATOR + getQueryString( parameters, false );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @param parameters
 	 * @return InputStream
 	 * @throws IOException
 	 */
 	public static InputStream doPost( final URL url, final Map<String,Object> parameters ) throws IOException
-	{ 
+	{
 		return doPost( url, parameters, true );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param url
 	 * @param parameters
 	 * @param encode
@@ -66,9 +66,9 @@ public class NetUtils
 		urlConn.setDoOutput( true );
 		urlConn.setUseCaches( false );
 		urlConn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" ); //$NON-NLS-1$ //$NON-NLS-2$
-		    
+
 		OutputStream os = null;
-		
+
 		try
 		{
 			os = new DataOutputStream( urlConn.getOutputStream() );
@@ -82,14 +82,14 @@ public class NetUtils
 				os.close();
 			}
 		}
-		
-	    return urlConn.getInputStream();
+
+		return urlConn.getInputStream();
 	}
-	
+
 	/**
 	 * 
 	 * @param parameters
-	 * @param encode 
+	 * @param encode
 	 * @return String
 	 * @throws UnsupportedEncodingException
 	 */
@@ -100,9 +100,9 @@ public class NetUtils
 		final String AMPERSAND = "&"; //$NON-NLS-1$
 		final String EQUALS_ENCODED = encode ? URLEncoder.encode( EQUALS, ENCODING ) : EQUALS;
 		final String AMPERSAND_ENCODED = encode ? URLEncoder.encode( AMPERSAND, ENCODING ) : AMPERSAND;
-		
+
 		final StringBuffer queryString = new StringBuffer();
-		
+
 		for( Iterator<Map.Entry<String,Object>> iterator = parameters.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<String,Object> entry = iterator.next();
@@ -111,15 +111,15 @@ public class NetUtils
 			queryString.append( encode ? URLEncoder.encode( entry.getValue().toString(), ENCODING ) : entry.getValue().toString() );
 			queryString.append( AMPERSAND_ENCODED );
 		}
-		
+
 		if( queryString.length() > 0 )
 		{
 			queryString.setLength( queryString.length() - AMPERSAND_ENCODED.length() );
 		}
-		
+
 		return queryString.toString();
 	}
-	
+
 	/**
 	 * 
 	 * @param url
@@ -133,9 +133,9 @@ public class NetUtils
 		final String SEPARATOR = "--"; //$NON-NLS-1$
 		final String BOUNDARY = Long.toString( random.nextLong(), RADIX );
 		final String NEW_LINE = "\r\n"; //$NON-NLS-1$
-		
+
 		BufferedWriter writer = null;
-		
+
 		try
 		{
 			final HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -145,21 +145,21 @@ public class NetUtils
 			http.setRequestProperty( "Cache-Control", "no-cache" ); //$NON-NLS-1$ //$NON-NLS-2$
 			http.setRequestProperty( "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" ); //$NON-NLS-1$ //$NON-NLS-2$
 			http.setDoOutput( true );
-			
+
 			writer = new BufferedWriter( new OutputStreamWriter( http.getOutputStream() ) );
-			
+
 			for( Iterator<Map.Entry<String,Object>> i = parameters.entrySet().iterator(); i.hasNext(); )
 			{
 				final Map.Entry<String,Object> entry = i.next();
 				Object value = null;
-				
+
 				writer.write( SEPARATOR );
 				writer.write( BOUNDARY );
 				writer.write( NEW_LINE );
 				writer.write( "Content-Disposition: form-data; name=\"" ); //$NON-NLS-1$
 				writer.write( entry.getKey() );
 				writer.write( "\"" ); //$NON-NLS-1$
-				
+
 				if( entry.getValue() instanceof File )
 				{
 					final File file = (File)entry.getValue();
@@ -168,35 +168,35 @@ public class NetUtils
 					writer.write( "\"" ); //$NON-NLS-1$
 					writer.write( NEW_LINE );
 					writer.write( "Content-Type:" ); //$NON-NLS-1$
-					
+
 					String contentType = URLConnection.guessContentTypeFromName( file.getPath() );
-					
+
 					if( contentType == null )
 					{
 						contentType = "text/plain"; //$NON-NLS-1$
 					}
-					
+
 					writer.write( contentType );
-					
+
 					value = new String( FileUtils.read( file.toURI().toURL() ) );
 				}
 				else
 				{
 					value = entry.getValue();
 				}
-				
+
 				writer.write( NEW_LINE );
 				writer.write( NEW_LINE );
 				writer.write( value.toString() );
 				writer.write( NEW_LINE );
 			}
-			
+
 			writer.write( SEPARATOR );
 			writer.write( BOUNDARY );
 			writer.write( SEPARATOR );
 			writer.write( NEW_LINE );
 			writer.close();
-			
+
 			return http;
 		}
 		finally

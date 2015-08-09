@@ -26,7 +26,7 @@ public class ExceptionComponentFactory
 	 * 
 	 */
 	private final boolean reportErrors;
-	
+
 	/**
 	 * 
 	 * @param reportErrors
@@ -35,7 +35,7 @@ public class ExceptionComponentFactory
 	{
 		this.reportErrors = reportErrors;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -43,7 +43,7 @@ public class ExceptionComponentFactory
 	{
 		this( false );
 	}
-	
+
 	/**
 	 * 
 	 * @param error
@@ -53,34 +53,34 @@ public class ExceptionComponentFactory
 	public Container getExceptionPanel( final String error, final Exception e )
 	{
 		final String text = ExceptionUtils.toString( e );
-		
+
 		final InformationPanel informationPanel = new InformationPanel( error );
 		informationPanel.setText( text );
 
 		final JPanel panel = new JPanel( new BorderLayout() );
 		panel.add( informationPanel, BorderLayout.CENTER );
-		
+
 		if( reportErrors )
 		{
 			final ReportErrorAction reportErrorAction = new ReportErrorAction();
 			reportErrorAction.setError( text );
-			
+
 			final JToolBar toolbar = new JToolBar();
 			toolbar.add( reportErrorAction );
 			toolbar.setFloatable( false );
 			toolbar.setOpaque( false );
 			toolbar.setBorderPainted( false );
-			
+
 			final JPanel toolbarPanel = new JPanel( new BorderLayout() );
 			toolbarPanel.setBorder( BorderFactory.createEmptyBorder( GridBagPanel.DEFAULT_INSET, GridBagPanel.DEFAULT_INSET, GridBagPanel.DEFAULT_INSET, GridBagPanel.DEFAULT_INSET ) );
 			toolbarPanel.add( toolbar, BorderLayout.EAST );
-			
+
 			panel.add( toolbarPanel, BorderLayout.SOUTH );
 		}
-		
+
 		return panel;
 	}
-	
+
 	/**
 	 * 
 	 * @param owner
@@ -91,7 +91,7 @@ public class ExceptionComponentFactory
 	public JDialog getExceptionDialog( final Container owner, final String error, final Exception e )
 	{
 		JDialog dialog;
-		
+
 		if( owner instanceof Dialog )
 		{
 			dialog = new JDialog( (Dialog)owner, error, true );
@@ -106,7 +106,7 @@ public class ExceptionComponentFactory
 			dialog.setTitle( error );
 			dialog.setModal( true );
 		}
-		
+
 		dialog.setContentPane( getExceptionPanel( error, e ) );
 		dialog.pack();
 		return dialog;

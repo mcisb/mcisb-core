@@ -23,22 +23,22 @@ class DatabaseLinker
 	 * 
 	 */
 	private final KeyMap keyMap;
-	
+
 	/**
 	 * 
 	 */
 	private final List<String> links = new ArrayList<>();
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param keyMap
 	 */
 	DatabaseLinker( final KeyMap keyMap )
 	{
 		this.keyMap = keyMap;
 	}
-	
+
 	/**
 	 * 
 	 * @param sourceTableName
@@ -50,7 +50,7 @@ class DatabaseLinker
 		investigateKeys( keyMap.getKeys( sourceTableName ), targetTableName );
 		return returnResult();
 	}
-	
+
 	/**
 	 * 
 	 * @param sourceTableName
@@ -62,7 +62,7 @@ class DatabaseLinker
 		investigateKeys( keyMap.getKeys( sourceTableName ), maxDepth, 0 );
 		return returnResult();
 	}
-	
+
 	/**
 	 * 
 	 * @param tableName
@@ -73,10 +73,10 @@ class DatabaseLinker
 	{
 		return keyMap.isKey( tableName, fieldName );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @return Collection
 	 */
 	private Collection<String> returnResult()
@@ -85,10 +85,10 @@ class DatabaseLinker
 		links.clear();
 		return result;
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param keys
 	 * @param targetTableName
 	 * @return boolean
@@ -100,30 +100,31 @@ class DatabaseLinker
 			final Key key = iterator.next();
 			final Object tableName = key.getTargetTableName();
 			links.add( key.toString() );
-			
+
 			if( tableName.equals( targetTableName ) )
-			{	
+			{
 				return true;
 			}
-			
-			// Remove the current Key from next Keys, to prevent the recursion from going back and forth:
+
+			// Remove the current Key from next Keys, to prevent the recursion
+			// from going back and forth:
 			final Collection<Key> nextKeys = new ArrayList<>( keyMap.getKeys( tableName ) );
 			nextKeys.remove( key );
-			
+
 			if( investigateKeys( nextKeys, targetTableName ) )
 			{
 				return true;
 			}
-			
+
 			links.remove( key.toString() );
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param keys
 	 * @param maxDepth
 	 * @param currentDepth
@@ -135,16 +136,17 @@ class DatabaseLinker
 			final Key key = iterator.next();
 			final Object tableName = key.getTargetTableName();
 			links.add( key.toString() );
-			
+
 			if( currentDepth + 1 == maxDepth )
-			{	
+			{
 				continue;
 			}
-			
-			// Remove the current Key from next Keys, to prevent the recursion from going back and forth:
+
+			// Remove the current Key from next Keys, to prevent the recursion
+			// from going back and forth:
 			final Collection<Key> nextKeys = new ArrayList<>( keyMap.getKeys( tableName ) );
 			nextKeys.remove( key );
-			
+
 			investigateKeys( nextKeys, maxDepth, currentDepth + 1 );
 		}
 	}

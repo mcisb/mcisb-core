@@ -28,7 +28,7 @@ public class ComponentUtils
 		final Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension frameDimension = component.getSize();
 		final int x = ( screenDimension.width - frameDimension.width ) / 2;
-		final int y = ( screenDimension.height - frameDimension.height )/ 2;
+		final int y = ( screenDimension.height - frameDimension.height ) / 2;
 		component.setLocation( x, y );
 	}
 }

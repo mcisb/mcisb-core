@@ -12,13 +12,13 @@
 package org.mcisb.ui.util.data;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public interface Manipulatable
 {
 	/**
-	 *
+	 * 
 	 * @param minXPosition
 	 * @param maxXPosition
 	 */
@@ -30,19 +30,19 @@ public interface Manipulatable
 	public abstract void reset();
 
 	/**
-	 *
+	 * 
 	 * @return int
 	 */
 	public abstract int getAxesBorder();
-	
+
 	/**
-	 *
+	 * 
 	 * @return int
 	 */
 	public abstract int getHeight();
-	
+
 	/**
-	 *
+	 * 
 	 * @return int
 	 */
 	public abstract int getWidth();

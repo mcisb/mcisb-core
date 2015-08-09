@@ -20,7 +20,7 @@ import org.xmldb.api.base.*;
 public abstract class StatementExecutorFactory
 {
 	/**
-	 *
+	 * 
 	 * @param dbDriver
 	 * @param dbServerName
 	 * @param dbCollectionName

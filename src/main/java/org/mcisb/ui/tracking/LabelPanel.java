@@ -28,12 +28,12 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final Map<Object,Object> labelToSample = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
@@ -47,12 +47,12 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	public LabelPanel( final String title, final String[] labelNames )
 	{
 		super( title, new JList<>( new DefaultListModel<>() ), false );
-		
+
 		setValid( true );
-		
+
 		// Populate label list:
 		final ListModel<?> listModel = objectList.getModel();
-		
+
 		if( listModel instanceof DefaultListModel )
 		{
 			for( int i = 0; i < labelNames.length; i++ )
@@ -62,20 +62,21 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 				( (DefaultListModel<Object>)listModel ).addElement( object );
 			}
 		}
-		
+
 		// Create and configure components:
 		sampleList.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		sampleList.addListSelectionListener( this );
-		
+
 		// Add components:
 		add( new JLabel( resourceBundle.getString( "LabelPanel.label" ) ), 0, 0, false, false, true, false, GridBagConstraints.HORIZONTAL ); //$NON-NLS-1$
 		add( new JScrollPane( objectList ), 1, 0, true, true, true, false, GridBagConstraints.BOTH );
 		add( new JLabel( resourceBundle.getString( "LabelPanel.sample" ) ), 0, 1, false, false, true, true, GridBagConstraints.HORIZONTAL ); //$NON-NLS-1$
 		add( new JScrollPane( sampleList ), 1, 1, true, true, true, true, GridBagConstraints.BOTH );
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#newObject()
 	 */
 	@Override
@@ -83,9 +84,10 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	{
 		// Not implemented.
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.Manager#deleteObject()
 	 */
 	@Override
@@ -93,9 +95,10 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	{
 		// Not implemented.
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ObjectParameterPanel#dispose()
 	 */
 	@Override
@@ -104,25 +107,29 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 		super.dispose();
 		sampleList.removeListSelectionListener( this );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.tracking.SampleParameterPanel#setSamples(java.util.Collection)
+	 * 
+	 * @see
+	 * org.mcisb.ui.tracking.SampleParameterPanel#setSamples(java.util.Collection
+	 * )
 	 */
 	@Override
 	public void setSamples( Collection<?> samples )
 	{
 		final DefaultListModel<Object> model = ( (DefaultListModel<Object>)sampleList.getModel() );
 		model.clear();
-		
+
 		for( Iterator<?> iterator = samples.iterator(); iterator.hasNext(); )
 		{
 			model.addElement( iterator.next() );
 		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ObjectParameterPanel#getObject()
 	 */
 	@Override
@@ -130,9 +137,10 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	{
 		return labelToSample;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.ObjectParameterPanel#save(java.lang.Object)
 	 */
 	@Override
@@ -144,23 +152,26 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 		}
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( ListSelectionEvent e )
 	{
 		super.valueChanged( e );
-		
+
 		final Object label = objectList.getSelectedValue();
-		
+
 		if( e.getSource().equals( objectList ) )
 		{
-			
+
 			final Object sample = label == null ? null : labelToSample.get( label );
 			sampleList.setSelectedValue( sample, true );
-			
+
 			if( sample == null )
 			{
 				sampleList.clearSelection();

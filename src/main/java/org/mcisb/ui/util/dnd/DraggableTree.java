@@ -30,12 +30,12 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 	 * 
 	 */
 	private final DragSource source = new DragSource();
-	
+
 	/**
 	 * 
 	 */
 	private DefaultMutableTreeNode node = null;
-	  
+
 	/**
 	 * 
 	 * @param newModel
@@ -49,23 +49,28 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.DragGestureEvent)
+	 * 
+	 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.
+	 * DragGestureEvent)
 	 */
 	@Override
 	public void dragGestureRecognized( final DragGestureEvent dge )
 	{
 		final TreePath path = getSelectionPath();
-		
-	    if( path != null )
-	    {
-	    	node = (DefaultMutableTreeNode)path.getLastPathComponent();
-		    source.startDrag( dge, DragSource.DefaultMoveNoDrop, new TransferableObject( node.getUserObject() ), this );
-	    }
+
+		if( path != null )
+		{
+			node = (DefaultMutableTreeNode)path.getLastPathComponent();
+			source.startDrag( dge, DragSource.DefaultMoveNoDrop, new TransferableObject( node.getUserObject() ), this );
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragDropEnd(java.awt.dnd.DragSourceDropEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragDropEnd(java.awt.dnd.DragSourceDropEvent
+	 * )
 	 */
 	@Override
 	public void dragDropEnd( final DragSourceDropEvent dsde )
@@ -78,7 +83,10 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragEnter(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragEnter(java.awt.dnd.DragSourceDragEvent
+	 * )
 	 */
 	@Override
 	public void dragEnter( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
@@ -88,7 +96,9 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragExit(java.awt.dnd.DragSourceEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragExit(java.awt.dnd.DragSourceEvent)
 	 */
 	@Override
 	public void dragExit( @SuppressWarnings("unused") final DragSourceEvent dse )
@@ -98,7 +108,10 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dragOver(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see
+	 * java.awt.dnd.DragSourceListener#dragOver(java.awt.dnd.DragSourceDragEvent
+	 * )
 	 */
 	@Override
 	public void dragOver( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
@@ -108,7 +121,9 @@ public class DraggableTree extends SearchableTree implements DragSourceListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.dnd.DragSourceListener#dropActionChanged(java.awt.dnd.DragSourceDragEvent)
+	 * 
+	 * @see java.awt.dnd.DragSourceListener#dropActionChanged(java.awt.dnd.
+	 * DragSourceDragEvent)
 	 */
 	@Override
 	public void dropActionChanged( @SuppressWarnings("unused") final DragSourceDragEvent dsde )

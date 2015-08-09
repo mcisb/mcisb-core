@@ -14,7 +14,7 @@ package org.mcisb.ui.util.table;
 import javax.swing.table.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class NonEditableTable extends ColumnClassTable
@@ -23,9 +23,9 @@ public class NonEditableTable extends ColumnClassTable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 *
+	 * 
 	 * @param model
 	 */
 	public NonEditableTable( final TableModel model )
@@ -33,8 +33,9 @@ public class NonEditableTable extends ColumnClassTable
 		super( model );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTable#isCellEditable(int, int)
 	 */
 	@Override

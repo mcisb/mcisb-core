@@ -24,9 +24,9 @@ public class CustomWizardComponent extends WizardComponent
 	 * 
 	 */
 	private final String propertyName;
-	
+
 	/**
-	 *
+	 * 
 	 * @param bean
 	 * @param parameterPanel
 	 * @param propertyName
@@ -37,8 +37,9 @@ public class CustomWizardComponent extends WizardComponent
 		this.propertyName = propertyName;
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.wizard.WizardComponent#update()
 	 */
 	@Override

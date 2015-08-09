@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ListManager extends PropertyChangeSupported implements Serializable
@@ -24,51 +24,51 @@ public class ListManager extends PropertyChangeSupported implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	public static final String INDEX = "INDEX"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	public static final String OBJECT = "OBJECT"; //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	private final List<?> list;
-	
+
 	/**
 	 * 
 	 */
 	private int index = -1;
-	
+
 	/**
 	 * 
 	 */
 	private Object object = null;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param list
 	 */
 	public ListManager( final List<?> list )
 	{
 		this.list = list;
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @return int
 	 */
 	public int getListSize()
 	{
 		return list.size();
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -76,7 +76,7 @@ public class ListManager extends PropertyChangeSupported implements Serializable
 	{
 		next();
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -84,7 +84,7 @@ public class ListManager extends PropertyChangeSupported implements Serializable
 	{
 		update( 1 );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -92,15 +92,15 @@ public class ListManager extends PropertyChangeSupported implements Serializable
 	{
 		update( -1 );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param increment
 	 */
 	private void update( final int increment )
 	{
 		final int ZERO = 0;
-		
+
 		if( list.size() > ZERO )
 		{
 			final int newIndex = ( index + list.size() + increment ) % list.size();

@@ -23,7 +23,7 @@ public class PropertyChangeSupported
 	 * 
 	 */
 	protected final PropertyChangeSupport support = new PropertyChangeSupport( this );
-	
+
 	/**
 	 * 
 	 * @param l
@@ -32,7 +32,7 @@ public class PropertyChangeSupported
 	{
 		support.addPropertyChangeListener( l );
 	}
-	
+
 	/**
 	 * 
 	 * @param l

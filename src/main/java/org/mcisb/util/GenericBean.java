@@ -25,12 +25,12 @@ public class GenericBean
 	 * 
 	 */
 	protected Map<Object,Object> properties = new TreeMap<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final PropertyChangeSupport support = new PropertyChangeSupport( this );
-	
+
 	/**
 	 * 
 	 * @return Map
@@ -39,9 +39,9 @@ public class GenericBean
 	{
 		return new TreeMap<>( properties );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param name
 	 * @return Object
 	 */
@@ -49,7 +49,7 @@ public class GenericBean
 	{
 		return properties.get( name );
 	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -61,7 +61,7 @@ public class GenericBean
 		properties.put( name, object );
 		support.firePropertyChange( name.toString(), oldObject, object );
 	}
-	
+
 	/**
 	 * 
 	 * @return Collection
@@ -70,9 +70,9 @@ public class GenericBean
 	{
 		return properties.keySet();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return boolean
 	 */
@@ -80,9 +80,9 @@ public class GenericBean
 	{
 		return ( (Boolean)( CollectionUtils.getFirst( (Object[])getProperty( propertyName ) ) ) ).booleanValue();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return int
 	 */
@@ -90,9 +90,9 @@ public class GenericBean
 	{
 		return ( (Number)CollectionUtils.getFirst( (Object[])getProperty( propertyName ) ) ).intValue();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param name
 	 * @param value
 	 */
@@ -100,43 +100,43 @@ public class GenericBean
 	{
 		setProperty( name, new Double[] { Double.valueOf( value ) } );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return double
 	 */
 	public double getDouble( String propertyName )
 	{
 		final Object property = getProperty( propertyName );
-		
+
 		if( property == null )
 		{
 			return NumberUtils.UNDEFINED;
 		}
-		
+
 		return ( (Double)( CollectionUtils.getFirst( (Object[])property ) ) ).doubleValue();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return String
 	 */
 	public String getString( String propertyName )
 	{
 		final Object property = getProperty( propertyName );
-		
+
 		if( property instanceof Object[] )
 		{
 			return (String)CollectionUtils.getFirst( (Object[])property );
 		}
-		
+
 		return ( property == null ) ? null : property.toString();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return File
 	 */
@@ -144,9 +144,9 @@ public class GenericBean
 	{
 		return CollectionUtils.getFirst( getFiles( propertyName ) );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return Collection
 	 */
@@ -154,17 +154,17 @@ public class GenericBean
 	{
 		Collection<File> files = new ArrayList<>();
 		final Object property = getProperty( propertyName );
-		
+
 		if( property instanceof Collection<?> )
 		{
 			Collection<?> filepaths = (Collection<?>)property;
-			
+
 			for( Iterator<?> iterator = filepaths.iterator(); iterator.hasNext(); )
 			{
 				files.add( new File( iterator.next().toString() ) );
 			}
 		}
-		
+
 		return files;
 	}
 }

@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * @author neilswainston
- *
+ * 
  */
 public abstract class RestReader
 {
@@ -17,7 +17,7 @@ public abstract class RestReader
 	 * 
 	 */
 	private final String location;
-	
+
 	/**
 	 * 
 	 * @param url
@@ -27,47 +27,47 @@ public abstract class RestReader
 	{
 		this.location = parse( url, parameters );
 	}
-	
+
 	/**
 	 * 
 	 * @return Object
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Object read() throws Exception
 	{
 		final int MILLISECONDS = 1000;
-		
+
 		HttpURLConnection connection = null;
-		
+
 		try
 		{
 			final URL url = new URL( location );
-			
+
 			do
 			{
 				connection = (HttpURLConnection)url.openConnection();
 				connection.setDoInput( true );
 				connection.connect();
-				
+
 				int wait = 0;
-				
+
 				final String header = connection.getHeaderField( "Retry-After" ); //$NON-NLS-1$
-				
+
 				if( header != null )
 				{
 					wait = Integer.parseInt( header );
 				}
-				
+
 				if( wait == 0 )
 				{
-					if( connection.getResponseCode()  == HttpURLConnection.HTTP_OK )
+					if( connection.getResponseCode() == HttpURLConnection.HTTP_OK )
 					{
 						return processInputStream( connection.getInputStream() );
 					}
-					
+
 					return null;
 				}
-				
+
 				connection.disconnect();
 				Thread.sleep( wait * MILLISECONDS );
 			}
@@ -81,7 +81,7 @@ public abstract class RestReader
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param is
@@ -89,7 +89,7 @@ public abstract class RestReader
 	 * @throws Exception
 	 */
 	protected abstract Object processInputStream( final InputStream is ) throws Exception;
-	
+
 	/**
 	 * 
 	 * @param url
@@ -100,9 +100,9 @@ public abstract class RestReader
 	{
 		final StringBuilder stringBuilder = new StringBuilder( url );
 		stringBuilder.append( '?' );
-		
+
 		boolean appendAmpersand = false;
-		
+
 		for( Map.Entry<String,String> parameter : parameters.entrySet() )
 		{
 			if( appendAmpersand )
@@ -113,12 +113,12 @@ public abstract class RestReader
 			{
 				appendAmpersand = true;
 			}
-			
+
 			stringBuilder.append( parameter.getKey() );
 			stringBuilder.append( '=' );
 			stringBuilder.append( parameter.getValue() );
 		}
-		
+
 		return stringBuilder.toString();
 	}
 }

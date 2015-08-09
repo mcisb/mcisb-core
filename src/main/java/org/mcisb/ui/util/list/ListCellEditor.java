@@ -26,5 +26,5 @@ public interface ListCellEditor extends CellEditor, Serializable
 	 * @param value
 	 * @return Component
 	 */
-	public Component getListCellEditorComponent( final Object value ); 
+	public Component getListCellEditorComponent( final Object value );
 }

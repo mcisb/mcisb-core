@@ -28,61 +28,61 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	protected final JProgressBar progressBar = new JProgressBar();
-	
+
 	/**
 	 * 
 	 */
 	protected final JToolBar toolbar = new JToolBar();
-	
+
 	/**
 	 * 
 	 */
 	protected final JScrollPane display = new JScrollPane();
-	
+
 	/**
 	 * 
 	 */
 	protected final ReportErrorAction reportErrorAction = new ReportErrorAction();
-	
+
 	/**
 	 * 
 	 */
 	private final Color defaultColor = progressBar.getForeground();
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param title
-	 * @param displayPreferredSize 
+	 * @param displayPreferredSize
 	 */
 	public ProgressPanel( final String title, final Dimension displayPreferredSize )
 	{
 		super( title );
-		
+
 		display.setPreferredSize( displayPreferredSize );
-		
+
 		progressBar.setIndeterminate( true );
-		
+
 		toolbar.setFloatable( false );
 		toolbar.setOpaque( false );
 		toolbar.setBorderPainted( false );
-		
+
 		final JPanel toolbarPanel = new JPanel( new BorderLayout() );
 		toolbarPanel.add( toolbar, BorderLayout.EAST );
-	
+
 		add( display, 0, 0, true, true, true, false, GridBagConstraints.BOTH );
 		add( toolbarPanel, 0, 1, true, true, false, false, GridBagConstraints.HORIZONTAL );
 		add( progressBar, 0, 2, true, true, false, true, GridBagConstraints.HORIZONTAL );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param e
 	 */
 	public void setException( final Exception e )
@@ -102,7 +102,7 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 	{
 		boolean indeterminate = false;
 		Color foreground = defaultColor;
-		
+
 		switch( progress )
 		{
 			case Task.INDETERMINATE:
@@ -130,14 +130,15 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 				break;
 			}
 		}
-		
+
 		progressBar.setIndeterminate( indeterminate );
 		progressBar.setForeground( foreground );
 		progressBar.setValue( progress );
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
 	@SuppressWarnings("unused")
@@ -146,10 +147,12 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 	{
 		// No implementation.
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent e )
@@ -165,11 +168,11 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 	}
 
 	/**
-	 *
+	 * 
 	 * @param message
 	 */
 	protected abstract void setMessage( String message );
-	
+
 	/**
 	 * 
 	 *

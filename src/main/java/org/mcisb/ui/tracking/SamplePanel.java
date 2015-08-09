@@ -25,7 +25,7 @@ public class SamplePanel extends UniqueObjectPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 * @param title
@@ -38,9 +38,10 @@ public class SamplePanel extends UniqueObjectPanel
 		add( new JLabel( resourceBundle.getString( "SamplePanel.name" ) ), 0, 0, false, true ); //$NON-NLS-1$
 		add( new JScrollPane( objectList ), 1, 0, true, true, GridBagConstraints.HORIZONTAL );
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.CustomParameterPanel#getObject()
 	 */
 	@Override
@@ -48,17 +49,18 @@ public class SamplePanel extends UniqueObjectPanel
 	{
 		Collection<Object> samples = new ArrayList<>();
 		ListModel<?> model = objectList.getModel();
-		
+
 		for( int i = 0; i < model.getSize(); i++ )
 		{
 			samples.add( model.getElementAt( i ) );
 		}
-		
+
 		return samples;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.CustomParameterPanel#save(java.lang.Object)
 	 */
 	@Override
@@ -66,9 +68,10 @@ public class SamplePanel extends UniqueObjectPanel
 	{
 		// Take no action.
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.tracking.UniqueObjectPanel#setValid()
 	 */
 	@Override

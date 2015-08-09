@@ -23,37 +23,37 @@ class Key
 	 * 
 	 */
 	private final Object sourceTableName;
-	
+
 	/**
 	 * 
 	 */
 	private final Object sourceFieldName;
-	
+
 	/**
 	 * 
 	 */
 	private final Object targetTableName;
-	
+
 	/**
 	 * 
 	 */
 	private final Object targetFieldName;
-	
+
 	/**
 	 * 
 	 */
 	private final String toString;
-	
+
 	/**
 	 * 
 	 */
 	private boolean hashCodeDefined = false;
-	
+
 	/**
 	 * 
 	 */
 	private int hashCode;
-	
+
 	/**
 	 * 
 	 * @param sourceTableName
@@ -78,7 +78,7 @@ class Key
 	{
 		return sourceTableName;
 	}
-	
+
 	/**
 	 * 
 	 * @return Object
@@ -105,9 +105,10 @@ class Key
 	{
 		return targetTableName;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -117,12 +118,13 @@ class Key
 		{
 			return hashCode() == object.hashCode();
 		}
-		
+
 		return false;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -133,20 +135,21 @@ class Key
 			final Collection<Object> tableNames = new TreeSet<>();
 			tableNames.add( sourceTableName );
 			tableNames.add( targetTableName );
-			
+
 			for( Iterator<Object> iterator = tableNames.iterator(); iterator.hasNext(); )
 			{
 				hashCode += iterator.next().hashCode();
 			}
-			
+
 			hashCodeDefined = true;
 		}
-		
+
 		return hashCode;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

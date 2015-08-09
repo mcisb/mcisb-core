@@ -15,7 +15,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class JPopupMenuListener extends MouseAdapter
@@ -24,46 +24,48 @@ public class JPopupMenuListener extends MouseAdapter
 	 * 
 	 */
 	private final JPopupMenu menu;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param menu
 	 */
 	public JPopupMenuListener( final JPopupMenu menu )
 	{
-		this.menu = menu;	
+		this.menu = menu;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
 	 */
-    @Override
+	@Override
 	public void mousePressed( final MouseEvent e )
-    {
-    	showPopup( e );
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
-     */
-    @Override
+	{
+		showPopup( e );
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
+	 */
+	@Override
 	public void mouseReleased( final MouseEvent e )
-    {
-        showPopup( e );
-    }
-    
-    /**
-     *
-     * @param e
-     */
-    private void showPopup( final MouseEvent e )
-    {
-        if( e.isPopupTrigger() )
-        { 
-        	menu.show( e.getComponent(), e.getX(), e.getY() );
-        }
-    }
+	{
+		showPopup( e );
+	}
+
+	/**
+	 * 
+	 * @param e
+	 */
+	private void showPopup( final MouseEvent e )
+	{
+		if( e.isPopupTrigger() )
+		{
+			menu.show( e.getComponent(), e.getX(), e.getY() );
+		}
+	}
 }

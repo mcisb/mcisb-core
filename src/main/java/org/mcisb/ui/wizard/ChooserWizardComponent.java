@@ -29,9 +29,10 @@ public class ChooserWizardComponent extends WizardComponent
 	{
 		super( bean, parameterPanel );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.wizard.WizardComponent#update()
 	 */
 	@Override

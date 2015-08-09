@@ -15,7 +15,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class ColumnClassTable extends JTable
@@ -24,9 +24,9 @@ public class ColumnClassTable extends JTable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 *
+	 * 
 	 * @param model
 	 */
 	public ColumnClassTable( final TableModel model )
@@ -34,8 +34,9 @@ public class ColumnClassTable extends JTable
 		super( model );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTable#getColumnClass(int)
 	 */
 	@Override
@@ -45,13 +46,13 @@ public class ColumnClassTable extends JTable
 		{
 			final int FIRST = 0;
 			final Object object = getValueAt( FIRST, column );
-			
+
 			if( object != null )
 			{
 				return object.getClass();
 			}
 		}
-		
+
 		return Object.class;
 	}
 }

@@ -8,7 +8,7 @@ import org.mcisb.util.data.*;
 
 /**
  * @author neilswainston
- *
+ * 
  */
 public class Spectra extends ArrayList<Spectrum>
 {

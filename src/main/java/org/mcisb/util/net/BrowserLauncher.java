@@ -30,41 +30,42 @@ public class BrowserLauncher
 	 * @throws InvocationTargetException
 	 * @throws IOException
 	 */
-	public static void openURL( URL url )  throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException
+	public static void openURL( URL url ) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException
 	{
 		final String osName = System.getProperty( "os.name" ); //$NON-NLS-1$
 
 		if( osName.startsWith( "Mac OS" ) ) //$NON-NLS-1$
 		{
-            final Class<?> fileManager = Class.forName( "com.apple.eio.FileManager" ); //$NON-NLS-1$
-            final Method openURL = fileManager.getDeclaredMethod( "openURL", new Class[] { String.class } ); //$NON-NLS-1$
-            openURL.invoke( null, new Object[] { url.toString() } );
-        }
+			final Class<?> fileManager = Class.forName( "com.apple.eio.FileManager" ); //$NON-NLS-1$
+			final Method openURL = fileManager.getDeclaredMethod( "openURL", new Class[] { String.class } ); //$NON-NLS-1$
+			openURL.invoke( null, new Object[] { url.toString() } );
+		}
 		else if( osName.startsWith( "Windows" ) ) //$NON-NLS-1$
 		{
-            Runtime.getRuntime().exec( "rundll32 url.dll,FileProtocolHandler " + url ); //$NON-NLS-1$
+			Runtime.getRuntime().exec( "rundll32 url.dll,FileProtocolHandler " + url ); //$NON-NLS-1$
 		}
-		else //assume Unix or Linux
-		{ 
-            final String[] browsers = { "firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-            
-            for( int i = 0; i < browsers.length; i++ )
-            {
-            	try
-            	{
-	            	Runtime.getRuntime().exec( new String[] { browsers[ i ], url.toString() } );
-            	}
-            	catch( IOException e )
-            	{
-            		if( i == browsers.length - 1 )
-            		{
-            			throw e;
-            		}
-            	}
-            }
+		else
+		// assume Unix or Linux
+		{
+			final String[] browsers = { "firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+
+			for( int i = 0; i < browsers.length; i++ )
+			{
+				try
+				{
+					Runtime.getRuntime().exec( new String[] { browsers[ i ], url.toString() } );
+				}
+				catch( IOException e )
+				{
+					if( i == browsers.length - 1 )
+					{
+						throw e;
+					}
+				}
+			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param args

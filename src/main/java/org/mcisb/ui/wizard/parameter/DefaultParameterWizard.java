@@ -26,9 +26,9 @@ public class DefaultParameterWizard extends Wizard
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 *
+	 * 
 	 * @param bean
 	 * @param component
 	 * @param propertyNameToKey
@@ -39,9 +39,9 @@ public class DefaultParameterWizard extends Wizard
 		addWizardComponent( new DefaultWizardComponent( bean, component, propertyNameToKey ) );
 		init();
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param propertyName
 	 * @return Object
 	 */

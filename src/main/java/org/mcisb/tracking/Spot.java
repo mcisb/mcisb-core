@@ -23,83 +23,84 @@ public class Spot implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final static String SEPARATOR = ","; //$NON-NLS-1$
-	
-    /**
+
+	/**
      * 
      */
-    private final SpotReading userValue;
-    
-    /**
+	private final SpotReading userValue;
+
+	/**
      * 
      */
-    private int row;
-    
-    /**
+	private int row;
+
+	/**
      * 
      */
-    private int column;
-    
-    /**
-     * 
-     * @param userValue
-     */
-    public Spot( final SpotReading userValue )
-    {
+	private int column;
+
+	/**
+	 * 
+	 * @param userValue
+	 */
+	public Spot( final SpotReading userValue )
+	{
 		this.userValue = userValue;
-    }
-    
-    /**
-     * 
-     * @return SpotReading
-     */
-    public SpotReading getUserValue()
-    {
-    	return userValue;
-    }
-    
-    /**
-     * 
-     * @return int
-     */
-    public int getColumn()
-    {
+	}
+
+	/**
+	 * 
+	 * @return SpotReading
+	 */
+	public SpotReading getUserValue()
+	{
+		return userValue;
+	}
+
+	/**
+	 * 
+	 * @return int
+	 */
+	public int getColumn()
+	{
 		return column;
 	}
 
-    /**
-     *
-     * @param column
-     */
+	/**
+	 * 
+	 * @param column
+	 */
 	public void setColumn( int column )
 	{
 		this.column = column;
 	}
 
-    /**
-     * 
-     * @return int
-     */
+	/**
+	 * 
+	 * @return int
+	 */
 	public int getRow()
 	{
 		return row;
 	}
 
-    /**
-     *
-     * @param row
-     */
+	/**
+	 * 
+	 * @param row
+	 */
 	public void setRow( int row )
 	{
 		this.row = row;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -24,7 +24,7 @@ public class JMenuMouseListener extends MouseAdapter
 	 * 
 	 */
 	private final JPopupMenu menu;
-	
+
 	/**
 	 * 
 	 * @param menu
@@ -33,25 +33,26 @@ public class JMenuMouseListener extends MouseAdapter
 	{
 		this.menu = menu;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
 	 */
-    @Override
+	@Override
 	public void mousePressed( final MouseEvent e )
-    {
-    	switch( e.getModifiers() )
-    	{
-           case InputEvent.BUTTON3_MASK:
-           {
-                menu.show( e.getComponent(), e.getX(), e.getY() );
-                break;
-           }
-           default:
-           {
-        	   break;
-           }
-    	}
-    }
+	{
+		switch( e.getModifiers() )
+		{
+			case InputEvent.BUTTON3_MASK:
+			{
+				menu.show( e.getComponent(), e.getX(), e.getY() );
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
 }

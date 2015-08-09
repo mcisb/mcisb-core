@@ -22,12 +22,12 @@ public class DefaultPasswordAuthenticator extends Authenticator
 	 * 
 	 */
 	private final String username;
-	
+
 	/**
 	 * 
 	 */
 	private final String password;
-	
+
 	/**
 	 * 
 	 * @param username
@@ -38,9 +38,10 @@ public class DefaultPasswordAuthenticator extends Authenticator
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.net.Authenticator#getPasswordAuthentication()
 	 */
 	@Override

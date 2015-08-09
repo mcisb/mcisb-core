@@ -18,7 +18,7 @@ import javax.swing.event.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public abstract class TableSelectionAction extends AbstractAction implements ListSelectionListener, Disposable
@@ -27,14 +27,14 @@ public abstract class TableSelectionAction extends AbstractAction implements Lis
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
-	protected final JTable table; 
-	
+	protected final JTable table;
+
 	/**
-	 *
+	 * 
 	 * @param table
 	 * @param name
 	 */
@@ -55,32 +55,35 @@ public abstract class TableSelectionAction extends AbstractAction implements Lis
 		final Collection<Object> selection = new ArrayList<>();
 		final ListSelectionModel rowSelectionModel = table.getSelectionModel();
 		final ListSelectionModel columnSelectionModel = table.getColumnModel().getSelectionModel();
-		
+
 		for( int row = 0; row < table.getRowCount(); row++ )
 		{
 			if( rowSelectionModel.isSelectedIndex( row ) )
 			{
-    			for( int column = 0; column < table.getColumnCount(); column++ )
-    			{
-    				if( columnSelectionModel.isSelectedIndex( column ) )
-        			{
-        				final Object object = table.getValueAt( row, column );
-        				
-        				if( object != null )
-        				{
-        					selection.add( object );
-        				}
-        			}
-    			}
+				for( int column = 0; column < table.getColumnCount(); column++ )
+				{
+					if( columnSelectionModel.isSelectedIndex( column ) )
+					{
+						final Object object = table.getValueAt( row, column );
+
+						if( object != null )
+						{
+							selection.add( object );
+						}
+					}
+				}
 			}
 		}
-		
+
 		return selection;
-    }
-	
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( ListSelectionEvent e )
@@ -90,10 +93,12 @@ public abstract class TableSelectionAction extends AbstractAction implements Lis
 			setEnabled( getSelection().size() > 0 );
 		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed( ActionEvent e )
@@ -104,6 +109,7 @@ public abstract class TableSelectionAction extends AbstractAction implements Lis
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -111,9 +117,9 @@ public abstract class TableSelectionAction extends AbstractAction implements Lis
 	{
 		table.getSelectionModel().removeListSelectionListener( this );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param e
 	 */
 	protected abstract void performAction( final ActionEvent e );

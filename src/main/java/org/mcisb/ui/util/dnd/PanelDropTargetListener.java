@@ -25,7 +25,7 @@ public class PanelDropTargetListener extends DefaultDropTargetListener
 	 * 
 	 */
 	private final JPanel panel;
-	
+
 	/**
 	 * 
 	 * @param panel
@@ -36,19 +36,22 @@ public class PanelDropTargetListener extends DefaultDropTargetListener
 		super( supportedClasses );
 		this.panel = panel;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.ui.util.dnd.DefaultDropTargetListener#dropComponent(java.lang.Object, java.awt.Point)
+	 * 
+	 * @see
+	 * org.mcisb.ui.util.dnd.DefaultDropTargetListener#dropComponent(java.lang
+	 * .Object, java.awt.Point)
 	 */
 	@Override
 	protected boolean dropComponent( final Object o, final Point point )
 	{
-    	panel.add( getComponent( o ), Arrays.asList( panel.getComponents() ).indexOf( panel.getComponentAt( point ) ) );
-    	panel.validate();
-    	return true;
+		panel.add( getComponent( o ), Arrays.asList( panel.getComponents() ).indexOf( panel.getComponentAt( point ) ) );
+		panel.validate();
+		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @param object
@@ -59,7 +62,7 @@ public class PanelDropTargetListener extends DefaultDropTargetListener
 	{
 		final DraggableLabel label = new DraggableLabel( object );
 		// label.setFont( Font.getFont( Font.MONOSPACED ) );
-    	label.setBorder( BorderFactory.createLineBorder( Color.GRAY ) );
+		label.setBorder( BorderFactory.createLineBorder( Color.GRAY ) );
 		return label;
 	}
 }

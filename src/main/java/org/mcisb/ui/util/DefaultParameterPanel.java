@@ -29,44 +29,44 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	protected final Map<Object,JLabel> labels = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final Map<Object,JCheckBox> checkBoxes = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final Map<Object,JList<?>> lists = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final Map<Object,JSpinner> spinners = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
 	protected final Map<Object,JTextField> textFields = new HashMap<>();
-	
+
 	/**
 	 * 
 	 */
 	private final transient Preferences preferences;
-	
+
 	/**
 	 * 
 	 */
 	private transient MouseListener mouseListener;
-	
+
 	/**
-	 *
+	 * 
 	 * @param title
 	 * @param optionsMap
 	 * @param passwordMap
@@ -78,14 +78,14 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		super( title );
 		this.preferences = preferences;
-		
+
 		int[] selectionModes = new int[ optionsMap.size() ];
 		Arrays.fill( selectionModes, selectionMode );
 		init( optionsMap, passwordMap, selectionModes, selectable );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param title
 	 * @param optionsMap
 	 * @param preferences
@@ -95,7 +95,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		this( title, optionsMap, null, ListSelectionModel.SINGLE_SELECTION, preferences, selectable );
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -107,7 +107,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		this( title, optionsMap, passwordMap, ListSelectionModel.SINGLE_SELECTION, preferences, true );
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -118,7 +118,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		this( title, optionsMap, null, ListSelectionModel.SINGLE_SELECTION, preferences, true );
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -128,7 +128,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		this( title, optionsMap, null, ListSelectionModel.SINGLE_SELECTION, null, true );
 	}
-	
+
 	/**
 	 * 
 	 * @param key
@@ -138,11 +138,11 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		JCheckBox checkBox = checkBoxes.get( key );
 		JSpinner spinner = spinners.get( key );
-		
+
 		if( checkBox != null )
 		{
 			JList<?> list = lists.get( key );
-			
+
 			if( list == null )
 			{
 				return new Boolean[] { Boolean.valueOf( checkBox.isSelected() ) };
@@ -153,7 +153,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 				if( list.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION )
 				{
 					Object selectedValue = list.getSelectedValue();
-					
+
 					if( selectedValue != null )
 					{
 						return new Object[] { selectedValue };
@@ -174,12 +174,13 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 			JTextField textField = textFields.get( key );
 			return new Object[] { textField.getText() };
 		}
-		
+
 		return new Object[ 0 ];
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
 	@Override
@@ -190,7 +191,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 			final Map.Entry<Object,JCheckBox> entry = iterator.next();
 			final JCheckBox checkBox = entry.getValue();
 			final ItemListener[] itemListeners = checkBox.getItemListeners();
-			
+
 			for( int i = 0; i < itemListeners.length; i++ )
 			{
 				checkBox.removeItemListener( itemListeners[ i ] );
@@ -201,53 +202,56 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 				preferences.putBoolean( entry.getKey().toString(), checkBox.isSelected() );
 			}
 		}
-		
+
 		for( Iterator<Map.Entry<Object,JList<?>>> iterator = lists.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<Object,JList<?>> entry = iterator.next();
 			final JList<?> list = entry.getValue();
 			list.getSelectionModel().removeListSelectionListener( this );
-			
+
 			if( !list.isEnabled() )
 			{
 				list.clearSelection();
 			}
-			
+
 			if( preferences != null )
 			{
 				preferences.put( entry.getKey().toString(), Arrays.toString( list.getSelectedIndices() ) );
 			}
 		}
-		
+
 		for( Iterator<Map.Entry<Object,JSpinner>> iterator = spinners.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<Object,JSpinner> entry = iterator.next();
 			final JSpinner spinner = entry.getValue();
 			spinner.removeChangeListener( this );
-			
+
 			if( preferences != null )
 			{
 				preferences.put( entry.getKey().toString(), spinner.getValue().toString() );
 			}
 		}
-		
+
 		for( Iterator<Map.Entry<Object,JTextField>> iterator = textFields.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<Object,JTextField> entry = iterator.next();
 			final JTextField textField = entry.getValue();
 			textField.getDocument().removeDocumentListener( this );
 			textField.removeMouseListener( getMouseListener() );
-			
+
 			if( !( textField instanceof JPasswordField ) && preferences != null )
 			{
 				preferences.put( entry.getKey().toString(), textField.getText() );
 			}
 		}
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * .ListSelectionEvent)
 	 */
 	@Override
 	public void valueChanged( @SuppressWarnings("unused") final ListSelectionEvent e )
@@ -255,9 +259,11 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 		setValid();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void changedUpdate( @SuppressWarnings("unused") final DocumentEvent e )
@@ -265,9 +271,11 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 		setValid();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void insertUpdate( @SuppressWarnings("unused") final DocumentEvent e )
@@ -275,26 +283,31 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 		setValid();
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent)
+	 * 
+	 * @see javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.
+	 * DocumentEvent)
 	 */
 	@Override
 	public void removeUpdate( @SuppressWarnings("unused") final DocumentEvent e )
 	{
 		setValid();
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
-	 * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
+	 * 
+	 * @see
+	 * javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent
+	 * )
 	 */
 	@Override
 	public void stateChanged( @SuppressWarnings("unused") final ChangeEvent e )
 	{
 		setValid();
 	}
-	
+
 	/**
 	 * 
 	 * @param key
@@ -304,10 +317,10 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	{
 		checkBoxes.get( key ).setSelected( selected );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param key
 	 * @param enabled
 	 */
@@ -325,31 +338,31 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 		for( Iterator<JList<?>> iterator = lists.values().iterator(); iterator.hasNext(); )
 		{
 			JList<?> list = iterator.next();
-			
+
 			if( list.isEnabled() && list.getSelectedValue() == null )
 			{
 				setValid( false );
 				return;
 			}
 		}
-		
+
 		for( Iterator<JTextField> iterator = textFields.values().iterator(); iterator.hasNext(); )
 		{
 			JTextField textField = iterator.next();
 			String text = textField.getText();
-			
+
 			if( text == null || text.getBytes().length == 0 )
 			{
 				setValid( false );
 				return;
 			}
 		}
-		
+
 		setValid( true );
 	}
 
 	/**
-	 *
+	 * 
 	 * @param optionsMap
 	 * @param passwordMap
 	 * @param selectionModes
@@ -358,23 +371,23 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	private void init( final Map<Object,Object> optionsMap, final Map<Object,Boolean> passwordMap, final int[] selectionModes, final boolean selectable )
 	{
 		int y = 0;
-		
+
 		for( Iterator<Map.Entry<Object,Object>> iterator = optionsMap.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<Object,Object> entry = iterator.next();
 			final Object key = entry.getKey();
-			
+
 			final boolean password = ( passwordMap == null ) ? false : ( ( passwordMap.get( key ) == null ) ? false : passwordMap.get( key ).booleanValue() );
 			final boolean lastY = ( y == optionsMap.size() - 1 );
-			
+
 			final java.util.List<Component> components = new ArrayList<>();
-			
+
 			final Object options = entry.getValue();
-			
+
 			Vector<?> checkBoxOptions = null;
 			SpinnerModel spinnerModel = null;
 			JLabel label = null;
-			
+
 			// If options instanceof Vector: JCheckBox mode
 			if( options instanceof Vector<?> )
 			{
@@ -384,19 +397,19 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 			{
 				spinnerModel = (SpinnerModel)options;
 			}
-			
+
 			if( checkBoxOptions != null )
 			{
 				JCheckBox checkBox = null;
-				
+
 				if( checkBoxOptions.size() > 0 )
 				{
 					final String preference = preferences == null ? null : preferences.get( key.toString(), null );
 					final int[] selectedIndices = CollectionUtils.toIntArray( preference );
-					
+
 					checkBox = new JCheckBox( key.toString() );
 					checkBox.setSelected( !selectable || selectedIndices.length > 0 );
-					
+
 					final JList<?> list = new JList<>( checkBoxOptions );
 					list.setEnabled( !selectable || checkBox.isSelected() );
 					list.setSelectedIndices( selectedIndices );
@@ -404,51 +417,54 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 					list.getSelectionModel().addListSelectionListener( this );
 
 					lists.put( key, list );
-					
+
 					if( selectable )
 					{
 						checkBox.addItemListener( new ItemListener()
 						{
-							/* 
+							/*
 							 * (non-Javadoc)
-							 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
+							 * 
+							 * @see
+							 * java.awt.event.ItemListener#itemStateChanged(
+							 * java.awt.event.ItemEvent)
 							 */
 							@Override
 							public void itemStateChanged( ItemEvent e )
 							{
 								boolean enabled = e.getStateChange() == ItemEvent.SELECTED;
-								
+
 								if( enabled && getSelectedValues( key ).length == 0 )
 								{
 									final int FIRST = 0;
 									list.setSelectedIndex( FIRST );
 								}
-								
+
 								list.setEnabled( enabled );
 								setValid();
 							}
 						} );
 					}
-					
+
 					components.add( checkBox );
 					components.add( new JScrollPane( list ) );
-					
+
 					list.ensureIndexIsVisible( CollectionUtils.getFirst( selectedIndices ) );
 				}
 				else
 				{
 					checkBox = new JCheckBox();
-					
+
 					if( preferences != null )
 					{
 						checkBox.setSelected( preferences.getBoolean( key.toString(), false ) );
 					}
-					
+
 					label = new JLabel( key.toString() );
 					components.add( label );
 					components.add( checkBox );
 				}
-				
+
 				checkBox.setOpaque( false );
 				checkBoxes.put( key, checkBox );
 			}
@@ -460,9 +476,9 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 				spinners.put( key, spinner );
 				components.add( label );
 				components.add( spinner );
-				
+
 				final String value = preferences == null ? null : preferences.get( key.toString(), null );
-				
+
 				if( value != null )
 				{
 					if( spinnerModel instanceof SpinnerNumberModel )
@@ -484,7 +500,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 				textFields.put( key, textField );
 				components.add( label );
 				components.add( textField );
-				
+
 				if( !password && preferences != null )
 				{
 					textField.setText( preferences.get( key.toString(), null ) );
@@ -497,18 +513,18 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 				final Object component = components.get( x );
 				add( (Component)component, x, y, lastX, lastX, ( component instanceof JScrollPane ) || lastY, lastY, ( component instanceof JScrollPane ) ? GridBagConstraints.BOTH : ( lastX ? GridBagConstraints.HORIZONTAL : GridBagConstraints.NONE ) );
 			}
-			
+
 			if( label != null )
 			{
 				labels.put( key, label );
 			}
-			
+
 			y++;
 		}
-		
+
 		setValid();
 	}
-	
+
 	/**
 	 * 
 	 * @return MouseListener
@@ -519,7 +535,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 		{
 			mouseListener = new JMenuMouseListener( new JTextComponentMenu() );
 		}
-		
+
 		return mouseListener;
 	}
 }

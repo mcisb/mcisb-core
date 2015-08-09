@@ -30,7 +30,7 @@ public class HyperlinkLabel extends JLabel implements Disposable
 	 * 
 	 */
 	private final UrlMouseListener urlMouseListener;
-	
+
 	/**
 	 * 
 	 * @param text
@@ -41,16 +41,17 @@ public class HyperlinkLabel extends JLabel implements Disposable
 	public HyperlinkLabel( final String text, final Icon icon, int horizontalAlignment, final URL url )
 	{
 		super( text, icon, horizontalAlignment );
-		
+
 		final int DEFAULT_ICON_TEXT_GAP = 8;
 		setIconTextGap( DEFAULT_ICON_TEXT_GAP );
 		setOpaque( false );
 		urlMouseListener = new UrlMouseListener( url );
 		addMouseListener( urlMouseListener );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override

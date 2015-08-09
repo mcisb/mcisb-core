@@ -16,11 +16,11 @@ import org.junit.*;
 // import org.mcisb.util.math.octave.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class CalculatorImplTest
-{	
+{
 	/**
 	 * 
 	 */
@@ -29,7 +29,7 @@ public class CalculatorImplTest
 	{
 		// getResults( MatlabImpl.getInstance() );
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -38,27 +38,17 @@ public class CalculatorImplTest
 	{
 		// getResults( OctaveImpl.getInstance() );
 	}
-	
+
 	/**
 	 * 
 	 * @param calculator
 	 * @throws Exception
 	 */
 	/*
-	private void getResults( final CalculatorImpl calculator ) throws Exception
-	{
-		try
-		{
-			final java.util.Map<String,Double> results = calculator.getResults( "A=sqrt(5)" ); //$NON-NLS-1$
-			Assert.assertEquals( results.get( "A" ).doubleValue(), 2.2361, 0.0 ); //$NON-NLS-1$
-		}
-		finally
-		{
-			if( calculator != null )
-			{
-				calculator.close();
-			}
-		}
-	}
-	*/
+	 * private void getResults( final CalculatorImpl calculator ) throws
+	 * Exception { try { final java.util.Map<String,Double> results =
+	 * calculator.getResults( "A=sqrt(5)" ); //$NON-NLS-1$ Assert.assertEquals(
+	 * results.get( "A" ).doubleValue(), 2.2361, 0.0 ); //$NON-NLS-1$ } finally
+	 * { if( calculator != null ) { calculator.close(); } } }
+	 */
 }

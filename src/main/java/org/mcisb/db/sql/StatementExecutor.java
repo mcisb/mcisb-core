@@ -20,12 +20,12 @@ import org.mcisb.util.*;
  * @author Neil Swainston
  */
 public class StatementExecutor implements Disposable
-{	
+{
 	/**
 	 * 
 	 */
 	protected final SqlUtils sqlUtils = new SqlUtils();
-	
+
 	/**
 	 * 
 	 */
@@ -35,14 +35,14 @@ public class StatementExecutor implements Disposable
 	 * 
 	 */
 	protected final Connection connection;
-	
+
 	/**
 	 * 
 	 */
 	private final String schema;
-	
+
 	/**
-	 *
+	 * 
 	 * @param connection
 	 * @param schema
 	 * @throws SQLException
@@ -51,7 +51,7 @@ public class StatementExecutor implements Disposable
 	{
 		this( connection, true, schema );
 	}
-	
+
 	/**
 	 * 
 	 * @param connection
@@ -61,9 +61,9 @@ public class StatementExecutor implements Disposable
 	{
 		this( connection, false, null );
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param connection
 	 * @param useDatabaseLinker
 	 * @param schema
@@ -75,7 +75,7 @@ public class StatementExecutor implements Disposable
 		this.databaseLinker = ( useDatabaseLinker ) ? new DatabaseLinker( getKeyMap() ) : null;
 		this.schema = schema;
 	}
-	
+
 	/**
 	 * 
 	 * @param tableName
@@ -87,19 +87,19 @@ public class StatementExecutor implements Disposable
 		final StringBuffer statement = new StringBuffer( "INSERT INTO " ); //$NON-NLS-1$
 		statement.append( getSchema() + tableName );
 		statement.append( " VALUES (" ); //$NON-NLS-1$
-		
+
 		for( Iterator<?> iterator = values.iterator(); iterator.hasNext(); )
 		{
 			statement.append( SqlUtils.getValueString( iterator.next() ) );
 			statement.append( "," ); //$NON-NLS-1$
 		}
-		
+
 		statement.setLength( statement.length() - 1 );
 		statement.append( ");" ); //$NON-NLS-1$
-		
+
 		executeUpdate( statement.toString() );
 	}
-	
+
 	/**
 	 * 
 	 * @param nameValuePairs
@@ -109,28 +109,28 @@ public class StatementExecutor implements Disposable
 	public void update( final Map<String,Object> nameValuePairs, final Collection<String> conditions ) throws SQLException
 	{
 		final Collection<String> tableNames = getTableNames( nameValuePairs.keySet() );
-		
+
 		final StringBuffer statement = new StringBuffer( "UPDATE " ); //$NON-NLS-1$
 		statement.append( getSchema() + CollectionUtils.getFirst( tableNames ) );
 		statement.append( " SET " ); //$NON-NLS-1$
-		
+
 		Collection<String> updates = new ArrayList<>();
-		
+
 		for( Iterator<Map.Entry<String,Object>> iterator = nameValuePairs.entrySet().iterator(); iterator.hasNext(); )
 		{
 			final Map.Entry<String,Object> entry = iterator.next();
 			final String column = entry.getKey().substring( entry.getKey().lastIndexOf( SqlUtils.FIELD_SEPARATOR ) + 1 );
 			updates.add( column + "=" + SqlUtils.getValueString( entry.getValue() ) ); //$NON-NLS-1$
 		}
-		
+
 		statement.append( SqlUtils.getValuesString( updates ) );
 		statement.append( " WHERE " ); //$NON-NLS-1$
 		statement.append( getTableLinks( tableNames, conditions ) );
 		statement.append( ";" ); //$NON-NLS-1$
-		
+
 		executeUpdate( statement.toString() );
 	}
-	
+
 	/**
 	 * 
 	 * @param columnNamesRequested
@@ -141,7 +141,7 @@ public class StatementExecutor implements Disposable
 	{
 		return getValues( columnNamesRequested, new ArrayList<String>() );
 	}
-	
+
 	/**
 	 * 
 	 * @param columnNamesRequested
@@ -153,7 +153,7 @@ public class StatementExecutor implements Disposable
 	{
 		return getValues( columnNamesRequested, new ArrayList<String>(), distinct );
 	}
-	
+
 	/**
 	 * 
 	 * @param columnNamesRequested
@@ -165,7 +165,7 @@ public class StatementExecutor implements Disposable
 	{
 		return getValues( columnNamesRequested, conditions, false );
 	}
-	
+
 	/**
 	 * 
 	 * @param columnNamesRequested
@@ -178,10 +178,10 @@ public class StatementExecutor implements Disposable
 	{
 		return getValuesFromStatement( getQuery( columnNamesRequested, conditions, distinct ), new ArrayList<String>() );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param tableName
 	 * @param conditions
 	 * @param columnNamesReturned
@@ -192,11 +192,11 @@ public class StatementExecutor implements Disposable
 	{
 		final Collection<String> tableNames = getTableNames( conditions );
 		final Collection<String> tableLinks = getTableLinks( conditions );
-		
+
 		for( Iterator<String> iterator = tableLinks.iterator(); iterator.hasNext(); )
 		{
 			final String[] conditionTags = iterator.next().split( "=" ); //$NON-NLS-1$
-			
+
 			if( conditionTags[ 0 ].contains( "." ) ) //$NON-NLS-1$
 			{
 				tableNames.add( conditionTags[ 0 ].substring( 0, conditionTags[ 0 ].lastIndexOf( "." ) ) ); //$NON-NLS-1$
@@ -206,33 +206,33 @@ public class StatementExecutor implements Disposable
 				tableNames.add( conditionTags[ 1 ].substring( 0, conditionTags[ 1 ].lastIndexOf( "." ) ) ); //$NON-NLS-1$
 			}
 		}
-		
+
 		tableNames.add( getSchema() + tableName );
-		
+
 		// Select all:
 		final StringBuffer query = new StringBuffer( "SELECT * FROM " ); //$NON-NLS-1$
 		query.append( SqlUtils.getValuesString( tableNames ) );
 
 		final String SEPARATOR = " AND "; //$NON-NLS-1$
-		
+
 		tableLinks.addAll( conditions );
-		
+
 		final String tableLinksString = SqlUtils.concatenate( tableLinks, SEPARATOR );
-		
+
 		if( tableLinksString.length() > 0 )
 		{
 			query.append( " WHERE " ); //$NON-NLS-1$
 			query.append( tableLinksString );
 		}
-		
+
 		query.append( ";" ); //$NON-NLS-1$
-	  
+
 		return getValuesFromStatement( query.toString().trim(), columnNamesReturned );
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @param preparedStatement
 	 * @param columnNamesReturned
 	 * @return List
@@ -240,30 +240,31 @@ public class StatementExecutor implements Disposable
 	 */
 	public static List<List<Object>> getValuesFromStatement( final PreparedStatement preparedStatement, final List<String> columnNamesReturned ) throws SQLException
 	{
-		try( final ResultSet resultSet = preparedStatement.executeQuery() )
+		try ( final ResultSet resultSet = preparedStatement.executeQuery() )
 		{
 			columnNamesReturned.clear();
 			columnNamesReturned.addAll( getColumnNames( resultSet ) );
 			final List<List<Object>> values = new ArrayList<>();
-	
+
 			while( resultSet.next() )
 			{
 				final List<Object> row = new ArrayList<>();
-				
+
 				for( int i = 0; i < columnNamesReturned.size(); i++ )
 				{
 					row.add( resultSet.getObject( i + 1 ) );
 				}
-				
+
 				values.add( row );
 			}
-		  
+
 			return values;
 		}
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
 	@Override
@@ -273,7 +274,7 @@ public class StatementExecutor implements Disposable
 	}
 
 	/**
-	 *
+	 * 
 	 * @param sqlStatement
 	 * @param columnNamesReturned
 	 * @return List
@@ -281,7 +282,7 @@ public class StatementExecutor implements Disposable
 	 */
 	private List<List<Object>> getValuesFromStatement( final String sqlStatement, final List<String> columnNamesReturned ) throws SQLException
 	{
-		try( final PreparedStatement statement = connection.prepareStatement( sqlStatement ) )
+		try ( final PreparedStatement statement = connection.prepareStatement( sqlStatement ) )
 		{
 			return getValuesFromStatement( statement, columnNamesReturned );
 		}
@@ -299,7 +300,7 @@ public class StatementExecutor implements Disposable
 		final String DISTINCT = "DISTINCT "; //$NON-NLS-1$
 		final String EMPTY_STRING = ""; //$NON-NLS-1$
 		final Collection<String> potentialTableNames = new LinkedHashSet<>();
-		
+
 		if( columnNamesRequested != null )
 		{
 			potentialTableNames.addAll( columnNamesRequested );
@@ -308,12 +309,12 @@ public class StatementExecutor implements Disposable
 		{
 			potentialTableNames.addAll( conditions );
 		}
-		
+
 		Collection<String> tableNames = getTableNames( potentialTableNames );
-		
+
 		final StringBuffer query = new StringBuffer( "SELECT " ); //$NON-NLS-1$
 		query.append( distinct ? DISTINCT : EMPTY_STRING );
-		
+
 		if( columnNamesRequested == null )
 		{
 			// Select all:
@@ -328,7 +329,7 @@ public class StatementExecutor implements Disposable
 			}
 			query.setLength( query.length() - 1 );
 		}
-		
+
 		final String tableLinks = getTableLinks( tableNames, conditions );
 
 		if( tableLinks.length() > 0 )
@@ -357,10 +358,10 @@ public class StatementExecutor implements Disposable
 		}
 
 		query.append( ";" ); //$NON-NLS-1$
-		
+
 		return query.toString();
 	}
-	
+
 	/**
 	 * 
 	 * @return Collection
@@ -370,24 +371,24 @@ public class StatementExecutor implements Disposable
 	{
 		final int TABLE_NAME_COLUMN_INDEX = 3;
 		final Collection<String> tableNames = new ArrayList<>();
-		
+
 		final DatabaseMetaData databaseMetaData = connection.getMetaData();
 
-        // Specify the type of object; in this case we want tables:
+		// Specify the type of object; in this case we want tables:
 		final String[] types = { "TABLE" }; //$NON-NLS-1$
-		
-		try( final ResultSet resultSet = databaseMetaData.getTables( null, null, "%", types ) ) //$NON-NLS-1$
+
+		try ( final ResultSet resultSet = databaseMetaData.getTables( null, null, "%", types ) ) //$NON-NLS-1$
 		{
-	        // Get the table names
-	        while( resultSet.next() )
-	        {
-	        	tableNames.add( getSchema() + resultSet.getString( TABLE_NAME_COLUMN_INDEX ) );
-	        }
+			// Get the table names
+			while( resultSet.next() )
+			{
+				tableNames.add( getSchema() + resultSet.getString( TABLE_NAME_COLUMN_INDEX ) );
+			}
 		}
-		
+
 		return tableNames;
 	}
-	
+
 	/**
 	 * 
 	 * @return KeyMap
@@ -397,24 +398,24 @@ public class StatementExecutor implements Disposable
 	{
 		final KeyMap keyMap = new KeyMap();
 		final DatabaseMetaData databaseMetaData = connection.getMetaData();
-		
+
 		for( Iterator<String> iterator = getTableNames().iterator(); iterator.hasNext(); )
 		{
-			try( final ResultSet rs = databaseMetaData.getImportedKeys( null, null, iterator.next() ) )
+			try ( final ResultSet rs = databaseMetaData.getImportedKeys( null, null, iterator.next() ) )
 			{
-	            while( rs.next() )
-	            {
-	                keyMap.add( rs.getString( "pktable_name" ), rs.getString( "pkcolumn_name" ), rs.getString( "fktable_name" ), rs.getString( "fkcolumn_name" ) ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-	            }
+				while( rs.next() )
+				{
+					keyMap.add( rs.getString( "pktable_name" ), rs.getString( "pkcolumn_name" ), rs.getString( "fktable_name" ), rs.getString( "fkcolumn_name" ) ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				}
 			}
 		}
-		
+
 		return keyMap;
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 * @return String
 	 */
 	private String getSchema()
@@ -422,7 +423,7 @@ public class StatementExecutor implements Disposable
 		final String EMPTY_STRING = ""; //$NON-NLS-1$
 		return ( schema == null ) ? EMPTY_STRING : schema + SqlUtils.FIELD_SEPARATOR;
 	}
-	
+
 	/**
 	 * 
 	 * @param sqlStatement
@@ -431,12 +432,12 @@ public class StatementExecutor implements Disposable
 	 */
 	private int executeUpdate( final String sqlStatement ) throws SQLException
 	{
-		try( final Statement statement = connection.createStatement() )
+		try ( final Statement statement = connection.createStatement() )
 		{
 			return statement.executeUpdate( sqlStatement );
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param resultSet
@@ -446,36 +447,36 @@ public class StatementExecutor implements Disposable
 	private static List<String> getColumnNames( final ResultSet resultSet ) throws SQLException
 	{
 		final List<String> columnNames = new ArrayList<>();
-		
+
 		final ResultSetMetaData metaData = resultSet.getMetaData();
-		
+
 		for( int i = 0; i < metaData.getColumnCount(); i++ )
 		{
 			columnNames.add( metaData.getColumnName( i + 1 ) );
 		}
-		
+
 		return columnNames;
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param fields
 	 * @return Collection
 	 */
 	private Collection<String> getTableNames( final Collection<String> fields )
 	{
 		final Set<String> tableNames = new LinkedHashSet<>();
-		
+
 		for( Iterator<String> iterator = fields.iterator(); iterator.hasNext(); )
 		{
 			tableNames.add( getSchema() + new StringTokenizer( iterator.next(), SqlUtils.FIELD_SEPARATOR ).nextToken() );
 		}
-		
+
 		return tableNames;
 	}
 
 	/**
-	 *
+	 * 
 	 * @param tableNames
 	 * @param conditions
 	 * @return String
@@ -483,31 +484,31 @@ public class StatementExecutor implements Disposable
 	private String getTableLinks( final Collection<String> tableNames, final Collection<String> conditions )
 	{
 		final Collection<String> links = new LinkedHashSet<>();
-		
+
 		if( conditions != null )
 		{
 			links.addAll( conditions );
 		}
-		
+
 		for( Iterator<String> sourceIterator = tableNames.iterator(); sourceIterator.hasNext(); )
 		{
 			final Object sourceTable = sourceIterator.next();
-			
+
 			for( Iterator<String> targetIterator = tableNames.iterator(); targetIterator.hasNext(); )
 			{
 				final Object targetTable = targetIterator.next();
-				
+
 				if( !sourceTable.equals( targetTable ) )
 				{
 					links.addAll( databaseLinker.getLinks( sourceTable, targetTable ) );
 				}
 			}
 		}
-		
+
 		final String SEPARATOR = " AND "; //$NON-NLS-1$
 		return SqlUtils.concatenate( links, SEPARATOR );
 	}
-	
+
 	/**
 	 * 
 	 * @param conditions
@@ -518,18 +519,18 @@ public class StatementExecutor implements Disposable
 		final String EMPTY_STRING = ""; //$NON-NLS-1$
 		final Set<String> tableLinks = new LinkedHashSet<>();
 		final Collection<String> newConditions = new ArrayList<>();
-		
+
 		for( Iterator<String> iterator = conditions.iterator(); iterator.hasNext(); )
 		{
 			final String[] conditionTags = iterator.next().split( "=" ); //$NON-NLS-1$
-			
+
 			final String firstTag = ( ( conditionTags[ 0 ].contains( "." ) ) ? getSchema() : EMPTY_STRING ) + conditionTags[ 0 ]; //$NON-NLS-1$
 			final String secondTag = ( ( !NumberUtils.isDecimal( conditionTags[ 1 ] ) && conditionTags[ 1 ].contains( "." ) ) ? getSchema() : EMPTY_STRING ) + conditionTags[ 1 ]; //$NON-NLS-1$
 			newConditions.add( firstTag + "=" + secondTag ); //$NON-NLS-1$
 		}
-		
+
 		tableLinks.addAll( newConditions );
-		
+
 		return tableLinks;
 	}
 }

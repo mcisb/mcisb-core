@@ -18,7 +18,7 @@ import javax.xml.transform.stream.*;
 import org.mcisb.util.*;
 
 /**
- *
+ * 
  * @author Neil Swainston
  */
 public class XslTransformer
@@ -26,20 +26,20 @@ public class XslTransformer
 	/**
 	 * @param xsl
 	 * @param xml
-	 * @param os 
+	 * @param os
 	 * @throws TransformerException
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static void transform( final File xsl, final File xml, final OutputStream os ) throws TransformerException, IOException
 	{
-		try( final InputStream xslInputStream = new FileInputStream( xsl ); final InputStream xmlInputStream = new FileInputStream( xml ) )
+		try ( final InputStream xslInputStream = new FileInputStream( xsl ); final InputStream xmlInputStream = new FileInputStream( xml ) )
 		{
 			transform( xslInputStream, xmlInputStream, os, null );
 		}
 	}
-	
+
 	/**
-	 *
+	 * 
 	 * @param xslInputStream
 	 * @param xmlInputStream
 	 * @param outputStream
@@ -52,20 +52,20 @@ public class XslTransformer
 		final Source xmlSource = new StreamSource( xmlInputStream );
 		final Result outputTarget = new StreamResult( outputStream );
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		
+
 		final Transformer transformer = transformerFactory.newTransformer( xslSource );
-		
+
 		if( parameters != null )
 		{
-    		for( Iterator<Map.Entry<String,Object>> iterator = parameters.entrySet().iterator(); iterator.hasNext(); )
-    		{
-    			final Map.Entry<String,Object> entry = iterator.next();
-    			final Object value = entry.getValue();
-    			final Object parameterValue = ( value instanceof String ) ? value : ( ( value instanceof String[] ) ? CollectionUtils.getFirst( (String[])value ) : value );
-    			transformer.setParameter( entry.getKey(), parameterValue );
-    		}
+			for( Iterator<Map.Entry<String,Object>> iterator = parameters.entrySet().iterator(); iterator.hasNext(); )
+			{
+				final Map.Entry<String,Object> entry = iterator.next();
+				final Object value = entry.getValue();
+				final Object parameterValue = ( value instanceof String ) ? value : ( ( value instanceof String[] ) ? CollectionUtils.getFirst( (String[])value ) : value );
+				transformer.setParameter( entry.getKey(), parameterValue );
+			}
 		}
-		
+
 		transformer.transform( xmlSource, outputTarget );
 	}
 }

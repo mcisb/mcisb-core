@@ -27,49 +27,49 @@ public class JTextComponentMenu extends JPopupMenu implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
 	 */
 	private final static ResourceBundle resourceBundle = ResourceBundle.getBundle( "org.mcisb.ui.util.messages" ); //$NON-NLS-1$
-	
+
 	/**
 	 * 
 	 */
 	final JMenuItem cutMenuItem = new JMenuItem( resourceBundle.getString( "JTextFieldMenu.cut" ) ); //$NON-NLS-1$
-    
+
 	/**
 	 * 
 	 */
 	final JMenuItem copyMenuItem = new JMenuItem( resourceBundle.getString( "JTextFieldMenu.copy" ) ); //$NON-NLS-1$
-    
+
 	/**
 	 * 
 	 */
 	final JMenuItem pasteMenuItem = new JMenuItem( resourceBundle.getString( "JTextFieldMenu.paste" ) ); //$NON-NLS-1$
-    
-    /**
-     * 
-     * @param editable
-     */
+
+	/**
+	 * 
+	 * @param editable
+	 */
 	public JTextComponentMenu( final boolean editable )
 	{
-        cutMenuItem.addActionListener( this );
-        copyMenuItem.addActionListener( this );
-        pasteMenuItem.addActionListener( this );
-        
-        if( editable )
-        {
-        	add( cutMenuItem );
-        }
-        add( copyMenuItem );
-        
-        if( editable )
-        {
-        	add( pasteMenuItem );
-        }
+		cutMenuItem.addActionListener( this );
+		copyMenuItem.addActionListener( this );
+		pasteMenuItem.addActionListener( this );
+
+		if( editable )
+		{
+			add( cutMenuItem );
+		}
+		add( copyMenuItem );
+
+		if( editable )
+		{
+			add( pasteMenuItem );
+		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -77,33 +77,35 @@ public class JTextComponentMenu extends JPopupMenu implements ActionListener
 	{
 		this( true );
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
-    @Override
+	@Override
 	public void actionPerformed( final ActionEvent evt )
-    {
-        final Object source = evt.getSource();
-        final Component component = getInvoker();
-        
-        if( component instanceof JTextComponent )
-        {
-	        final JTextComponent textComponent = (JTextComponent)component;
-	        
-	        if( source == cutMenuItem )
-	        {
-	        	textComponent.cut();
-	        }
-	        if( source == copyMenuItem )
-	        {
-	        	textComponent.copy();
-	        }
-	        if( source == pasteMenuItem )
-	        {
-	        	textComponent.paste();
-	        }
-        }
+	{
+		final Object source = evt.getSource();
+		final Component component = getInvoker();
+
+		if( component instanceof JTextComponent )
+		{
+			final JTextComponent textComponent = (JTextComponent)component;
+
+			if( source == cutMenuItem )
+			{
+				textComponent.cut();
+			}
+			if( source == copyMenuItem )
+			{
+				textComponent.copy();
+			}
+			if( source == pasteMenuItem )
+			{
+				textComponent.paste();
+			}
+		}
 	}
 }

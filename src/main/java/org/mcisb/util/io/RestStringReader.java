@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  * @author neilswainston
- *
+ * 
  */
 public class RestStringReader extends RestReader
 {
@@ -21,25 +21,27 @@ public class RestStringReader extends RestReader
 		super( url, parameters );
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
-	 * @see org.mcisb.gwt.server.RestReader#processInputStream(java.io.InputStream)
+	 * 
+	 * @see
+	 * org.mcisb.gwt.server.RestReader#processInputStream(java.io.InputStream)
 	 */
 	@Override
 	protected Object processInputStream( final InputStream is ) throws IOException
 	{
-		try( InputStreamReader reader = new InputStreamReader( is ) )
+		try ( InputStreamReader reader = new InputStreamReader( is ) )
 		{
 			final int BUFFER_SIZE = 1024 * 8;
 			final char[] buffer = new char[ BUFFER_SIZE ];
 			final StringBuilder stringBuilder = new StringBuilder();
 			int read = -1;
-			
+
 			while( ( read = reader.read( buffer ) ) != -1 )
 			{
 				stringBuilder.append( buffer, 0, read );
 			}
-			
+
 			return stringBuilder.toString();
 		}
 	}
