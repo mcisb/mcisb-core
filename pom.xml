@@ -3,7 +3,19 @@
   <groupId>org.mcisb</groupId>
   <artifactId>mcisb-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mcisb-core</name>
+  <name>mcisb-core</name>  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <dependencies>
   	<dependency>
 		<groupId>commons-net</groupId>
@@ -46,6 +58,9 @@
   		<version>RELEASE</version>
   	</dependency>
   </dependencies>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <organization>
   	<name>MCISB</name>
   	<url>http://www.mcisb.org</url>
