@@ -77,7 +77,8 @@ public class StreamReaderTest
 		@SuppressWarnings("resource")
 		InputStream fis = null;
 
-		try ( final InputStream is = getInputStream(); final OutputStream os = ( file == null ) ? new ByteArrayOutputStream() : new FileOutputStream( file ) )
+		try ( final InputStream is = getInputStream(); @SuppressWarnings("resource")
+		final OutputStream os = ( file == null ) ? new ByteArrayOutputStream() : new FileOutputStream( file ) )
 		{
 			final StreamReader reader = new StreamReader( is, os );
 			final Thread thread = new Thread( reader );
