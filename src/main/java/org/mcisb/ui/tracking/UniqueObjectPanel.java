@@ -12,6 +12,7 @@
 package org.mcisb.ui.tracking;
 
 import javax.swing.*;
+
 import org.mcisb.ui.util.*;
 import org.mcisb.ui.util.list.*;
 import org.mcisb.util.*;
@@ -48,6 +49,7 @@ public abstract class UniqueObjectPanel extends ObjectParameterPanel
 	 * 
 	 * @see org.mcisb.ui.tracking.Manager#newObject()
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void newObject() throws Exception
 	{

@@ -13,8 +13,10 @@ package org.mcisb.util;
 
 import java.io.*;
 import java.util.*;
+
 import javax.xml.parsers.*;
 import javax.xml.stream.*;
+
 import org.w3c.dom.*;
 import org.xml.sax.*;
 
@@ -90,6 +92,7 @@ public class CollectionUtils
 	 * @param objects
 	 * @return Object
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getFirst( final Collection<T> objects )
 	{
 		return (T)getFirst( objects.toArray() );

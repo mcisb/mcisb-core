@@ -13,8 +13,10 @@ package org.mcisb.ui.tracking;
 
 import java.awt.*;
 import java.util.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
+
 import org.mcisb.ui.util.*;
 import org.mcisb.util.*;
 
@@ -44,6 +46,7 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	 * @param title
 	 * @param labelNames
 	 */
+	@SuppressWarnings("unchecked")
 	public LabelPanel( final String title, final String[] labelNames )
 	{
 		super( title, new JList<>( new DefaultListModel<>() ), false );
@@ -118,6 +121,7 @@ public class LabelPanel extends ObjectParameterPanel implements SampleParameterP
 	@Override
 	public void setSamples( Collection<?> samples )
 	{
+		@SuppressWarnings("unchecked")
 		final DefaultListModel<Object> model = ( (DefaultListModel<Object>)sampleList.getModel() );
 		model.clear();
 
