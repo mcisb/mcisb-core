@@ -72,13 +72,12 @@ public class StreamReaderTest
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
+	@SuppressWarnings("resource")
 	private static void read( final File file ) throws IOException, InterruptedException
 	{
-		@SuppressWarnings("resource")
 		InputStream fis = null;
 
-		try ( final InputStream is = getInputStream(); @SuppressWarnings("resource")
-		final OutputStream os = ( file == null ) ? new ByteArrayOutputStream() : new FileOutputStream( file ) )
+		try ( final InputStream is = getInputStream(); final OutputStream os = ( file == null ) ? new ByteArrayOutputStream() : new FileOutputStream( file ) )
 		{
 			final StreamReader reader = new StreamReader( is, os );
 			final Thread thread = new Thread( reader );
