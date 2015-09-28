@@ -78,7 +78,6 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public void dispose() throws Exception
 	{

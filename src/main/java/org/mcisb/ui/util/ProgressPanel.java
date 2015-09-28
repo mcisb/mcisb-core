@@ -141,7 +141,6 @@ public abstract class ProgressPanel extends ParameterPanel implements PropertyCh
 	 * 
 	 * @see org.mcisb.ui.util.Disposable#dispose()
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public void dispose() throws Exception
 	{

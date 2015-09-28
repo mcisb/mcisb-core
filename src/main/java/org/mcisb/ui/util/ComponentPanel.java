@@ -51,7 +51,6 @@ public class ComponentPanel extends ParameterPanel
 	 * 
 	 * @see org.mcisb.util.Disposable#dispose()
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public void dispose() throws Exception
 	{

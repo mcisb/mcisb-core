@@ -109,7 +109,6 @@ public abstract class AbstractTask implements Runnable, Task, PropertyChangeList
 	 * 
 	 * @see org.mcisb.util.Task#cancel()
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public void cancel() throws Exception
 	{
