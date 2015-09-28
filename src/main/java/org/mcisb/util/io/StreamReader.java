@@ -13,9 +13,8 @@ package org.mcisb.util.io;
 
 import java.io.*;
 import java.net.*;
-import java.nio.*;
-import java.nio.channels.*;
 import java.util.zip.*;
+import org.apache.commons.io.*;
 
 /**
  * 
@@ -85,18 +84,9 @@ public class StreamReader implements Runnable
 	 */
 	public void read() throws IOException
 	{
-		final int BUFFER_SIZE = 1048576;
-		final ByteBuffer buffer = ByteBuffer.allocate( BUFFER_SIZE );
-
-		try ( final ReadableByteChannel source = Channels.newChannel( is ); final WritableByteChannel destination = Channels.newChannel( os ) )
-		{
-			while( source.read( buffer ) > 0 )
-			{
-				buffer.flip();
-				destination.write( buffer );
-				buffer.clear();
-			}
-		}
+		IOUtils.copy( is, os );
+		is.close();
+		os.close();
 	}
 
 	/*
