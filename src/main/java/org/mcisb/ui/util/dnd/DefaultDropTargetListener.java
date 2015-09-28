@@ -64,7 +64,7 @@ public abstract class DefaultDropTargetListener extends PropertyChangeSupported 
 	 * java.awt.dnd.DropTargetListener#dragExit(java.awt.dnd.DropTargetEvent)
 	 */
 	@Override
-	public void dragExit( @SuppressWarnings("unused") final DropTargetEvent dte )
+	public void dragExit( final DropTargetEvent dte )
 	{
 		// No implementation
 	}

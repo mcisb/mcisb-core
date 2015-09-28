@@ -95,7 +95,7 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	 * )
 	 */
 	@Override
-	public void dragEnter( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
+	public void dragEnter( final DragSourceDragEvent dsde )
 	{
 		// No implementation.
 	}
@@ -107,7 +107,7 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	 * java.awt.dnd.DragSourceListener#dragExit(java.awt.dnd.DragSourceEvent)
 	 */
 	@Override
-	public void dragExit( @SuppressWarnings("unused") final DragSourceEvent dse )
+	public void dragExit( final DragSourceEvent dse )
 	{
 		// No implementation.
 	}
@@ -120,7 +120,7 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	 * )
 	 */
 	@Override
-	public void dragOver( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
+	public void dragOver( final DragSourceDragEvent dsde )
 	{
 		// No implementation.
 	}
@@ -132,7 +132,7 @@ public abstract class DraggablePanel extends JPanel implements DragSourceListene
 	 * DragSourceDragEvent)
 	 */
 	@Override
-	public void dropActionChanged( @SuppressWarnings("unused") final DragSourceDragEvent dsde )
+	public void dropActionChanged( final DragSourceDragEvent dsde )
 	{
 		// No implementation.
 	}

@@ -254,7 +254,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * .ListSelectionEvent)
 	 */
 	@Override
-	public void valueChanged( @SuppressWarnings("unused") final ListSelectionEvent e )
+	public void valueChanged( final ListSelectionEvent e )
 	{
 		setValid();
 	}
@@ -266,7 +266,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * DocumentEvent)
 	 */
 	@Override
-	public void changedUpdate( @SuppressWarnings("unused") final DocumentEvent e )
+	public void changedUpdate( final DocumentEvent e )
 	{
 		setValid();
 	}
@@ -278,7 +278,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * DocumentEvent)
 	 */
 	@Override
-	public void insertUpdate( @SuppressWarnings("unused") final DocumentEvent e )
+	public void insertUpdate( final DocumentEvent e )
 	{
 		setValid();
 	}
@@ -290,7 +290,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * DocumentEvent)
 	 */
 	@Override
-	public void removeUpdate( @SuppressWarnings("unused") final DocumentEvent e )
+	public void removeUpdate( final DocumentEvent e )
 	{
 		setValid();
 	}
@@ -303,7 +303,7 @@ public class DefaultParameterPanel extends ParameterPanel implements ListSelecti
 	 * )
 	 */
 	@Override
-	public void stateChanged( @SuppressWarnings("unused") final ChangeEvent e )
+	public void stateChanged( final ChangeEvent e )
 	{
 		setValid();
 	}

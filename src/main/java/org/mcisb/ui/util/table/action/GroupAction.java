@@ -59,7 +59,7 @@ public class GroupAction extends TableSelectionAction
 	 * .awt.event.ActionEvent)
 	 */
 	@Override
-	public void performAction( @SuppressWarnings("unused") final ActionEvent e )
+	public void performAction( final ActionEvent e )
 	{
 		final String GROUP_NAME = "GROUP_NAME"; //$NON-NLS-1$
 		final GenericBean bean = new GenericBean();

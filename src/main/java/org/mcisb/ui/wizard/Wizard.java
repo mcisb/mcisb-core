@@ -532,7 +532,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * )
 		 */
 		@Override
-		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+		public void actionPerformed( final ActionEvent e )
 		{
 			try
 			{
@@ -572,7 +572,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * )
 		 */
 		@Override
-		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+		public void actionPerformed( final ActionEvent e )
 		{
 			forward();
 		}
@@ -605,7 +605,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * )
 		 */
 		@Override
-		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+		public void actionPerformed( final ActionEvent e )
 		{
 			if( task == null )
 			{
@@ -652,7 +652,7 @@ public abstract class Wizard extends JPanel implements PropertyChangeListener
 		 * )
 		 */
 		@Override
-		public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+		public void actionPerformed( final ActionEvent e )
 		{
 			try
 			{

@@ -64,7 +64,7 @@ public class SamplePanel extends UniqueObjectPanel
 	 * @see org.mcisb.ui.util.CustomParameterPanel#save(java.lang.Object)
 	 */
 	@Override
-	protected void save( @SuppressWarnings("unused") Object object )
+	protected void save( final Object object )
 	{
 		// Take no action.
 	}

@@ -93,7 +93,7 @@ public abstract class ObjectParameterPanel extends ParameterPanel implements Lis
 	 * .ListSelectionEvent)
 	 */
 	@Override
-	public void valueChanged( @SuppressWarnings("unused") ListSelectionEvent e )
+	public void valueChanged( final ListSelectionEvent e )
 	{
 		if( previousIndex != -1 )
 		{

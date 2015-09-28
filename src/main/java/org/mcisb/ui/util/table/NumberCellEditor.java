@@ -79,7 +79,7 @@ public class NumberCellEditor extends DefaultCellEditor
 			 * ActionEvent)
 			 */
 			@Override
-			public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+			public void actionPerformed( final ActionEvent e )
 			{
 				stopCellEditing();
 			}

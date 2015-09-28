@@ -139,7 +139,7 @@ public class ManipulatorPanel extends JPanel implements MouseListener, MouseMoti
 	 * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseMoved( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseMoved( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -150,7 +150,7 @@ public class ManipulatorPanel extends JPanel implements MouseListener, MouseMoti
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseEntered( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseEntered( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -161,7 +161,7 @@ public class ManipulatorPanel extends JPanel implements MouseListener, MouseMoti
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseExited( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseExited( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -172,7 +172,7 @@ public class ManipulatorPanel extends JPanel implements MouseListener, MouseMoti
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mousePressed( @SuppressWarnings("unused") MouseEvent e )
+	public void mousePressed( final MouseEvent e )
 	{
 		// No implementation.
 	}

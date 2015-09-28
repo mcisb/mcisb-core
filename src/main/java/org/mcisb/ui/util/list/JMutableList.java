@@ -106,7 +106,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * .ChangeEvent)
 	 */
 	@Override
-	public void editingStopped( @SuppressWarnings("unused") ChangeEvent e )
+	public void editingStopped( final ChangeEvent e )
 	{
 		setValueAt( editor.getCellEditorValue(), editingIndex );
 		removeEditor();
@@ -201,7 +201,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * .ChangeEvent)
 	 */
 	@Override
-	public void editingCanceled( @SuppressWarnings("unused") ChangeEvent e )
+	public void editingCanceled( final ChangeEvent e )
 	{
 		removeEditor();
 	}
@@ -274,7 +274,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseClicked( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseClicked( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -285,7 +285,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseEntered( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseEntered( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -296,7 +296,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseExited( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseExited( final MouseEvent e )
 	{
 		// No implementation.
 	}
@@ -308,7 +308,7 @@ public class JMutableList extends JList<Object> implements MouseListener, CellEd
 	 * java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseReleased( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseReleased( final MouseEvent e )
 	{
 		// No implementation.
 	}

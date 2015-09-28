@@ -76,7 +76,7 @@ public abstract class TableParameterPanel extends ParameterPanel implements Mana
 	 * .ListSelectionEvent)
 	 */
 	@Override
-	public void valueChanged( @SuppressWarnings("unused") ListSelectionEvent e )
+	public void valueChanged( final ListSelectionEvent e )
 	{
 		final int selectedRow = table.getSelectedRow();
 		deleteAction.setEnabled( selectedRow != -1 );

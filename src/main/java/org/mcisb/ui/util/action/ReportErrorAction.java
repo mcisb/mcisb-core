@@ -81,7 +81,7 @@ public class ReportErrorAction extends AbstractAction
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed( @SuppressWarnings("unused") final ActionEvent e )
+	public void actionPerformed( final ActionEvent e )
 	{
 		final String EMAIL_ADDRESS = resourceBundle.getString( "ReportErrorAction.eMailAddress" ); //$NON-NLS-1$
 		final String ERROR_MESSAGE = resourceBundle.getString( "ReportErrorAction.errorMessage" ); //$NON-NLS-1$

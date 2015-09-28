@@ -58,7 +58,7 @@ public abstract class WizardComponent implements PropertyChangeListener
 	 * PropertyChangeEvent)
 	 */
 	@Override
-	public void propertyChange( @SuppressWarnings("unused") PropertyChangeEvent e )
+	public void propertyChange( final PropertyChangeEvent e )
 	{
 		// Override where necessary.
 	}

@@ -52,7 +52,7 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 	 * ComponentEvent)
 	 */
 	@Override
-	public void componentResized( @SuppressWarnings("unused") ComponentEvent e )
+	public void componentResized( final ComponentEvent e )
 	{
 		update();
 	}
@@ -65,7 +65,7 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 	 * )
 	 */
 	@Override
-	public void componentShown( @SuppressWarnings("unused") ComponentEvent e )
+	public void componentShown( final ComponentEvent e )
 	{
 		update();
 	}
@@ -88,7 +88,7 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 	 * ComponentEvent)
 	 */
 	@Override
-	public void componentHidden( @SuppressWarnings("unused") ComponentEvent e )
+	public void componentHidden( final ComponentEvent e )
 	{
 		// No implementation.
 	}
@@ -101,7 +101,7 @@ public class ResizableJLayeredPane extends JLayeredPane implements ComponentList
 	 * )
 	 */
 	@Override
-	public void componentMoved( @SuppressWarnings("unused") ComponentEvent e )
+	public void componentMoved( final ComponentEvent e )
 	{
 		// No implementation.
 	}

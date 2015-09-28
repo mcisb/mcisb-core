@@ -30,7 +30,7 @@ public class DefaultMutableListModel extends DefaultListModel<Object> implements
 	 * @see org.mcisb.ui.util.list.MutableListModel#isCellEditable(int)
 	 */
 	@Override
-	public boolean isCellEditable( @SuppressWarnings("unused") int index )
+	public boolean isCellEditable( final int index )
 	{
 		return true;
 	}

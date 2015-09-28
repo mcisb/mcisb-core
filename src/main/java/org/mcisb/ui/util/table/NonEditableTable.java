@@ -39,7 +39,7 @@ public class NonEditableTable extends ColumnClassTable
 	 * @see javax.swing.JTable#isCellEditable(int, int)
 	 */
 	@Override
-	public boolean isCellEditable( @SuppressWarnings("unused") final int row, @SuppressWarnings("unused") final int column )
+	public boolean isCellEditable( final int row, final int column )
 	{
 		return false;
 	}

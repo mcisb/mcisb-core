@@ -50,7 +50,7 @@ public class DeleteAction extends AbstractDeleteAction
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed( @SuppressWarnings("unused") ActionEvent e )
+	public void actionPerformed( final ActionEvent e )
 	{
 		try
 		{

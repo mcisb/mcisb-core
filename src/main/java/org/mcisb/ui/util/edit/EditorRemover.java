@@ -49,7 +49,7 @@ public class EditorRemover implements PropertyChangeListener
 	 * PropertyChangeEvent)
 	 */
 	@Override
-	public void propertyChange( @SuppressWarnings("unused") PropertyChangeEvent ev )
+	public void propertyChange( final PropertyChangeEvent ev )
 	{
 		if( editable.getEditorComponent() == null || !editable.terminateEditOnFocusLost() )
 		{

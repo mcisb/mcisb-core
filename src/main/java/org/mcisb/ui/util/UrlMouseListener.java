@@ -49,7 +49,7 @@ public class UrlMouseListener extends MouseAdapter implements Serializable
 	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseClicked( @SuppressWarnings("unused") MouseEvent e )
+	public void mouseClicked( final MouseEvent e )
 	{
 		try
 		{

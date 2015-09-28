@@ -91,7 +91,7 @@ public class ContinuousDataDisplayPanel extends DataDisplayPanel
 	 * @see org.mcisb.ui.util.data.DataDisplayPanel#getColor(double, double)
 	 */
 	@Override
-	protected Color getColor( @SuppressWarnings("unused") final double x, @SuppressWarnings("unused") final double y )
+	protected Color getColor( final double x, final double y )
 	{
 		return SampleConstants.getColor( spectra.get( spectrumIndex ).isBackground() ? org.mcisb.tracking.SampleConstants.BLANK : org.mcisb.tracking.SampleConstants.SAMPLE );
 	}

@@ -120,7 +120,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 	 * .TreeModelEvent)
 	 */
 	@Override
-	public void treeNodesChanged( @SuppressWarnings("unused") final TreeModelEvent e )
+	public void treeNodesChanged( final TreeModelEvent e )
 	{
 		// No implementation.
 	}
@@ -179,7 +179,7 @@ public class SearchableTree extends JTree implements TreeModelListener, Disposab
 	 * event.TreeModelEvent)
 	 */
 	@Override
-	public void treeStructureChanged( @SuppressWarnings("unused") final TreeModelEvent e )
+	public void treeStructureChanged( final TreeModelEvent e )
 	{
 		// No implementation.
 	}
