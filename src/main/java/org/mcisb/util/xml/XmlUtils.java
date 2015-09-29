@@ -282,8 +282,7 @@ public abstract class XmlUtils
 					{
 						read = false;
 
-						for( @SuppressWarnings("unchecked")
-						Iterator<Attribute> iterator = event.asStartElement().getAttributes(); iterator.hasNext(); )
+						for( Iterator<Attribute> iterator = event.asStartElement().getAttributes(); iterator.hasNext(); )
 						{
 							Attribute attribute = iterator.next();
 
