@@ -142,9 +142,8 @@ public class StreamReader implements Runnable
 	 */
 	public static void unzip( final URL zipUrl, final File root ) throws IOException
 	{
-		try ( @SuppressWarnings("resource")
-		final InputStream is = new BufferedInputStream( zipUrl.openStream() ); @SuppressWarnings("resource")
-		final ZipInputStream zis = new ZipInputStream( is ) )
+		try ( final InputStream is = new BufferedInputStream( zipUrl.openStream() );
+				final ZipInputStream zis = new ZipInputStream( is ) )
 		{
 			ZipEntry entry;
 
